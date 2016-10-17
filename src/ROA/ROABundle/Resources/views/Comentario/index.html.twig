@@ -1,0 +1,46 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+{% block javascripts %} 
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#solicitudes').attr('class');
+            $('a#solicitudes').attr('class', a_class+' active');
+            a_class = $('a#comentarios').attr('class');
+            $('a#comentarios').attr('class', a_class+' active');
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/admin.css') }}" 
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Comentarios</h1>
+
+<table class="table-general table_admin">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Objeto</th>
+            <th>Autor</th>
+            <th colspan="2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.usuario.nombre }}</td>
+            <td>{{ entity.oa.titulo }}</td>  
+            <td>{{ entity.oa.usuario.nombre }}</td> 
+            <td>
+                <a href="{{ path('comentario_edit_admin', { 'id': entity.id }) }}" class="link">Editar</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

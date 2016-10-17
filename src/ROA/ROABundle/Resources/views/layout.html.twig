@@ -1,0 +1,404 @@
+{% extends "::base2.html.twig" %}
+
+{% block stylesheets %} {{ parent() }} {% endblock %}
+
+{% block javascripts %} 
+
+{{ parent() }}
+
+<script>
+
+$(document).ready(function(){
+
+	$( "#tabs" ).tabs();
+	$( "#tabs1" ).tabs();
+
+	agregar_contribuciones();
+	agregar_contribuciones2();
+	agregar_anotaciones();
+	agregar_clasificaciones();
+	agregar_requerimientos();
+	agregar_identificadores();
+	agregar_relaciones();
+	/*agregar_entidades();*/
+
+	//$( "#dialog" ).dialog();
+
+	/*$('#comentarios').on('click', function(e) {
+	        e.preventDefault();
+	})*/
+
+	$(".fecha").datepicker();
+
+
+	$('.pagination').flexipage({
+    //element:'a',
+    perpage:3,
+    //navigation: true,
+    //pager: false,
+    //showcounter: false,
+    next_txt: 'Siguiente',
+    prev_txt: 'Anterior'
+     
+	});
+
+
+	$("#accordion > li > div").click(function(){
+ 		if(false == $(this).next().is(':visible')) {
+ 			$('#accordion ul').slideUp(300);
+ 		}
+ 		$(this).next().slideToggle(300);
+ 	});
+ 	//$('#accordion ul:eq(0)').show();
+
+ 	$("#div_sesion").click(function(e){
+
+ 		$("#info_perfil").fadeIn("fast");
+ 		e.stopPropagation();
+ 	});
+
+ 	$("#info_perfil").click(function(e){
+ 		e.stopPropagation();
+ 	});
+
+ 	
+
+
+ 	$('html').click(function() {
+    	$("#info_perfil").fadeOut("fast");
+	});
+
+	$('.desplegable').click(function(){
+
+		$('.seleccionado').each(function(){
+			$(this).attr('class', 'desplegable no_seleccionado');
+			var aux = "{{ asset('bundles/ROA/images/arrow_right.png') }}";
+			$(this).children('img').eq(0).attr('src', aux);
+		});
+
+		$(this).attr('class', 'desplegable seleccionado');
+		var aux = "{{ asset('bundles/ROA/images/arrow_right2.png') }}";
+		$(this).children('img').eq(0).attr('src', aux);
+	});
+
+	$('.desplegable a').click(function(){
+		
+		$('.seleccionado').each(function(){
+			$(this).attr('class', 'desplegable no_seleccionado');
+			var aux = "{{ asset('bundles/ROA/images/arrow_right.png') }}";
+			$(this).children('img').eq(0).attr('src', aux);
+		});
+
+		$(this).prev().parent().attr('class', 'desplegable seleccionado');
+		var aux = "{{ asset('bundles/ROA/images/arrow_right2.png') }}";
+		$(this).prev().parent().children('img').eq(0).attr('src', aux);
+		
+	});
+
+
+	/*Botones Accesibilidad*/
+	defaultSize_p = 15;
+	defaultSize_h1 = 20;
+	defaultSize_h2 = 17;
+	defaultSize_h3 = 17;
+	currentSize_p = defaultSize_p;
+	currentSize_h1 = defaultSize_h1;
+	currentSize_h2 = defaultSize_h2;
+	currentSize_h3 = defaultSize_h3;
+
+	$('#aumentar').click(function(){
+		currentSize_p++; currentSize_h1++;currentSize_h2++;currentSize_h3++;
+		aux_p = currentSize_p.toString(); 
+		aux_h1 = currentSize_h1.toString(); 
+		aux_h2 = currentSize_h2.toString(); 
+		aux_h3 = currentSize_h3.toString();
+		if(aux_h1 <= 22){
+			$('p, label, a.link').attr('style', 'font-size:'+aux_p+'px');
+			$('h1').attr('style', 'font-size:'+aux_h1+'px');
+			$('h2').attr('style', 'font-size:'+aux_h2+'px');
+			$('h3').attr('style', 'font-size:'+aux_h3+'px');
+			return false;
+		}else{
+			return false;
+		}
+
+	});
+
+	$('#disminuir').click(function(){
+		currentSize_p--; currentSize_h1--;currentSize_h2--;currentSize_h3--;
+		aux_p = currentSize_p.toString(); 
+		aux_h1 = currentSize_h1.toString(); 
+		aux_h2 = currentSize_h2.toString(); 
+		aux_h3 = currentSize_h3.toString();
+		$('p, label, a.link').attr('style', 'font-size:'+aux_p+'px');
+		$('h1').attr('style', 'font-size:'+aux_h1+'px');
+		$('h2').attr('style', 'font-size:'+aux_h2+'px');
+		$('h3').attr('style', 'font-size:'+aux_h3+'px');
+		return false;
+	});
+
+	$('#restaurar').click(function(){
+		currentSize_p = defaultSize_p;
+		currentSize_h1 = defaultSize_h1;
+		currentSize_h2 = defaultSize_h2;
+		currentSize_h3 = defaultSize_h3;
+		$('p, label, a.link').attr('style', 'font-size:'+defaultSize_p+'px');
+		$('h1').attr('style', 'font-size:'+defaultSize_h1+'px');
+		$('h2').attr('style', 'font-size:'+aux_h2+'px');
+		$('h3').attr('style', 'font-size:'+defaultSize_h3+'px');
+		return false;
+	});
+
+	var tooltips = $( "[title]" ).tooltip({ position: { my: "center", at: "left+15 bottom+15" } });
+
+});
+
+
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+
+<header>
+<img id= "logo_ucv" src="{{ asset('bundles/ROA/images/logoUCVNuevo.png') }}"/>
+<div id="inicio_sesion">
+	
+		
+		<img class="logo" src="{{ asset('bundles/ROA/images/logoRoacar.png') }}"/>
+
+
+		<div id="letras_roacar">
+			<p class="puntozero">Repositorio de Objetos de Aprendizaje</p>
+			<p class="puntozero verde2">de Contenidos Abiertos Reutilizables</p>
+		</div>
+		
+	
+	<div id="div_sesion">
+
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a class="link_top2" id="link_sesion">{{ usuario.getNombre | upper }} {{ usuario.getApellido | upper}}</a>
+			<a class="link_top" href="{{ path('logout') }}"> CERRAR SESI&Oacute;N </a>
+		{% else %}
+			<a class="link_top" id="link_sesion">INICIAR SESI&Oacute;N</a>
+			<a class="link_top" href="{{ path('perfil_new') }}"> REGISTRARSE </a>
+		{% endif %}	
+
+		
+
+
+
+
+	</div>
+</div> <!-- div inicio sesion -->
+
+</header>
+
+
+<div id="recuadro_flotante">
+
+
+		<div id="info_perfil" class= "modulo">
+	
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	     			<!--<p class="titulo_modulo"> Mi Perfil <p><!--<br>-->
+	     			<div id="sesion">
+						<div>
+	            		{% if usuario.getWebPath() %}
+	                		<img src="{{ asset(usuario.getWebPath()) }}" class="img_usuario"/>
+	            		{% else %}
+	                		<img src="{{ asset('bundles/ROA/images/user.png') }}" class="img_usuario"/>
+	            		{% endif %}
+	        			</div>
+
+						<p> {{ usuario.getUsername }} </p>
+						<p>{{ usuario.getNombre }}  {{ usuario.getApellido }} </p>
+						<p><a href="{{ path('perfil_edit', {'id':usuario.getId}) }}" class="link"> Editar perfil </a></p>
+						{% if is_granted('ROLE_SUPER_USER') %}
+							<p><a href="{{ path('admin') }}" class="link"> M&oacute;dulo de Administraci&oacute;n </a></p>
+						{% endif %}
+						<p><a href="{{ path('logout') }}" class="link"> Cerrar Sesi&oacute;n </a></p>
+					</div>	
+     			{% else %}
+     			<!--<p class="titulo_modulo"> Entrar <p><br>-->
+				<div id="sesion">
+					{% if error %}
+						<div><p class='error'>{{ error }}</p></div><!--<br>-->
+						<!--<div><p>{mensaje}</p></div><br>-->
+					{% endif %}	
+					
+					<form action="{{ path('login_check') }}" method="POST" name="form_entrar" id="form_entrar" >
+						<input type="text" name="_username" placeholder="Usuario" value=""/>
+						<input type="password" name="_password" id="password" placeholder="Contrasena"/>
+						
+						<a class="btn_custom" name="login" id="boton_sesion" onClick="javascript:form_entrar.submit()">Aceptar</a>
+					</form>
+					<!--<div class="registrarse">
+						<p><a href="{{ path('perfil_new') }}" class="link"> Registrarse </a></p>
+					</div>-->
+					<div class="registrarse">
+						<p><a href="{{ path('recuperar_contrasena') }}" class="link"> &iquest;Olvid&oacute; su contrase&ntilde;a? </a></p>
+					</div>
+				</div>	
+				{% endif %}	
+				<div class="chat-bubble-arrow-border"></div>
+				<div class="chat-bubble-arrow"></div>
+			</div><!-- DIV PERFIL -->
+
+		</div>
+
+
+<div id="outer">
+<!--<a> Este es el outer </a>-->
+
+		
+		<div id="menu_principal">
+				<ul class="menu" id="menu">
+					<li class="li_menu"><a id="inicio" href="{{path('inicio')}}">INICIO</a></li>
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li class="li_menu"><a class="" id="gestionar_OACA">GESTIONAR OACA</a>
+							<ul>
+								<li ><a id="insertar_OACA" href="{{path('OA_new', {'filtro': 'usuario', 'id': usuario.getId})}}">INSERTAR OACA</a></li>
+								<li>
+									<a id="mis_OACAS" href="{{path('OA_index', {'filtro': 'usuario', 'id': usuario.getId})}}">MIS OACA</a>
+								</li>
+							</ul>
+						</li>
+					{% else %}
+						<li class="li_menu"><a id="gestionar_OACA" class="puntozero">GESTIONAR OACA</a></li>
+					{% endif %}
+					<li class="li_menu"><a id="buscar_OACA">BUSCAR OACA</a>
+					<ul>
+							<!--<li><a>POR T&Iacute;TULO</a></li>
+							<li><a>POR A&Ntilde;O</a></li>-->
+							<li><a id="busqueda" href="{{path('busqueda')}}">B&Uacute;QUEDA AVANZADA</a></li>
+							<li><a id="recientes" href="{{path('recientes')}}">LO MAS RECIENTE</a></li>
+							<li><a id="mas_descargados" href="{{path('mas_descargados')}}">LO MAS DESCARGADO</a></li>
+						</ul>
+					</li>
+					<li class="li_menu"><a href="{{path('creditos')}}"id="creditos">CR&Eacute;DITOS</a>
+					</li>
+					<li id="" class="">
+					</li>
+				</ul>
+				<div id="redes_s">
+					<a class="red_social" href="http://twitter.com" target="_blank"><img src="{{ asset('bundles/ROA/images/twitter_icon2.png') }}"/></a>
+					<a class="red_social" href="#"><img src="{{ asset('bundles/ROA/images/rss_icon2.png') }}"/></a>
+				</div>
+		</div>
+
+		<div class="botones_accesibilidad">
+			<a id="aumentar" href="#" title="Letras Grandes"><img src="{{ asset('bundles/ROA/images/a1.png') }}"/></a>
+			<a id="disminuir" href="#" title="Letras Pequeñas"><img src="{{ asset('bundles/ROA/images/a2.png') }}"/></a>
+			<a id="restaurar" href="#" title="Restaurar Tamaño"><img src="{{ asset('bundles/ROA/images/a3.png') }}"/></a>
+			<a id="contraste" title="Alto Contraste" href="{{path('accesibilidad')}}"><img src="{{ asset('bundles/ROA/images/a4.png') }}"/></a>
+		</div>
+
+
+		
+		<!--<div id="banner">
+			<img id="img_banner" src="{{ asset('bundles/ROA/images/b7.jpg') }}"/>
+		</div>-->
+
+		<div id="main">
+		<!--- ..............................MAIN ............................................-->
+
+			
+
+		<div id="columnas_izq">
+			
+			<div id="columna_izq2">
+
+			<!--<div class="modulo">-->
+				<!--<p class="titulo_modulo">Categor&iacute;as</p>-->
+				<div class="menu_lateral">		
+					<ul id="accordion">
+
+						<li class="sin_vineta"><div class="cabecera_accordion">CATEGOR&Iacute;AS</div></li>
+						{% for categoria in categorias %}
+						<li><div class="desplegable no_seleccionado"><img src="{{ asset('bundles/ROA/images/arrow_right.png') }}"/>{{ categoria.nombre }}</div>
+							<ul>
+							{% for subcategoria in categoria.subcategorias %}
+								<li class="submenu_accordion"><div><a href="{{path('OA_index', {'filtro':'subcategoria', 'id': subcategoria.id})}}" class="">{{ subcategoria.nombre }}</a></div></li>
+							{% endfor %}
+							</ul>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			
+			
+			<div id="columna_izq3" class="">
+				
+				<div class="menu_lateral">		
+					<ul id="accordion">
+
+						<li class="sin_vineta"><div class="cabecera_accordion">SOBRE ROACAR</div></li>
+						
+						
+						<li><div id="div_sobre_roacar" class="desplegable no_seleccionado"><img src="{{ asset('bundles/ROA/images/arrow_right.png') }}"/><a href="{{path('sobre_roacar')}}">¿Qu&eacute; es ROACAR?</a></div>
+							<!--<ul id="ul_sobre_roacar">
+								<li class="submenu_accordion"><div><a href="{{path('sobre_roacar')}}#consideraciones" class="">Submenu</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('sobre_roacar')}}#gestion" class="">Submenu</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('sobre_roacar')}}#politicas_derechos" class="">Submenu</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('sobre_roacar')}}#calidad" class="">Submenu</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('sobre_roacar')}}#estado" class="">Submenu</a></div></li>
+							</ul>-->
+						</li>
+
+
+						<li><div id="div_politicas" class="desplegable no_seleccionado"><img src="{{ asset('bundles/ROA/images/arrow_right.png') }}"/><a href="{{path('politicas')}}">Pol&iacute;ticas de ROACAR</a></div>
+							<ul id="ul_politicas">
+								<li class="submenu_accordion"><div><a href="{{path('politicas')}}#consideraciones" class="">Consideraciones Generales</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('politicas')}}#gestion" class="">Gestión y Organización</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('politicas')}}#politicas_derechos" class="">Políticas de Uso</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('politicas')}}#calidad" class="">Control de Calidad</a></div></li>
+								<li class="submenu_accordion"><div><a href="{{path('politicas')}}#estado" class="">Estado de los Objetos</a></div></li>
+							</ul>
+						</li>
+
+
+						
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+		
+		
+		<div id="columnas_der">
+			<div id="columna_der1">
+				{% block content %}
+				{% endblock content %}
+			</div>
+		</div>
+		
+		
+		<div class="separador"></div>
+
+		
+
+	</div><!-- main -->
+
+		<!--<div class="creative_commons">-->
+
+			<!--<div class="botones_accesibilidad">
+				<a id="aumentar" href="#">Aumentar</a>
+				<a id="disminuir" href="#">Disminuir</a>
+				<a id="restaurar" href="#">Restaurar Tamano</a>
+				<a id="contraste" href="{{path('accesibilidad')}}">Alto Contraste</a>
+			</div>-->
+
+			<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/es/"><img src="{{ asset('bundles/ROA/images/cc_logo_full.png') }}" class="imagen_footer"/></a>
+		<!--</div>-->
+
+	</div>
+	<footer>
+		<p>Universidad Central de Venezuela. Facultad de Ciencias.</p>
+		<p class="small">Escuela de Computacion. Caracas Venezuela</p>
+	</footer>
+</div>
+
+{% endblock %} 

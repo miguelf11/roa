@@ -1,0 +1,223 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }} 
+    <script>
+		$(document).ready(function(){
+			a_class = $('a#gestionar_OACA').attr('class');
+			$('a#gestionar_OACA').attr('class', a_class+' active');
+			a_class = $('a#mis_OACAS').attr('class');
+			$('a#mis_OACAS').attr('class', a_class+' active');
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+
+	<div id="dialog-message" title="comentarios" class="comentarios" style="width:900px">
+	</div>
+
+	<div id="dialog-message-metadatos" title="metadatos" class="metadatos" style="width:900px">
+	</div>
+
+	<h1>Mis OACA</h1>
+
+	{% if mensaje %}
+    	<div class="alert alert-info mensaje">{{ mensaje }}</div>
+	{% endif %}
+
+	{% if politicas %}
+    	<p>No olvides leer las <a class="link" onClick="openWindow('dialog-message-politicas', '800', '500')">Pol&iacute;ticas de ROACAR</a></p>
+	{% endif %}
+
+
+
+	<ul class="pagination">
+		{% for objeto in objetos %}
+			<li>
+				<!--<fieldset class="fieldset_objeto">-->
+					<h2>{{ objeto.titulo }}</h2>
+					<div class="info_objeto">
+
+						<p><b>Titulo: </b>{{ objeto.titulo }}</p>
+						<p><b>Autor: </b>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</p>
+						<p><b>Categoria: </b>{{ objeto.subcategoria.categoria.nombre }}</p>
+						<p><b>Subcategoria: </b>{{ objeto.subcategoria.nombre }}</p>
+						<p><b>Fecha de Publicaci&oacute;n: </b>{{ objeto.fecha_publicacion |date('d-m-Y') }}</p>
+						
+						<p id="puntuacion"><b>Valoraci&oacute;n: </b></p>
+						{% if objeto.puntuacion == 1 %} 
+							<span class="valoracion val-10"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 2 %} 
+							<span class="valoracion val-20"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 3 %} 
+							<span class="valoracion val-30"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 4 %} 
+							<span class="valoracion val-40"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 5 %} 
+							<span class="valoracion val-50"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == null %} 
+							<span class="valoracion val-0"></span>
+						{% endif %}	
+					</div>
+
+					{% if objeto.status.getDescripcion() == 'Certificado' %}
+
+						<div class="certificado">
+							<img src="{{ asset('bundles/ROA/images/logo_azul.png') }}" height="" width=""/>
+						</div>
+
+					{% endif %}
+
+					{% if objeto.status.getDescripcion() == 'No Autorizado' %}
+
+						 <div class="certificado">
+							<img src="{{ asset('bundles/ROA/images/logo_rojo.png') }}" height="" width=""/>
+						</div>
+
+					{% endif %}
+
+					{% if objeto.status.getDescripcion() == 'En Revision' %}
+
+						<div class="certificado">
+							<img src="{{ asset('bundles/ROA/images/logo_amarillo.png') }}" height="" width=""/>
+						</div>
+					
+					{% endif %}
+
+					
+					<div class="resumen">
+						<p><b>Resumen: </b>{{objeto.general.descripcion}}</p>
+					</div>
+
+					<div class="btn-group">
+						
+						<div class="arrow_first"><img src="{{ asset('bundles/ROA/images/arrow2.png') }}" class=""/></div>
+						<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+						<a href="{{path('OA_visualizacion', {'id':objeto.id})}}" target="_blank" class="btn_custom2" id="" onclick="">Ver</a>
+						<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+						<a href="{{path('OA_descarga', {'id':objeto.id})}}" class="btn_custom2" id="" onclick="">Descargar</a>
+
+						<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+						<a class="btn_custom2" id="metadatos" onclick="ajax('{{path('OA_metadatos', {'id': objeto.id})}}', 'dialog-message-metadatos', 'openMessage_metadatos()', '')">Ficha Descriptiva</a>
+
+
+						{% if objeto.status.getDescripcion() == 'Certificado' %}
+
+							<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+							<a class="btn_custom2" id="comentarios" onclick="ajax('{{path('comentario_new', {'id': objeto.id})}}', 'dialog-message', 'openMessage()', '')">Comentar</a>
+							<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+							<a href="{{ path('OA_edit', { 'id_usuario': usuario.getId, 'id': objeto.id }) }}" class="btn_custom2" id="" onclick="">Editar</a>
+							<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+							<a class="btn_custom2" id="" onClick="eliminar_objeto('{{path('OA_dispatcher', {'id': objeto.id})}}', 'delete')">Eliminar</a>
+
+						{% endif %}
+
+						{% if objeto.status.getDescripcion() == 'No Autorizado' %}
+
+							<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+							<a href="{{ path('OA_edit', { 'id_usuario': usuario.getId, 'id': objeto.id }) }}" class="btn_custom2" id="" onclick="">Editar</a>
+							<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+							<a class="btn_custom2" id="" onClick="eliminar_objeto('{{path('OA_dispatcher', {'id': objeto.id})}}', 'delete')">Eliminar</a>
+
+						{% endif %}
+
+					</div>
+
+
+				<!--</fieldset>-->
+			</li>
+
+		{% endfor %}
+	</ul>
+
+	<div id="dialog-confirm" title="Eliminar" style="display:none">
+  		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro que desea eliminar este objeto?</p>
+	</div>
+
+	<form id="form" name="form" action="" method="POST">
+		<input type="hidden" name="method" id="method" value="">
+	</form>
+
+
+	<!-- ......................... Politicas de ROACAR .......................................... -->
+	<div id="dialog-message-politicas" title="Politicas" style="display:none">
+  		<h1>Pol&iacute;ticas de ROACAR</h1>
+  		<h3>Consideraciones Generales</h3>
+		<ul>
+			<li>
+				<p>ROACAR promueve la filosofía del acceso abierto a los contenidos. Esto conlleva una voluntad de difundir, compartir y reutilizar contenidos.</p>
+			</li>
+			<li>
+				<p>Los items que integran colecciones en ROACAR, deben ser producidos por miembros de la comunidad académica de la UCV y/o de otras instituciones en colaboración a través de convenios específicos. Los items deben ser resultado de actividades de investigación, difusión, creación y enseñanza que pertenezcan a acervos de la institución ó editados por la UCV</p>
+			</li>
+			<li>
+				<p>Los items depósitados deberán contar con los datos básicos para su identificación y clasificación, estar completos y en formato digital; no infringir los derechos de propiedad intelectual y/o que éstos afecten a terceros</p>
+			</li>
+		</ul>
+
+		<h3>Depósito</h3>
+		<ul>
+			<li>
+				<p>Podrá depositar contenidos cualquier usuario que se registre en ROACAR.</p>
+			</li>
+			<li>
+				<p>El autor establecerá las limitaciones de acceso y términos de uso a sus items, de acuerdo a los derechos de propiedad intelectual asociados a su trabajo.</p>
+			</li>
+			<li>
+				<p>El autor ser hace responsable de la integridad y pertinencia del objeto depositado, así como de la validación técnica de los datos que se incluyan.</p>
+			</li>
+		</ul>
+
+
+		<h3>Gestión y Organización</h3>
+		<ul>
+			<li>
+				<p>ROACAR contendrá el objeto mismo y sus metadatos.</p>
+			</li>
+			<li>
+				<p>Los depositantes deberán proporcionar los metadatos básicos para la identificación y clasificación de los objetos que depositan.</p>
+			</li>
+			<li>
+				<p>Si ROACAR detecta violaciones de derechos de autor en los ítems depositados, estos serán retirados inmediatamente</p>
+			</li>
+			<li>
+				<p>ROACAR solo permite formatos libres</p>
+			</li>
+		</ul>
+
+		<h3>Políticas de Uso y Derechos Legales</h3>
+		<ul>
+			<li>
+				<p>El autor(es) deberá poseer los derechos de propiedad intelectual de su trabajo y conceder a la UCV el derecho de preservar y dar acceso público a su documento a través de los servicios de búsqueda y consulta del repositorio</p>
+			</li>
+			<li>
+				<p>El autor(es) deberá poseer los derechos de propiedad intelectual de su trabajo y conceder a la UCV el derecho de preservar y dar acceso público a su documento a través de los servicios de búsqueda y consulta del repositorio</p>
+			</li>
+			<li>
+				<p>El autor(es) deberá aceptar los términos de una licencia para el uso y distribución no exclusiva de los contenidos depositados, y estar en capacidad de ceder voluntariamente a la UCV el derecho a preservar y distribuir su trabajo a través del repositorio.</p>
+			</li>
+			<li>
+				<p>El usuario puede descargar, almacenar o visualizar los ítems, resultados de búsqueda u otra información, sólo para uso personal, de investigación y docencia.</p>
+			</li>
+			<li>
+				<p>Para lograr la preservación a lo largo plazo de los archivos digitales, la UCV se compromete a preservar los formatos de archivo: PDF, DOC, TXT, PPT y JPG. Asimismo la UCV se reserva el derecho a manipular los archivos con el fin de adoptar las medidas téécnicas necesarias para que sean visibles en el futuro (migración a nuevas versiones, etc.)</p>
+			</li>
+		</ul>
+
+	</div>
+	<!-- ......................................................................................... -->
+
+{% endblock content %}
+
+
+

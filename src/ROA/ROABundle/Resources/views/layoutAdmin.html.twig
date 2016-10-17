@@ -1,0 +1,172 @@
+{% extends "::base2.html.twig" %}
+
+{% block stylesheets %} 
+
+{{ parent() }} 
+<link rel="stylesheet" href="{{ asset('bundles/ROA/css/admin.css') }}" />
+
+{% endblock %}
+
+{% block javascripts %} 
+
+
+{{ parent() }}
+
+
+<script>
+
+$(document).ready(function(){
+	 $('.table-general tr:odd').css('background-color', '#F9F9F9');
+	 //$('.table-general tr:first').css('border-top', '0px');
+
+
+	 $('.pagination').flexipage({
+    	perpage:3,
+    	next_txt: 'Siguiente',
+    	prev_txt: 'Anterior'
+	});
+
+	 /*$("#div_sesion_admin").click(function(e){
+
+ 		$("#info_perfil").fadeIn("fast");
+ 		e.stopPropagation();
+ 	});
+
+
+ 	$('html').click(function() {
+    	$("#info_perfil").fadeOut("fast");
+	});*/
+
+	$("#div_sesion").click(function(e){
+
+ 		$("#info_perfil").fadeIn("fast");
+ 		e.stopPropagation();
+ 	});
+
+	$("#info_perfil").click(function(e){
+ 		e.stopPropagation();
+ 	});
+
+ 	$('html').click(function() {
+    	$("#info_perfil").fadeOut("fast");
+	});
+
+	var tooltips = $( "[title]" ).tooltip({ position: { my: "center", at: "left+120 bottom-19" } });
+
+});
+
+
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+<header>
+
+<img id= "logo_ucv" src="{{ asset('bundles/ROA/images/logoUCVNuevo.png') }}"/>
+<div id="inicio_sesion">
+
+		<img class="logo" src="{{ asset('bundles/ROA/images/logoRoacar.png') }}"/>
+
+		<div id="letras_roacar">
+			<p class="puntozero">Repositorio de Objetos de Aprendizaje</p>
+			<p class="puntozero verde2">de Contenidos Abiertos Reutilizables</p>
+		</div>
+
+		<div id="div_sesion">
+			<a class="link_top2" id="link_sesion">{{ usuario.getNombre | upper}} {{ usuario.getApellido | upper}}</a> 
+			<a class="link_top" href="{{ path('logout') }}">CERRAR SESI&Oacute;N</a>
+		</div>
+
+		
+</div> <!-- div inicio sesion -->
+
+</header>
+
+
+<div id="recuadro_flotante">
+		<div id="info_perfil" class= "modulo">
+	
+			<div id="sesion">
+
+				<div>
+		        {% if usuario.getWebPath() %}
+		            <img src="{{ asset(usuario.getWebPath()) }}" class="img_usuario"/>
+		        {% else %}
+		            <img src="{{ asset('bundles/ROA/images/user.png') }}" class="img_usuario"/>
+		        {% endif %}
+		       	</div>
+				<p> {{ usuario.getUsername }} </p>
+				<p>{{ usuario.getNombre }}  {{ usuario.getApellido }} </p>
+				<p><a href="{{ path('inicio') }}" class="link"> M&oacute;dulo Usuario </a></p>
+				<p><a href="{{ path('logout') }}" class="link"> Cerrar Sesi&oacute;n </a></p>
+			</div>
+			<div class="chat-bubble-arrow-border"></div>
+			<div class="chat-bubble-arrow"></div>
+		</div><!--....... info perfil .........-->
+
+	</div>
+
+<div id="outer">
+<!--<a> Este es el outer </a>-->
+	
+		
+		<div id="menu_principal">
+				<ul class="menu" id="menu">
+					<li class="li_menu"><a id="inicio" href="{{path('admin')}}" id="inicio">INICIO</a></li>
+					<li class="li_menu"><a id="usuarios">USUARIOS</a>
+						<ul>
+							<li><a id="contribuyentes" href="{{path('usuario', {'role' : 'Contribuyente'})}}">CONTRIBUYENTES</a></li>
+							<li><a id="no_contribuyentes" href="{{path('usuario', {'role' : 'No Contribuyente'})}}">NO CONTRIBUYENTES</a></li>
+						</ul>
+					</li>
+					<li class="li_menu"><a id="contenidos">CONTENIDOS</a>
+					<ul>
+							<li><a id="categorias" href="{{path('categoria')}}">CATEGOR&Iacute;AS</a></li>
+						</ul>
+					</li>
+					<li class="li_menu" id="ultimo"><a id="solicitudes">SOLICITUDES</a>
+					<ul>
+							<li><a id="comentarios" href="{{ path('comentario_index_admin') }}">COMENTARIOS</a></li>
+							<li>
+								<a id="OA" href="{{ path('OA_index_admin') }}">OACA</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+
+				<div id="redes_s">
+					
+				</div>
+		</div>
+
+		<div id="main">
+		<!--- ..............................MAIN ............................................-->
+		
+		<div id="columnas_der_admin">
+			<div id="columna_der1">
+				{% block content %}
+				{% endblock content %}
+			</div>
+		</div>
+		
+		
+		<div class="separador"></div>
+
+		
+
+	</div><!-- main -->
+
+		<!--<div class="creative_commons">-->
+			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/es/"><img src="{{ asset('bundles/ROA/images/cc_logo_full.png') }}" class="imagen_footer"/></a>
+		<!--</div>-->
+
+	</div>
+	<footer>
+		<p>Universidad Central de Venezuela. Facultad de Ciencias.</p>
+		<p class="small">Escuela de Computacion. Caracas Venezuela</p>
+	</footer>
+</div>
+
+{% endblock %} 

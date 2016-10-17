@@ -1,0 +1,64 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#contenidos').attr('class');
+            $('a#contenidos').attr('class', a_class+' active');
+            a_class = $('a#categorias').attr('class');
+            $('a#categorias').attr('class', a_class+' active');
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/admin.css') }}" 
+{% endblock %}
+
+{% block content %}
+    
+
+<h1>Categor&iacute;as</h1>
+
+{% if mensaje %}
+    <div class="alert alert-info mensaje">{{ mensaje }}</div>
+{% endif %}
+
+<table class="table-general table_admin">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th colspan="2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.nombre }}</td>
+            <td>
+                <a href="{{ path('categoria_show', { 'id': entity.id }) }}" class="link">Ver</a>
+            </td>
+            <td>
+                <a href="{{ path('categoria_edit', { 'id': entity.id }) }}" class="link">Editar</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('categoria_new') }}" class="btn_custom">
+            Crear Nueva Categor&iacute;a
+        </a>
+    </li>
+</ul>
+
+{% endblock content %}
+
+
+
+
+

@@ -1,0 +1,105 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    <script>
+		$(document).ready(function(){
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+		});
+	</script> 
+{% endblock %}
+
+{% block content %}
+
+	<div id="dialog-message" title="comentarios" class="comentarios" style="width:900px">
+	</div>
+
+	<div id="dialog-message-metadatos" title="metadatos" class="metadatos" style="width:900px">
+	</div>
+
+	<h1>{{ subcategoria.categoria.nombre }} - {{ subcategoria.nombre }}</h1>
+
+	<ul class="pagination">
+		{% for objeto in objetos %}
+			<li>
+					<h2>{{ objeto.titulo }}</h2>
+					<div class="info_objeto">
+
+						<p><b>Titulo: </b>{{ objeto.titulo }}</p>
+						<p><b>Autor: </b>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</p>
+						<p><b>Categoria: </b>{{ objeto.subcategoria.categoria.nombre }}</p>
+						<p><b>Subcategoria: </b>{{ objeto.subcategoria.nombre }}</p>
+						<p><b>Fecha de Publicaci&oacute;n: </b>{{ objeto.fecha_publicacion |date('d-m-Y') }}</p>
+
+						<p id="puntuacion"><b>Puntuaci&oacute;n: </b></p>
+						{% if objeto.puntuacion == 1 %} 
+							<span class="valoracion val-10"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 2 %} 
+							<span class="valoracion val-20"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 3 %} 
+							<span class="valoracion val-30"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 4 %} 
+							<span class="valoracion val-40"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == 5 %} 
+							<span class="valoracion val-50"></span> 
+						{% endif %}
+						{% if objeto.puntuacion == null %} 
+							<span class="valoracion val-0"></span>
+						{% endif %}	
+					</div>
+
+					<div class="certificado">
+						<img src="{{ asset('bundles/ROA/images/logo_azul.png') }}" height="" width=""/>
+					</div>
+
+					<div class="resumen">
+						<p><b>Resumen: </b>{{objeto.general.descripcion}}</p>
+					</div>
+
+					<!--<div class="btn-group">
+						<a class="btn" href="{{path('OA_visualizacion', {'id':objeto.id})}}" target="_blank">Visualizar</a>
+						<a class="btn" href="{{path('OA_descarga', {'id':objeto.id})}}">Descargar</a>
+
+						<a class="btn" id="comentarios" onclick="ajax('{{path('comentario_new', {'id': objeto.id})}}', 'dialog-message', 'openMessage()', '')">Comentar</a>
+
+					</div>-->
+					<div class="btn-group">
+						
+						<div class="arrow_first"><img src="{{ asset('bundles/ROA/images/arrow2.png') }}" class=""/></div>
+						<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+						<a href="{{path('OA_visualizacion', {'id':objeto.id})}}" target="_blank" class="btn_custom2" id="" onclick="">Ver</a>
+						<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+						<a href="{{path('OA_descarga', {'id':objeto.id})}}" class="btn_custom2" id="" onclick="">Descargar</a>
+
+						<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+						<a class="btn_custom2" id="metadatos" onclick="ajax('{{path('OA_metadatos', {'id': objeto.id})}}', 'dialog-message-metadatos', 'openMessage_metadatos()', '')">Ficha Descriptiva</a>
+
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<img src="{{ asset('bundles/ROA/images/arrow.png') }}" class="arrow"/>
+							<a class="btn_custom2" id="comentarios" onclick="ajax('{{path('comentario_new', {'id': objeto.id})}}', 'dialog-message', 'openMessage()', '')">Comentar</a>
+						{% endif %}
+
+					</div>
+			</li>
+
+		{% endfor %}
+	</ul>
+
+	<div id="dialog-confirm" title="Eliminar" style="display:none">
+  		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro que desea eliminar este objeto?</p>
+	</div>
+
+	<form id="form" name="form" action="" method="POST">
+		<input type="hidden" name="method" id="method" value="">
+	</form>
+
+{% endblock content %}

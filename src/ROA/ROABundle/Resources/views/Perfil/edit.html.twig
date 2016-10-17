@@ -1,0 +1,66 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_new-edit.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<!--<script language="javascript" src="{{ asset('bundles/ROA/js/livevalidation.js') }}" type="text/javascript"></script>-->
+
+	<script>
+		$(document).ready(function(){
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+
+			/*mensajes de error*/
+			$('input, input.input_form, input.fecha, select.select_form').each(function(){
+				$(this).parent().attr('style', 'position:relative');
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+	<h1>Mi Perfil</h1>
+
+	
+
+		<p>Actualiza tu perfil a traves del siguiente formulario</p><br><br>
+
+		<form id="form_new" name="form_new" action="{{path('perfil_edit', {'id': usuario.getId})}}" method="POST" enctype="multipart/form-data"><!--<br>-->
+
+			{% if contrasena_invalida %}
+
+				<p class="error">{{ contrasena_invalida }}</p>
+
+			{% endif %}	
+
+
+			<div class="foto_usuario">
+            	{% if usuario.getWebPath() %}
+                	<img src="{{ asset(usuario.getWebPath()) }}" class="img_usuario"/>
+            	{% else %}
+                	<img src="{{ asset('bundles/ROA/images/user.png') }}" class="img_usuario"/>
+            	{% endif %}
+        	</div>
+
+			<div class="formulario">
+				<div>
+					<label class="label_form"> Contrasena actual </label> 
+					<input type="password" id="contrasena_actual" name="contrasena_actual" class="input_form">
+				</div>
+			</div>
+
+			{{ form_widget(Usuario_form, { 'attr': { 'class': 'formulario' } }) }}
+
+			<script language="javascript" src="{{ asset('bundles/ROA/js/validaciones/validaciones_usuarioEdit.js') }}" type="text/javascript"></script> 
+
+			<a type="submit" name="aceptar" value="Actualizar" class="btn_custom" onClick="javascript:form_new.submit()">Aceptar</a>
+
+		</form>
+
+
+{% endblock content %}

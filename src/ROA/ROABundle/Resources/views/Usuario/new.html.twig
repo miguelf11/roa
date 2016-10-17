@@ -1,0 +1,69 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_new-edit.css') }}" />
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {% if role == 'Contribuyente' %}
+
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#contribuyentes').attr('class');
+            $('a#contribuyentes').attr('class', a_class+' active');
+
+            $('input, input.input_form, input.fecha, select.select_form').each(function(){
+                $(this).parent().attr('style', 'position:relative');
+            });
+        });
+    </script>
+
+    {% else %}
+
+        <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#no_contribuyentes').attr('class');
+            $('a#no_contribuyentes').attr('class', a_class+' active');
+
+            $('input, input.input_form, input.fecha, select.select_form').each(function(){
+                $(this).parent().attr('style', 'position:relative');
+            });
+        });
+    </script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<h1>Nuevo Usuario</h1>
+<p>Completa el siguiente formulario para crear el usuario</p><br><br>
+
+
+   
+    <form name="form_new" id="form_new" action="{{ path('usuario_create', {'role':role}) }}" method="post" {{ form_enctype(form) }}>
+        <div class="formulario">
+            {{ form_widget(form) }}
+            <p>
+                <!--<button type="submit" class="btn">Crear</button>-->
+                <a class="btn_custom" name="" id="" onClick="javascript:form_new.submit()">Crear</a>
+            </p>
+        </div>
+    </form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('usuario', {'role':role}) }}" class="link">
+            Volver a la lista
+        </a>
+    </li>
+</ul>
+
+{% endblock %}
+

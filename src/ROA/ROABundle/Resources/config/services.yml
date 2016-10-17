@@ -1,0 +1,7 @@
+parameters:
+#    roa.example.class: ROA\ROABundle\Example
+
+services:
+#    roa.example:
+#        class: %roa.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

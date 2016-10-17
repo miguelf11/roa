@@ -1,0 +1,67 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_create-update.css') }}" /> 
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script language="javascript" src="{{ asset('bundles/ROA/js/livevalidation.js') }}" type="text/javascript"></script>
+	<script>
+		$(document).ready(function(){
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+
+		
+		
+	{% if paso == 1 %}
+		<h1>Reestablecimiento de Contrase&ntilde;a</h1>	
+	{% endif %}
+
+	{% if paso == 2 %}
+		<h1>¡Tu clave provisional se ha enviado satisfactoriamente!</h1>
+	{% endif %}
+	
+	{% if paso == 1 %}
+
+			{% if email_invalido %}
+				<br><div><p class='error'>{{ email_invalido }}</p></div>
+			{% endif %}	
+
+			<form id="form_recuperar_contrasena" name="form_recuperar_contrasena" action="{{path('recuperar_contrasena')}}" method="POST"><br>
+
+				<div class="formulario">
+					<div>
+						{{ form_label(Usuario_form.email) }}
+						{{ form_widget(Usuario_form.email) }}
+					</div>
+				</div>
+
+				<script language="javascript" src="{{ asset('bundles/ROA/js/validaciones/validaciones_usuario.js') }}" type="text/javascript"></script> 
+
+				<!--<input type="text" name="email"/>-->
+
+				<a type="submit" id="boton_recuperar_contrasena" class="btn_custom" onClick="javascript:form_recuperar_contrasena.submit()">Aceptar</a>
+
+			</form>
+
+
+			<div class="instrucciones" style=''>
+				<p>Recibir&aacute;s un correo electr&oacute;nico con una contrase&ntilde;a provisional para acceder a tu cuenta de usuario. Una vez que accedas a tu cuenta puedes cambiar la contrase&ntilde;a en la opci&oacute;n "Editar Perfil"</p>
+			</div>
+
+	{% endif %}
+
+	{% if paso == 2 %}
+		<p>Revisa tu correo electr&oacute;nico para obtener la clave provisional</p>
+
+	{% endif %}
+
+{% endblock content %}

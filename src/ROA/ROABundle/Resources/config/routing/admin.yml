@@ -1,0 +1,38 @@
+admin:
+    pattern:  /
+    defaults: { _controller: ROABundle:Default:admin }
+
+OA_index_admin:
+    pattern:  /OA
+    defaults: { _controller: "ROABundle:OA:index_admin" }
+    requirements:
+        _method: POST|GET
+
+OA_edit_admin:
+    pattern:  /OA/{id}/edit
+    defaults: { _controller: "ROABundle:OA:edit_admin" }
+
+OA_update_admin:
+    pattern:  /OA/{id}/update
+    defaults: { _controller: "ROABundle:OA:update_admin" }
+    requirements: { _method: post }
+
+OA_delete_admin:
+    pattern:  OA/{id}/delete
+    defaults: { _controller: "ROABundle:OA:delete_admin" }
+    requirements: { _method: post }
+
+comentario_index_admin:
+    pattern:  /comentario
+    defaults: { _controller: "ROABundle:Comentario:index" }
+    requirements:
+        _method: POST|GET
+
+comentario_edit_admin:
+    pattern:  /comentario/{id}/edit
+    defaults: { _controller: "ROABundle:Comentario:edit" }
+
+comentario_update_admin:
+    pattern:  /comentario/{id}/update
+    defaults: { _controller: "ROABundle:Comentario:update" }
+    requirements: { _method: post }

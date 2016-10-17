@@ -1,0 +1,23 @@
+<h1>El Estado de tu OACA ha sido modificado por el administrador!</h1>
+
+<h3>Informaci&oacute;n de tu OACA:</h3>
+
+<p><b>Titulo:</b> {{ objeto.titulo }}</p>
+<p><b>Categor&iacute;a:</b> {{ objeto.subcategoria.categoria.nombre }}</p>
+<p><b>Subcategor&iacute;a:</b>{{ objeto.subcategoria.nombre }}</p>
+
+<p>El Estado de tu OACA a cambiado a "{{ objeto.status.descripcion }}".</p>
+
+<p>Recuerda que los OACA almacenados dentro de ROACAR, pueden tener varios estados: En Revisi&oacute;n, Certificado y No Autorizado.</p>
+
+		<ul>
+			<li>
+				<p>En Revisión: el OACA esta siendo sometido aun proceso de revisi&oacute;n para verificar si cumple con los requisitos m&iacute;nimos de calidad de ROACAR. Mientras el OACA est&aacute; en revisi&oacute;n, el usuario no podr&aacute; verlo en las publicaciones y tampoco podr&aacute; editarlo hasta tanto no sea Certificado</p>
+			</li>
+			<li>
+				<p>Certificado: el OACA ha sido revisado y cumple con los requisitos m&iacute;nimos de calidad de ROACAR. Los Objetos Certificados est&aacute;n visible en las publicaciones</p>
+			</li>
+			<li>
+				<p>No Autorizado: el OACA no cumple con los requisitos m&iacute;nimos de calidad de ROACAR o viola alguna de las pol&iacute;ticas del Repositorio. El usuario debe ponerse en contacto con el administrador para conocer los detalles.</p>
+			</li>
+		</ul>

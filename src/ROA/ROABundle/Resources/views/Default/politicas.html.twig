@@ -1,0 +1,120 @@
+ {% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+
+
+			$('#div_politicas').attr('class', 'desplegable seleccionado');
+			$('#accordion ul#ul_politicas').show();	
+			var aux = "{{ asset('bundles/ROA/images/arrow_right2.png') }}";
+			$('#div_politicas').children('img').eq(0).attr('src', aux);
+		});
+		
+	</script>
+{% endblock %}
+
+{% block content %}
+
+		<div id="politicas">
+		<h1>Pol&iacute;ticas de ROACAR</h1>
+  		<h3 id="consideraciones">Consideraciones Generales</h3>
+		<ul>
+			<li>
+				<p>ROACAR promueve la filosofía del acceso abierto a los contenidos. Esto conlleva una voluntad de difundir, compartir y reutilizar contenidos.</p>
+			</li>
+			<li>
+				<p>Los Objetos de Aprendizaje almacenados en ROACAR, deben ser producidos por miembros de la comunidad académica de la UCV y/o de otras instituciones en colaboración a través de convenios específicos. Los Objetos de Aprendizaje deben ser resultado de actividades de investigación, difusión, creación y enseñanza que pertenezcan a acervos de la institución ó editados por la UCV</p>
+			</li>
+			<li>
+				<p>Los Objetos de Aprendizaje almacenados deberán contar con los datos básicos para su identificación y clasificación, estar completos y en formato digital; no infringir los derechos de propiedad intelectual y/o que éstos afecten a terceros</p>
+			</li>
+			<li>
+				<p>ROACAR tiene la potestad de permitir o no la publicaci&oacute;n de los comentarios. Aquellos comentarios cuyo contenido sea ofensivo o viole alguna de las pol&iacute;ticas del Repositorio, ser&aacute; eliminado inmediatamente. </p>
+			</li>
+		</ul>
+
+		<h3 id="almacenamiento">Almacenamiento</h3>
+		<ul>
+			<li>
+				<p>Podrá almacenar contenidos cualquier usuario que se registre en ROACAR.</p>
+			</li>
+			<li>
+				<p>El autor establecerá las limitaciones de acceso y términos de uso a sus contenidos, de acuerdo a los derechos de propiedad intelectual asociados a su trabajo.</p>
+			</li>
+			<li>
+				<p>El autor se hace responsable de la integridad y pertinencia del objeto almacenado, así como de la validación técnica de los datos que se incluyan.</p>
+			</li>
+		</ul>
+
+
+		<h3 id="gestion">Gestión y Organización</h3>
+		<ul>
+			<li>
+				<p>ROACAR contendrá el objeto mismo y sus metadatos.</p>
+			</li>
+			<li>
+				<p>Los depositantes deberán proporcionar los metadatos básicos para la identificación y clasificación de los objetos que depositan.</p>
+			</li>
+			<li>
+				<p>Si ROACAR detecta violaciones de derechos de autor en los Objetos de Aprendizaje almacenados, estos serán retirados inmediatamente</p>
+			</li>
+			<li>
+				<p>ROACAR solo permite formatos libres</p>
+			</li>
+		</ul>
+
+		<h3 id="politicas_derechos">Políticas de Uso y Derechos Legales</h3>
+		<ul>
+			<li>
+				<p>El autor(es) deberá poseer los derechos de propiedad intelectual de su trabajo y conceder a la UCV el derecho de preservar y dar acceso público a sus Objetos de Aprendizaje a través de los servicios de búsqueda y consulta del repositorio</p>
+			</li>
+			<li>
+				<p>El autor(es) deberá aceptar los términos de una licencia para el uso y distribución no exclusiva de los contenidos almacenados, y estar en capacidad de ceder voluntariamente a la UCV el derecho a preservar y distribuir su trabajo a través del repositorio.</p>
+			</li>
+			<li>
+				<p>El usuario puede descargar, almacenar o visualizar los Objetos de Aprendizaje, resultados de búsqueda u otra información, sólo para uso personal, de investigación y docencia.</p>
+			</li>
+		</ul>
+
+		<h3 id="calidad">Control de Calidad de los Objetos de Aprendizaje</h3>
+		<ul>
+			<li>
+				<p>Los Objetos de Aprendizaje pasan por un proceso de control de calidad antes de ser publicados en el Repositorio.</p>
+			</li>
+			<li>
+				<p>El control de calidad se rige por el Instrumento para la Evaluaci&oacute;n de Objetos de Aprendizaje denominado LORI, y es llevado a cabo por el Administrador de ROACAR.</p>
+			</li>
+			<li>
+				<p>El resultado de la evaluaci&oacute;n de los objetos se representa mediante una escala del 1 al 5.</p>
+			</li>
+		</ul>
+
+		<h3 id="estado">Estado de los Objetos de Aprendizaje almacenados</h3>
+		<ul>
+			<li>
+				<p>Los Objetos de Aprendizaje almacenados dentro de ROACAR, pueden tener varios estados: En Revisi&oacute;n, Certificado y No Autorizado.</p>
+			</li>
+			<li>
+				<p>En Revisión: el Objeto de Aprendizaje esta siendo sometido a un proceso de revisi&oacute;n para verificar si cumple con los requisitos m&iacute;nimos de calidad de ROACAR. Mientras el Objeto est&aacute; en revisi&oacute;n, el usuario no podr&aacute; verlo en las publicaciones y tampoco podr&aacute; editarlo hasta tanto no sea Certificado</p>
+			</li>
+			<li>
+				<p>Certificado: el Objeto de Aprendizaje ha sido revisado y cumple con los requisitos m&iacute;nimos de calidad de ROACAR. Los Objetos Certificados est&aacute;n visible en las publicaciones</p>
+			</li>
+			<li>
+				<p>No Autorizado: el Objeto de Aprendizaje no cumple con los requisitos m&iacute;nimos de calidad de ROACAR o viola alguna de las pol&iacute;ticas del Repositorio. El usuario debe ponerse en contacto con el administrador para conocer los detalles.</p>
+			</li>
+		</ul>
+	</div>
+
+
+{% endblock %}
+

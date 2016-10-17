@@ -1,0 +1,91 @@
+ROABundle_OA:
+        resource: "@ROABundle/Resources/config/routing/OA.yml"
+        prefix:   
+
+ROABundle_Perfil:
+        resource: "@ROABundle/Resources/config/routing/Perfil.yml"
+        prefix:   /perfil
+
+ROABundle_usuario:
+        resource: "@ROABundle/Resources/config/routing/usuario.yml"
+        prefix:   admin/usuario
+
+ROABundle_admin:
+        resource: "@ROABundle/Resources/config/routing/admin.yml"
+        prefix:   admin/
+
+ROABundle_Comentario:
+        resource: "@ROABundle/Resources/config/routing/Comentario.yml"
+        prefix:   OA/{id}/comentario
+        
+ROABundle_categoria:
+        resource: "@ROABundle/Resources/config/routing/categoria.yml"
+        prefix:   admin/categoria
+
+ROABundle_subcategoria:
+        resource: "@ROABundle/Resources/config/routing/subcategoria.yml"
+        prefix:   /subcategoria
+
+roa_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: ROABundle:Default:index }
+
+inicio:
+    pattern:  /index
+    defaults: { _controller: ROABundle:Default:index }
+
+politicas:
+    pattern:  /politicas
+    defaults: { _controller: ROABundle:Default:politicas }
+
+busqueda:
+    pattern:  /busqueda
+    defaults: { _controller: ROABundle:Default:busqueda }
+
+recientes:
+    pattern:  /recientes
+    defaults: { _controller: ROABundle:Default:recientes }
+
+mas_descargados:
+    pattern:  /mas_descargados
+    defaults: { _controller: ROABundle:Default:mas_descargados }
+
+creditos:
+    pattern:  /creditos
+    defaults: { _controller: ROABundle:Default:creditos }
+
+sobre_roacar:
+    pattern:  /sobre_roacar
+    defaults: { _controller: ROABundle:Default:sobre_roacar }
+
+accesibilidad:
+    pattern:  /accesibilidad
+    defaults: { _controller: ROABundle:Default:accesibilidad }
+
+layout:
+    pattern:  /layout
+    defaults: { _controller: ROABundle:Default:layout}
+
+login:
+    pattern:  /login
+    defaults: { _controller: ROABundle:Default:login }
+
+login_check:
+    pattern:  /login_check
+
+logout:
+    pattern:  /logout
+
+email_insercion_OA:
+    pattern:  /email1
+    defaults: { _controller: ROABundle:Default:email }
+
+login_service:
+    pattern:  /loginservice
+    defaults: { _controller: ROABundle:Default:loginservice }
+    requirements:
+        _method: GET|POST|PUT|DELETE
+
+
+
+

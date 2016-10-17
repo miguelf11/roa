@@ -1,0 +1,57 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_create-update.css') }}" />
+{% endblock %}
+
+{% block content %}
+
+{% if activacion_exitosa == false %}
+
+<h1>Error de Activaci&oacute;n</h1>
+<p>Puede que tu cuenta ya haya sido activada, para verificarlo intenta iniciar sesi&oacute;n con tu cuenta. De lo contrario, por favor revisa nuevamente el enlace que fue enviado a tu correo o contacta al administrador: <a target="_blank" href="mailto:juansneak@gmail.com" class="link">roacar@ucv.ve</a></p>
+
+
+{% else %}
+
+	<h1>Nuevo Usuario</h1>
+
+	<div class="alert alert-info mensaje">
+		¡Felicidades, ya eres parte de ROACAR!
+	</div>
+
+        <div>
+            {% if usuario_new.getWebPath() %}
+                <img src="{{ asset(usuario_new.getWebPath()) }}" class="img_usuario"/>
+            {% else %}
+                <img src="{{ asset('bundles/ROA/images/user.png') }}" class="img_usuario"/>
+            {% endif %}
+        </div>
+	
+		<table class="table table-bordered">
+            <tr>
+                <td><p class="bold">Nombre</p></td>
+                <td><p>{{ usuario_new.getNombre }}</p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Apellido</p></td>
+                <td><p>{{ usuario_new.getApellido }}</p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Email</p></td>
+                <td><p>{{ usuario_new.getEmail }}<p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Tipo de Usuario</p></td>
+                <td><p>{{ usuario_new.getTipoUsuario().getDescripcion() }}</p></td>
+            </tr>
+        </table>
+
+		<div class="instrucciones"><p>Para iniciar sesi&oacute;n haz click en INICIAR SESI&Oacute;N e introduce tu nombre de usuario y contraseña</p></div>
+
+
+{% endif %}
+
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+<link rel="stylesheet" href="{{ asset('bundles/ROA/css/comentario.css') }}" />
+<!--<script language="javascript" src="{{ asset('bundles/ROA/js/funciones.js') }}" type="text/javascript"></script>
+ <script language="javascript" src="{{ asset('bundles/ROA/js/jquery.js') }}" type="text/javascript"></script>-->
+<h1>Comentarios</h1>
+
+<h3>Objeto: {{ objeto.titulo }}</h3>
+
+<div id="div_comentario_new">
+
+<form id="form_new" name="form_new" action="{{path('comentario_new', {'id': objeto.id})}}" method="POST"><br>
+
+	<div class="formulario_comentario">
+		{{ form_widget(Comentario_form.descripcion,  { 'attr': {'placeholder': 'Escribe un comentario'} }) }}
+		<div style="display:none">{{ form_widget(Comentario_form.status) }}</div>
+		{{ form_widget(Comentario_form._token) }}
+	</div>
+
+	<a id="" class="btn_custom" onClick="enviarForm2('form_new', 'div_comentario_new', '', '')">Publicar</a>
+
+</form>
+
+</div>
+
+
+<!--
+<div id="div_comentarios" class="div_comentarios">
+<div id="div_comentario_new"></div>
+{% for comentario in comentarios %}
+		<div class="comentario">
+			{% if comentario.usuario.getWebPath() %}
+				<a href="{{ asset(comentario.usuario.getWebPath()) }}" target="_blank"><img src="{{ asset(comentario.usuario.getWebPath()) }}" style=""/></a>
+			{% else %}
+				<img src="{{ asset('bundles/ROA/images/user.png') }}" style=""/>
+			{% endif %}
+			<div class="comentario_detalle">
+				<p style="color:#049EFF"><b>{{comentario.usuario.getNombre()}} {{comentario.usuario.getApellido()}}</b></p>
+				<p>{{comentario.descripcion}}</p>
+				<p><span class="fecha_publicacion">{{comentario.fecha_publicacion |date('d-m-Y H:i')}}</span></p>
+			</div>
+		</div>
+{% endfor %}
+</div>
+-->

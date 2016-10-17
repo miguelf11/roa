@@ -1,0 +1,45 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_new-edit.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<!--<script language="javascript" src="{{ asset('bundles/ROA/js/livevalidation.js') }}" type="text/javascript"></script>-->
+	<script>
+		$(document).ready(function(){
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+
+			/*mensajes de error*/
+			$('input, input.input_form, input.fecha, select.select_form').each(function(){
+				$(this).parent().attr('style', 'position:relative');
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+	<h1>Registro</h1>
+	<p>Introduce tus datos para registrarte</p><br><br>
+
+
+		<form id="form_new" name="form_new" id="form_new" action="{{path('perfil_new')}}" method="POST" {{ form_enctype(Usuario_form) }}><!--<br>-->
+
+
+			{{ form_widget(Usuario_form, { 'attr': {'class': 'formulario'} }) }}
+
+
+			<script language="javascript" src="{{ asset('bundles/ROA/js/validaciones/validaciones_usuario.js') }}" type="text/javascript"></script> 
+
+			<a class="btn_custom" name="login" id="boton_sesion" onClick="javascript:form_new.submit()">Aceptar</a>
+			<!--<input type="submit" name="aceptar" value="Aceptar" class="btn"/>-->
+
+		</form>
+
+	
+
+{% endblock content %}

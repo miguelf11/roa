@@ -1,0 +1,77 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {% if role == 'Contribuyente' %}
+
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#contribuyentes').attr('class');
+            $('a#contribuyentes').attr('class', a_class+' active');
+        });
+    </script>
+
+    {% else %}
+
+        <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#no_contribuyentes').attr('class');
+            $('a#no_contribuyentes').attr('class', a_class+' active');
+        });
+    </script>
+
+    {% endif %}
+    
+{% endblock %}
+
+{% block content %}
+
+
+
+<h1>Usuarios ({{ role }}s)</h1>
+
+{% if mensaje %}
+    <div class="alert alert-info mensaje">{{ mensaje }}</div>
+{% endif %}
+
+<table class="table-general table_admin">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th colspan="2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.nombre }}</td>
+            <td>{{ entity.apellido }}</td>
+            <td>
+                <a href="{{ path('usuario_show', { 'id': entity.id, 'role': role }) }}" class="link">Ver</a>
+            </td>    
+            <td>
+                <a href="{{ path('usuario_edit', { 'id': entity.id, 'role':role }) }}" class="link">Editar</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('usuario_new', {'role': role} ) }}" class="btn_custom">
+            Crear Nuevo Usuario
+        </a>
+    </li>
+</ul>
+
+{% endblock content %}

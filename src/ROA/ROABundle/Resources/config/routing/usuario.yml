@@ -1,0 +1,30 @@
+usuario:
+    pattern:  /{role}
+    defaults: { _controller: "ROABundle:Usuario:index" }
+
+usuario_show:
+    pattern:  /{role}/{id}/show
+    defaults: { _controller: "ROABundle:Usuario:show" }
+
+usuario_new:
+    pattern:  /{role}/new
+    defaults: { _controller: "ROABundle:Usuario:new" }
+
+usuario_create:
+    pattern:  /{role}/create
+    defaults: { _controller: "ROABundle:Usuario:create" }
+    requirements: { _method: post }
+
+usuario_edit:
+    pattern:  /{role}/{id}/edit
+    defaults: { _controller: "ROABundle:Usuario:edit" }
+
+usuario_update:
+    pattern:  /{role}/{id}/update
+    defaults: { _controller: "ROABundle:Usuario:update" }
+    requirements: { _method: post }
+
+usuario_delete:
+    pattern:  /{role}/{id}/delete
+    defaults: { _controller: "ROABundle:Usuario:delete" }
+    requirements: { _method: post }

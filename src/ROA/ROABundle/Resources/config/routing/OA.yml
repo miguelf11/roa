@@ -1,0 +1,60 @@
+OA_index:
+    pattern:  /{filtro}/{id}/OA.{_format}
+    defaults: { _controller: "ROABundle:OA:index", _format: html }
+    requirements:
+        _method: POST|GET
+        _format: html|xml|rss|json
+
+OA_edit:
+    pattern:  /usuario/{id_usuario}/OA/{id}/edit
+    defaults: { _controller: "ROABundle:OA:edit" }
+
+OA_update:
+    pattern:  /usuario/{id_usuario}/OA/{id}/update
+    defaults: { _controller: "ROABundle:OA:update" }
+    requirements: { _method: post }
+
+OA_new:
+    pattern:  /{filtro}/{id}/OA/new
+    defaults: { _controller: "ROABundle:OA:new" }
+
+OA_create:
+    pattern:  /{filtro}/{id}/OA/create
+    defaults: { _controller: "ROABundle:OA:create" }
+
+OA_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ROABundle:OA:delete" }
+    requirements: { _method: post|delete }
+
+OA_visualizacion:
+    pattern:  /{id}/visualizacion.{_format}
+    defaults: { _controller: ROABundle:OA:visualizacion, _format: html }
+    requirements:
+        id: \d+
+        _method: POST|GET
+        _format: html|xml|rss
+
+OA_descarga:
+    pattern:  /{id}/descarga.{_format}
+    defaults: { _controller: ROABundle:OA:descarga, _format: html }
+    requirements:
+        id: \d+
+        _method: POST|GET
+        _format: html|xml|rss
+
+OA_metadatos:
+    pattern:  OA/{id}/metadatos.{_format}
+    defaults: { _controller: ROABundle:OA:metadatos, _format: html }
+    requirements:
+        id: \d+
+        _method: POST|GET
+        _format: html|xml|rss
+
+OA_dispatcher:
+    pattern:  /{id}.{_format}
+    defaults: { _controller: ROABundle:OA:dispatcher, _format: html }
+    requirements:
+        id: \d+
+        _method: POST|GET
+        _format: html|xml|rss

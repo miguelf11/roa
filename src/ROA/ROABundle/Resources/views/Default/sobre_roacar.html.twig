@@ -1,0 +1,37 @@
+ {% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+
+			$('#div_sobre_roacar').attr('class', 'desplegable seleccionado');
+			$('#accordion ul#ul_sobre_roacar').show();	
+			var aux = "{{ asset('bundles/ROA/images/arrow_right2.png') }}";
+			$('#div_sobre_roacar').children('img').eq(0).attr('src', aux);
+		});
+		
+	</script>
+{% endblock %}
+
+{% block content %}
+
+	<div>
+	<h1>&iquest;Qu&eacute; es ROACAR?</h1>
+
+	<p>
+		ROACAR es una iniciativa de la Escuela de Computaci&oacute;n de la Universidad Central de Venezuela para la difusi&oacute;n de recursos educativos de contenidos abiertos dentro de las comunidades acad&eacute;micas, mediante el uso de las tecnolog&iacute;as de comunicaci&oacute;n e informaci&oacute;n. Este espacio virtual fomenta el acceso libre a la la producci&oacute;n intelectual y promueve el uso y la reutilizaci&oacute;n de los Objetos de Aprendizaje.
+	</p>
+
+		
+	</div>
+
+
+{% endblock %}

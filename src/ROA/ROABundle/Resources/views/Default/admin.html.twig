@@ -1,0 +1,31 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+{% block javascripts %} 
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+		});
+	</script>
+{% endblock %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+	
+{% endblock %}
+
+{% block content %}
+	<h1>Sistema de Administraci&oacute;n de ROACAR</h1>
+
+	<!--<p>El Sistema de Administraci&oacute;n de ROACAR permite llevar a cabo la gesti&oacute;n de los usuarios y cargar todos los contenidos de la p&aacute;gina<p>-->
+
+	<div style="height: 100px">
+		<p>El Sistema de Administraci&oacute;n de ROACAR permite llevar a cabo la gesti&oacute;n de los usuarios, así como el control de calidad de los Objetos de Aprendizajes que son publicados en el Repositorio.<p>
+
+	</div>
+
+{% endblock content %}
+
+
+
+

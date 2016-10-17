@@ -1,0 +1,35 @@
+{% extends "ROABundle::layout.html.twig" %}
+{% block javascripts %} 
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<h1>¡Hola {{ usuario.getNombre }}, bienvenido(a) a ROACAR!</h1>
+	{% else %}
+		<h1>¡Bienvenidos a ROACAR!</h1>
+	{% endif %}
+
+		<img src="{{ asset('bundles/ROA/images/small11.jpg') }}" title="Fuente: www.ucv.ve" class="imagen_inicio"/>
+		<img src="{{ asset('bundles/ROA/images/small13.jpg') }}" title="Fuente: www.ucv.ve" class="imagen_inicio"/>
+
+		<p>ROACAR es un Repositorio Institucional para la gesti&oacute;n de Objetos de Aprendizajes de Contenidos Abiertos Reutilizables desarrollados por alumnos y profesores de la Universidad Central de Venezuela.</p><br><p>A trav&eacute;s de este portal los usuarios podr&aacute;n publicar cualquier tipo de contenido educativo, siempre y cuando cumpla con las pol&iacute;ticas del Repositorio.</p><br />
+
+		<!--<p>Los Repositorios de Objetos de Aprendizaje almacenan una gran cantidad de recursos educativos de forma organizada y categorizada para facilitar el proceso de búsqueda y permiten aprovechar al máximo la característica de reutilización de los OA.</p><br />
+
+		<p>Por otra parte, se incrementa la disponibilidad y accesibilidad de los contenidos de aprendizaje, lo cual ayuda a los docentes a centrarse más en la información a transmitir y no en las herramientas que se usarán para transmitir dicha información.</p><br />-->
+
+		<p>Los Objetos de Aprendizajes de Contenidos Abiertos (OACA) son aquellos Objetos que pueden ser accedidos de manera libre y gratuita. <p><br>
+
+		<p>Los OACA pueden estar desarrollados con herramientas de software libre y están a disposición de cualquiera que quiera utilizarlos, permitiendo además la edición, adaptación y reutilización de forma libre.</p><br>
+
+
+
+		
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+{% endblock %}
+
+{% block content %}
+	<h1>&iexcl;Gracias por Registrarte!</h1>
+    <div class="registrarse">
+        <p> 
+            Se ha enviado un email de confirmaci&oacute;n a {{usuario_new.getEmail()}}. Haz click en el enlace de activaci&oacute;n para activar tu cuenta.
+        </p>
+    </div>
+
+{% endblock content %}

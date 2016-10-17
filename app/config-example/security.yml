@@ -1,0 +1,39 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    encoders:
+        ROA\ROABundle\Entity\Usuario:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
+
+    role_hierarchy:
+        ROLE_SUPER_USER: [ROLE_PROFESOR]
+        ROLE_PROFESOR: [ROLE_ESTUDIANTE]
+        
+
+    providers:
+        user_db:
+            entity: {class: ROA\ROABundle\Entity\Usuario, property: email}
+
+    firewalls:
+        secured_area:
+            pattern: ^/
+            provider: user_db
+            form_login:
+                default_target_path: /index
+                target_path_parameter: _target_path
+                login_path: /index
+                check_path: /login_check
+                failure_handler: authentication_handler 
+                success_handler: authentication_handler
+            logout:
+                path: /logout
+                target: /index
+            security: true
+            anonymous: true
+
+    access_control:
+        - { path: /admin, roles: ROLE_SUPER_USER }

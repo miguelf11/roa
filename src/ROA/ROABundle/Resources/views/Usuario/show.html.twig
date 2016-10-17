@@ -1,0 +1,103 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_create-update.css') }}" />
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {% if role == 'Contribuyente' %}
+
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#contribuyentes').attr('class');
+            $('a#contribuyentes').attr('class', a_class+' active');
+        });
+    </script>
+
+    {% else %}
+
+        <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#no_contribuyentes').attr('class');
+            $('a#no_contribuyentes').attr('class', a_class+' active');
+        });
+    </script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+{% if mensaje %}
+    <div class="alert alert-info mensaje">{{ mensaje }}</div>
+{% endif %}
+
+<h1>Usuario: {{ entity.nombre }} {{ entity.apellido }}</h1>
+
+    <div id="info_usuario" class="">
+
+        <div>
+            {% if entity.getWebPath() %}
+                <img src="{{ asset(entity.getWebPath()) }}" class="img_usuario"/>
+            {% else %}
+                <img src="{{ asset('bundles/ROA/images/user.png') }}" class="img_usuario"/>
+            {% endif %}
+        </div>
+
+       <table class="table table-bordered">
+            <tr>
+                <td><p class="bold">Nombre</p></td>
+                <td><p>{{ entity.nombre }}</p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Apellido</p></td>
+                <td><p>{{ entity.apellido }}</p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Email</p></td>
+                <td><p>{{ entity.email }}<p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Tipo de Usuario</p></td>
+                <td><p>{{ entity.getTipoUsuario().getDescripcion() }}</p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Rol</p></td>
+                <td><p>{{ entity.popRole() }}</p></td>
+            </tr>
+        </table>
+
+        <a href="{{ path('usuario_edit', { 'id': entity.id, 'role':role }) }}" class="btn_custom">
+            Editar
+        </a>
+
+        <!--<div class="instrucciones"></div>-->
+    </div>
+
+<ul class="record_actions">
+    <li>
+        <form action="{{ path('usuario_delete', { 'id': entity.id, 'role':role }) }}" method="post" id="form_delete_usuario">
+            {{ form_widget(delete_form) }}
+            <a id="" type="submit" class="btn_custom" onClick="eliminar('form_delete_usuario')">Eliminar Usuario</a>
+        </form>
+    </li>
+    <li>
+        <a href="{{ path('usuario', {'role': role}) }}" class="link">
+            Volver a la lista
+        </a>
+    </li>
+</ul>
+
+
+<div id="dialog-confirm" title="Eliminar" style="display:none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro que desea eliminar este usuario?</p>
+</div>
+
+
+{% endblock %}

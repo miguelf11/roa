@@ -1,0 +1,34 @@
+perfil_new:
+    pattern:  /new.{_format}
+    defaults: { _controller: ROABundle:Perfil:new, _format:html }
+    requirements:
+        _method: GET|POST
+        _format: html|xml|rss|json
+
+perfil_create:
+    pattern:  .{_format}
+    defaults: { _controller: ROABundle:Perfil:create, _format:html }
+    requirements:
+        _method: GET|POST
+        _format: html|xml|rss|json
+
+perfil_edit:
+    pattern:  /edit/{id}.{_format}
+    defaults: { _controller: ROABundle:Perfil:edit, _format:html }
+    requirements:
+        _method: GET|POST
+        _format: html|xml|rss|json
+
+perfil_update:
+    pattern:  .{_format}
+    defaults: { _controller: ROABundle:Perfil:update, _format:html }
+    requirements:
+        _method: GET
+        _format: html|xml|rss|json
+
+recuperar_contrasena:
+    pattern:  /recuperar_contrasena.{_format}
+    defaults: { _controller: ROABundle:Perfil:recuperar_contrasena, _format:html }
+    requirements:
+        _method: GET|POST
+        _format: html|xml|rss|json

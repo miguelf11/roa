@@ -1,0 +1,110 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_new-edit.css') }}" />
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {% if role == 'Contribuyente' %}
+
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#contribuyentes').attr('class');
+            $('a#contribuyentes').attr('class', a_class+' active');
+
+            /*mensajes de error*/
+            $('input, input.input_form, input.fecha, select.select_form').each(function(){
+                $(this).parent().attr('style', 'position:relative');
+            });
+        });
+    </script>
+
+    {% else %}
+
+        <script>
+        $(document).ready(function(){
+            a_class = $('a#usuarios').attr('class');
+            $('a#usuarios').attr('class', a_class+' active');
+            a_class = $('a#no_contribuyentes').attr('class');
+            $('a#no_contribuyentes').attr('class', a_class+' active');
+
+            /*mensajes de error*/
+            $('input, input.input_form, input.fecha, select.select_form').each(function(){
+                $(this).parent().attr('style', 'position:relative');
+            });
+        });
+    </script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if mensaje %}
+    <div class="alert alert-info mensaje">{{ mensaje }}</div>
+{% endif %}
+
+<h1>Editar Usuario: {{entity.nombre}} {{entity.apellido}}</h1>
+<p>Utiliza el siguiente formulario para editar la informaci&oacute;n del Usuario</p><br><br>
+
+<div class="">
+
+
+        {% if contrasena_invalida %}
+
+            <p class="error">{{ contrasena_invalida }}</p>
+
+        {% endif %} 
+
+
+        <div class="foto_usuario">
+            {% if entity.getWebPath() %}
+                <img src="{{ asset(entity.getWebPath()) }}" class="img_usuario"/>
+            {% else %}
+                <img src="{{ asset('bundles/ROA/images/user.png') }}" class="img_usuario"/>
+            {% endif %}
+        </div>
+
+    <form name="form_new" id="form_new" action="{{ path('usuario_update', { 'id': entity.id, 'role':role }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+
+        <div class="formulario">
+            <div>
+                <label class="label_form"> Contrasena actual </label> 
+                <input type="password" id="contrasena_actual" name="contrasena_actual" class="input_form">
+            </div>
+        </div>
+
+         <div class="formulario">
+            {{ form_widget(edit_form) }}
+            <p>
+                <!--<button type="submit" class="btn">Editar</button>-->
+                <a class="btn_custom" name="" id="" onClick="javascript:form_new.submit()">Editar</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<ul class="record_actions">
+    <li>
+        <form action="{{ path('usuario_delete', { 'id': entity.id, 'role':role }) }}" method="post" id="form_delete_usuario">
+            {{ form_widget(delete_form) }}
+            <a type="submit" class="btn_custom" id="eliminar_usuario" onClick="eliminar('form_delete_usuario')">Eliminar Usuario</a>
+        </form>
+    </li>
+    <li>
+        <a href="{{ path('usuario', {'role':role}) }}" class="link" id="volver_lista">
+            Volver a la lista
+        </a>
+    </li>
+</ul>
+
+<div id="dialog-confirm" title="Eliminar" style="display:none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro que desea eliminar este usuario?</p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,944 @@
+<link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+<link rel="stylesheet" href="{{ asset('bundles/ROA/css/comentario.css') }}" />
+<link rel="stylesheet" href="{{ asset('bundles/ROA/css/ficha_descriptiva.css') }}" />
+
+<script>
+$(document).ready(function(){
+	$( "#tabs-metadatos" ).tabs();
+
+	$('#ver_mas').toggle(function() {
+		$("#tabla_metadatos").css("display", "none");
+    	$("#tabs-metadatos").css("display", "block");
+    	$("#ver_mas").html("Ver resumen");
+	}, function() {
+    	$("#tabs-metadatos").css("display", "none");
+    	$("#tabla_metadatos").css("display", "table");
+    	$("#ver_mas").html("Ver mas");
+	});
+
+	
+});
+
+</script>
+
+{% set vacio = 'No Hay Información' %}
+
+<h1>Ficha Descriptiva</h1>
+
+<h3>Objeto: {{ objeto.titulo }}</h3>
+
+<table class="table table-bordered" id="tabla_metadatos">
+        <tr>
+            <td><p class="bold">T&iacute;tulo</p></td>
+            {% if objeto.titulo %}
+            	<td><p>{{ objeto.titulo }}</p></td>
+            {% else %}
+            	<td><p>{{ vacio }}</p></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><p class="bold">Autor</p></td>
+            {% if objeto.usuario.nombre %}
+            	<td><p>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</p></td>
+            {% else %}
+            	<td><p>{{ vacio }}</p></td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td><p class="bold">Categor&iacute;a</p></td>
+            {% if objeto.subcategoria.nombre %}
+            	<td><p>{{ objeto.subcategoria.nombre }}</p></td>
+            {% else %}
+            	<td><p>{{ vacio }}</p></td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td><p class="bold">Lenguaje</p></td>
+            {% if objeto.general.lenguaje %}
+            	<td><p>{{ objeto.general.lenguaje }}</p></td>
+            {% else %}
+            	<td><p>{{ vacio }}</p></td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td><p class="bold">Versi&oacute;n</p></td>
+            {% if objeto.ciclovida.version %}
+            	<td><p>{{ objeto.ciclovida.version }}</p></td>
+            {% else %}
+            	<td><p>{{ vacio }}</p></td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td><p class="bold">Formato</p></td>
+            {% if objeto.tecnico.formato %}
+            	<td><p>{{ objeto.tecnico.formato }}</p></td>
+            {% else %}
+            	<td><p>{{ vacio }}</p></td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td><p class="bold">Tipo de Recurso</p></td>
+            <td><p>
+            	{% if objeto.educacional.getTipoRecurso() %}
+            		{{ objeto.educacional.getTipoRecurso().getDescripcion() }}
+            	{% else %}
+            		{{ vacio }}
+            	{% endif %}
+            	</p>
+            </td>
+        </tr>
+</table>
+
+<div id="tabs-metadatos">
+	<ul>
+		<li><div class="pes"><a href="#tabs-1">General&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-2">Ciclo de Vida&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-3">MetaMetadata</a></div></li>
+		<li><div class="pes"><a href="#tabs-4">Tecnico&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-5">Educacional&nbsp;&nbsp;&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-6">Derechos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-7">Relaci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-8">Anotaci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-9">Clasificaci&oacute;n&nbsp;&nbsp;</a></div></li>
+		<li><div class="pes"><a href="#tabs-10">OA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+	</ul>
+
+	<div id="tabs-1">
+
+		<div class="formulario">
+			<div class="row">
+				<label class="label_form">Lenguaje</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.general.lenguaje %}
+            			{{ objeto.general.lenguaje }}
+            		{% else %}
+            			{{ vacio }}
+            		{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Descripci&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.general.descripcion %}
+            			{{ objeto.general.descripcion }}
+            		{% else %}
+            			{{ vacio }}
+            		{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Clave</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.general.clave %}
+            			{{ objeto.general.clave }}
+            		{% else %}
+            			{{ vacio }}
+            		{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Cobertura</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.general.cobertura %}
+            			{{ objeto.general.cobertura }}
+            		{% else %}
+            			{{ vacio }}
+            		{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Estructura</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.general.estructura %}
+						{{objeto.general.estructura.descripcion}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Nivel de Agregaci&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.general.getNivelagregacion() %}
+						{{objeto.general.getNivelagregacion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			{% for identificador in objeto.general.identificadores %}
+                    
+                <fieldset class="subform identificador"><legend>Identificador</legend>
+                	<div class="row">
+	                   	<label class="label_form">Cat&aacute;logo</label>
+						<p class="descripcion_metadato left">
+							{% if identificador.catalogo %}
+								{{identificador.catalogo}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+					<div class="row">
+	                   	<label class="label_form">Entrada</label>
+						<p class="descripcion_metadato left">
+							{% if identificador.entrada %}
+								{{identificador.entrada}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+                </fieldset>
+                                
+            {% endfor %}
+
+		</div>
+     
+	</div>
+
+	<div id="tabs-2">
+
+		<div class="formulario">
+
+			<div class="row">
+				<label class="label_form">Versi&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.ciclovida.version %}
+						{{objeto.ciclovida.version}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Status</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.ciclovida.getStatus() %}
+						{{objeto.ciclovida.getStatus().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			{% for contribucion in objeto.ciclovida.contribuciones %}
+                    
+                <fieldset class="subform contribucion2"><legend>Contribucion</legend>
+
+                	<div class="row">
+						<label class="label_form">Rol</label>
+						<p class="descripcion_metadato left">
+							{% if contribucion.rol %}
+								{{contribucion.rol}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					<div class="row">
+						<label class="label_form">Fecha</label>
+						<p class="descripcion_metadato left">
+							{% if contribucion.fecha %}
+								{{contribucion.fecha | date('d-m-Y')}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+                    {% for entidad in contribucion.entidades %}	
+                    
+                        <fieldset class="subform2 entidadCiclovida"><legend>Entidad</legend>
+
+                        	<div class="row">
+								<label class="label_form">Nombre</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.nombre %}
+										{{entidad.nombre}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+
+							<div class="row">
+								<label class="label_form">Email</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.email %}
+										{{entidad.email}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+
+							<div class="row">
+								<label class="label_form">Organizaci&oacute;n</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.organizacion %}
+										{{entidad.organizacion}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+                            
+                        </fieldset>
+                                
+                    {% endfor %}
+
+                </fieldset>
+                                
+            {% endfor %}
+
+		</div>
+		
+
+	</div>
+
+	<div id="tabs-3">
+		<div class="formulario">
+
+			<div class="row">
+				<label class="label_form">Esquema</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.metametadata.esquema %}
+						{{objeto.metametadata.esquema}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Lenguaje</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.metametadata.lenguaje %}
+						{{objeto.metametadata.lenguaje}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			 {% for contribucion in objeto.metametadata.contribuciones %}
+                    
+                <fieldset class="subform contribucion"><legend>Contribucion</legend>
+
+                    <div class="row">
+						<label class="label_form">Rol</label>
+						<p class="descripcion_metadato left">
+							{% if contribucion.rol %}
+								{{contribucion.rol}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					<div class="row">
+						<label class="label_form">Fecha</label>
+						<p class="descripcion_metadato left">
+							{% if contribucion.fecha %}
+								{{contribucion.fecha | date('d-m-Y')}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+                    {% for entidad in contribucion.entidades %}
+                    
+                        <fieldset class="subform2 entidadMetametadata"><legend>Entidad</legend>
+                        	<div class="row">
+								<label class="label_form">Nombre</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.nombre %}
+										{{entidad.nombre}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+
+							<div class="row">
+								<label class="label_form">Email</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.email %}
+										{{entidad.email}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+
+							<div class="row">
+								<label class="label_form">Organizaci&oacute;n</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.organizacion %}
+										{{entidad.organizacion}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+                        </fieldset>
+                                
+                    {% endfor %}
+
+                </fieldset>
+                                
+            {% endfor %}
+
+		</div>
+		
+
+	</div>
+
+	<div id="tabs-4">
+
+		<div class="formulario">
+
+			<div class="row">
+				<label class="label_form">Formato</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.tecnico.formato %}
+						{{objeto.tecnico.formato}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Tama&ntilde;o</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.tecnico.tamano %}
+						{{objeto.tecnico.tamano}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+			
+			<div class="row">
+				<label class="label_form">Ubicaci&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.tecnico.ubicacion %}
+						{{objeto.tecnico.ubicacion}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Comentario</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.tecnico.comentario %}
+						{{objeto.tecnico.comentario}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			{% for requerimiento in objeto.tecnico.requerimientos %}
+                    
+                <fieldset class="subform "><legend>Requerimiento</legend>
+                   <div class="row">
+						<label class="label_form">Tipo</label>
+						<p class="descripcion_metadato left">
+							{% if requerimiento.tipo %}
+								{{requerimiento.tipo}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					<div class="row">
+						<label class="label_form">Nombre</label>
+						<p class="descripcion_metadato left">
+							{% if requerimiento.nombre %}
+								{{requerimiento.nombre}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					<div class="row">
+						<label class="label_form">Versi&oacute;n M&iacute;nima</label>
+						<p class="descripcion_metadato left">
+							{% if requerimiento.getVersionMinima() %}
+								{{requerimiento.getVersionMinima()}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					<div class="row">
+						<label class="label_form">Versi&oacute;n M&aacute;xima</label>
+						<p class="descripcion_metadato left">
+							{% if requerimiento.getVersionMaxima() %}
+								{{requerimiento.getVersionMaxima()}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					
+                </fieldset>
+                                
+            {% endfor %}
+
+		</div>
+
+	</div>
+
+	<div id="tabs-5">
+
+		<div class="formulario">
+
+			<div class="row">
+				<label class="label_form">Tipo de Interacci&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.getTipoInteraccion() %}
+						{{objeto.educacional.getTipoInteraccion().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Tipo de Recurso</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.getTipoRecurso() %}
+						{{objeto.educacional.getTipoRecurso().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Nivel de Interaci&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.getNivelInteraccion() %}
+						{{objeto.educacional.getNivelInteraccion().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Sem&aacute;ntica</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.semantica %}
+						{{objeto.educacional.semantica}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Rol</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.getRol() %}
+						{{objeto.educacional.getRol().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Contexto</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.getContexto() %}
+						{{objeto.educacional.getContexto().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Edad</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.edad %}
+						{{objeto.educacional.edad}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Dificultad</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.getDificultad() %}
+						{{objeto.educacional.getDificultad().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Tiempo</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.tiempo %}
+						{{objeto.educacional.tiempo}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Descripci&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.descripcion %}
+						{{objeto.educacional.descripcion}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Lenguaje</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.educacional.lenguaje %}
+						{{objeto.educacional.lenguaje}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+		</div>
+		
+	</div>
+
+	<div id="tabs-6">
+
+		<div class="formulario">
+
+			<div class="row">
+				<label class="label_form">Costo</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.derechos.getCosto() %}
+						{{objeto.derechos.getCosto().getDescripcion()}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Restricciones</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.derechos.restricciones %}
+						{{objeto.derechos.restricciones}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Descripci&oacute;n</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.derechos.descripcion %}
+						{{objeto.derechos.descripcion}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+		
+		</div>
+		
+	</div>
+
+	<div id="tabs-7">
+
+		<div class="formulario">
+
+			{% if objeto.relaciones|length > 0 %}
+
+				{% for relacion in objeto.relaciones %}
+	                    
+	                <fieldset class="subform "><legend>Relaci&oacute;n</legend>
+	                   <div class="row">
+							<label class="label_form">Tipo</label>
+							<p class="descripcion_metadato left">
+								{% if relacion.getTipo() %}
+									{{relacion.getTipo().getDescripcion()}}
+								{% else %}
+									{{ vacio }}
+								{% endif %}
+							</p>
+						</div>
+	                    
+	                    <fieldset class="subform2 entidadMetametadata"><legend>Recurso</legend>
+	                       	<div class="row">
+								<label class="label_form">Descripci&oacute;n</label>
+								<p class="descripcion_metadato left">
+									{% if relacion.recurso.descripcion %}
+										{{relacion.recurso.descripcion}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+
+							{% for identificador in relacion.recurso.identificadores %}
+
+								<fieldset class="subform2 entidadMetametadata"><legend>Entidad</legend>
+									<div class="row">
+										<label class="label_form">Cat&aacute;logo</label>
+										<p class="descripcion_metadato left">
+											{% if identificador.catalogo %}
+												{{identificador.catalogo}}
+											{% else %}
+												{{ vacio }}
+											{% endif %}
+										</p>
+									</div>
+
+									<div class="row">
+										<label class="label_form">Entrada</label>
+										<p class="descripcion_metadato left">
+											{% if identificador.entrada %}
+												{{identificador.entrada}}
+											{% else %}
+												{{ vacio }}
+											{% endif %}
+										</p>
+									</div>
+								</fieldset>
+
+
+							{% endfor %}
+								
+	                    </fieldset>
+
+	                </fieldset>
+
+	            {% endfor %}
+
+	        {% else %}
+	        	<p>{{ vacio }}</p>
+	        {% endif %}
+
+		</div>
+
+	</div>
+
+	<div id="tabs-8">
+
+		<div class="formulario">
+			{% for anotacion in objeto.anotaciones %}
+
+			 	<fieldset class="subform "><legend>Anotaci&oacute;n</legend>
+                   <div class="row">
+						<label class="label_form">Fecha</label>
+						<p class="descripcion_metadato left">
+							{% if anotacion.fecha %}
+								{{anotacion.fecha  | date('d-m-Y')}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					 <div class="row">
+						<label class="label_form">Descripci&oacute;n</label>
+						<p class="descripcion_metadato left">
+							{% if anotacion.descripcion %}
+								{{anotacion.descripcion}}
+							{% else %}
+								{{ vacio }}
+							{% endif %}
+						</p>
+					</div>
+
+					{% for entidad in anotacion.entidades %}
+						<fieldset class="subform2"><legend>Entidad</legend>
+                   			<div class="row">
+								<label class="label_form">Nombre</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.nombre %}
+										{{entidad.nombre}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+
+							<div class="row">
+								<label class="label_form">Organizaci&oacute;n</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.organizacion %}
+										{{entidad.organizacion}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+
+							<div class="row">
+								<label class="label_form">Email</label>
+								<p class="descripcion_metadato left">
+									{% if entidad.email %}
+										{{entidad.email}}
+									{% else %}
+										{{ vacio }}
+									{% endif %}
+								</p>
+							</div>
+						</fieldset>
+					{% endfor %}
+
+
+				</fieldset>
+
+
+			{% endfor %}
+
+		</div>
+
+
+		<!-- .............................. comentarios ......................... -->
+		<h2>Comentarios</h2>
+		<div id="div_comentarios" class="div_comentarios">
+		<div id="div_comentario_new"></div>
+		{% if comentarios %}
+			{% for comentario in comentarios %}
+					<div class="comentario">
+						{% if comentario.usuario.getWebPath() %}
+							<a href="{{ asset(comentario.usuario.getWebPath()) }}" target="_blank"><img src="{{ asset(comentario.usuario.getWebPath()) }}" style=""/></a>
+						{% else %}
+							<img src="{{ asset('bundles/ROA/images/user.png') }}" style=""/>
+						{% endif %}
+						<div class="comentario_detalle">
+							<p style="color:#049EFF"><b>{{comentario.usuario.getNombre()}} {{comentario.usuario.getApellido()}}</b></p>
+							<p>{{comentario.descripcion}}</p>
+							<p><span class="fecha_publicacion">{{comentario.fecha_publicacion |date('d-m-Y h:i a')}}</span></p>
+						</div>
+					</div>
+			{% endfor %}
+		{% else %}
+			<p>{{ vacio }}</p>
+		{% endif %}
+		</div>
+		<!-- .....................................................................................-->
+		
+	</div>
+
+	<div id="tabs-9">
+
+		<div class="formulario">
+
+			{% if objeto.clasificaciones|length > 0 %}
+
+				{% for clasificacion in objeto.clasificaciones %}
+
+					<fieldset class="subform "><legend>Clasificaci&oacute;n</legend>
+		                <div class="row">
+							<label class="label_form">Prop&oacute;sito</label>
+							<p class="descripcion_metadato left">
+								{% if clasificacion.getProposito() %}
+									{{clasificacion.getProposito().getDescripcion()}}
+								{% else %}
+									{{ vacio }}
+								{% endif %}
+							</p>
+						</div>
+						<div class="row">
+							<label class="label_form">Descripci&oacute;n</label>
+							<p class="descripcion_metadato left">
+								{% if clasificacion.descripcion %}
+									{{clasificacion.descripcion}}
+								{% else %}
+									{{ vacio }}
+								{% endif %}
+							</p>
+						</div>
+						<div class="row">
+							<label class="label_form">Clave</label>
+							<p class="descripcion_metadato left">
+								{% if clasificacion.clave %}
+									{{clasificacion.clave}}
+								{% else %}
+									{{ vacio }}
+								{% endif %}
+							</p>
+						</div>
+					</fieldset>
+
+				{% endfor %}
+			{% else %}
+				<p>{{ vacio }}</p>
+			{% endif %}
+
+		</div>
+
+	</div>
+
+	<div id="tabs-10">
+
+		<div class="formulario">
+
+			<div class="row">
+				<label class="label_form">T&iacute;tulo</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.titulo %}
+						{{objeto.titulo}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+			<div class="row">
+				<label class="label_form">Subcategor&iacute;a</label>
+				<p class="descripcion_metadato left">
+					{% if objeto.subcategoria %}
+						{{objeto.subcategoria.nombre}}
+					{% else %}
+						{{ vacio }}
+					{% endif %}
+				</p>
+			</div>
+
+		</div>
+		
+
+	</div>
+</div>
+
+<a href="#" class="link verde_link" id="ver_mas"> Ver mas </a>

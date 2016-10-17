@@ -1,0 +1,664 @@
+ {% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+	{{ parent() }} 
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<!--<script language="javascript" src="{{ asset('bundles/ROA/js/livevalidation.js') }}" type="text/javascript"></script>-->
+
+	<script language="javascript" src="{{ asset('bundles/ROA/js/form.js') }}" type="text/javascript"></script>
+
+	<script>
+
+	$(function() {
+    //var tooltips = $( "[title]" ).tooltip({ position: { my: "center", at: "left+15 bottom+15" } });
+
+   /*$( "<button>" )
+      .text( "Show help" )
+      .button()
+      .click(function() {
+        tooltips.tooltip( "open" );
+      })
+      .insertAfter( "form" );*/
+  });
+
+	$(document).ready(function(){
+
+		a_class = $('a#gestionar_OACA').attr('class');
+		$('a#gestionar_OACA').attr('class', a_class+' active');
+
+		a_class = $('a#insertar_OACA').attr('class');
+		$('a#insertar_OACA').attr('class', a_class+' active');
+
+		agregar_ayuda();
+		agregar_ayuda_entidad();
+
+		$('[id^=dialog-message-OA_form]').css('padding-bottom', '30px');
+
+	});
+
+	
+
+
+	</script>
+{% endblock %}
+
+{% block content %}
+
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+		<h1>Nuevo OACA</h1>
+		<p>Completa el formulario con los metadatos del Objeto, y no olvides leer las <a class="link" onClick="openWindow('dialog-message-politicas', '800', '500')">Pol&iacute;ticas de ROACAR</a></p><br><br>
+
+		{% for flashMessage in app.session.flashbag.get('datos_invalidos') %}
+			<div class="error letra_peq">{{ flashMessage }}</div>
+		{% endfor %}
+
+		<form id="form_new" name="form_new" action="{{path('OA_create',{'filtro': 'usuario', 'id': usuario.getId})}}" method="POST" {{ form_enctype(OA_form) }} class="pestanas">
+			<div class="modulo">
+				<div id="tabs">
+				  	<ul>
+			    		<li><div class="pes"><a href="#tabs-1">General&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-2">Ciclo de Vida&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-3">MetaMetadata</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-4">Tecnico&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-5">Educacional&nbsp;&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-6">Derechos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-7">Relaci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-8">Anotaci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-9">Clasificaci&oacute;n&nbsp;&nbsp;&nbsp;</a></div></li>
+				    	<li><div class="pes"><a href="#tabs-10">OA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div></li>
+				  	</ul>
+
+				  	<div class="leyenda">
+				  		<a id="leyenda">LEYENDA:</a>
+				  		<a><img src="{{ asset('bundles/ROA/images/button1small.png') }}" class="asterisco"/> OBLIGATORIO</a>
+				  		<!--<a><img src="{{ asset('bundles/ROA/images/button2small.png') }}"/> OPCIONAL</a>-->
+				  		<a><img src="{{ asset('bundles/ROA/images/button3small.png') }}" class="asterisco"/> RECOMENDADO</a>
+				  	</div>
+
+				  	{{ form_errors(OA_form.general) }}
+
+				  	{{ form_errors(OA_form) }}
+
+			  		<div id="tabs-1">
+
+			  			<div class="formulario">
+
+					  		{{ form_row(OA_form.general.lenguaje) }}
+
+					  		{{ form_row(OA_form.general.descripcion) }}
+
+					  		{{ form_row(OA_form.general.clave) }}
+
+					  		{{ form_row(OA_form.general.cobertura) }}
+
+					  		{{ form_row(OA_form.general.estructura) }}
+
+					  		{{ form_row(OA_form.general.nivel_agregacion) }}
+
+					  		<!--<script language="javascript" src="{{ asset('bundles/ROA/js/validaciones/validaciones_general.js') }}" type="text/javascript"></script>-->
+
+					  		<ul class="identificadores" data-prototype="{{ form_widget(OA_form.general.identificadores.vars.prototype)|e }}">
+	 
+							</ul> 
+
+						</div>
+			  			
+			  		</div>
+
+			  		<div id="tabs-2">
+
+			  			<div class="formulario">
+
+			  				{{ form_row(OA_form.ciclovida.version) }}
+
+			  				{{ form_row(OA_form.ciclovida.status) }}
+
+			  				<ul class="contribuciones2" data-prototype="{{ form_widget(OA_form.ciclovida.contribuciones.vars.prototype)|e }}">
+ 
+						    </ul> 
+			    		
+			  			</div>
+
+			  		</div>
+
+			  		<div id="tabs-3">
+
+			  			<div class="formulario">
+			  			
+				  			{{ form_row(OA_form.metametadata.esquema) }}
+
+				  			{{ form_row(OA_form.metametadata.lenguaje) }}
+
+
+						    <ul class="contribuciones" data-prototype="{{ form_widget(OA_form.metametadata.contribuciones.vars.prototype)|e }}">
+ 
+						    </ul>  
+
+					    </div>
+					      
+			  		</div>
+
+			  		<div id="tabs-4">
+
+			    		<div class="formulario">
+
+				  			{{ form_row(OA_form.tecnico.formato) }}
+
+				  			{{ form_row(OA_form.tecnico.tamano) }}
+
+				  			{{ form_row(OA_form.tecnico.ubicacion) }}
+
+				  			{{ form_row(OA_form.tecnico.comentario) }}
+
+				  			 <ul class="requerimientos" data-prototype="{{ form_widget(OA_form.tecnico.requerimientos.vars.prototype)|e }}">
+ 
+						    </ul> 
+			    		
+			  			</div>
+
+			  		</div>
+
+			  		<div id="tabs-5">
+
+			  			<div class="formulario">
+
+				  			{{ form_widget(OA_form.educacional, { 'attr': {'class': 'formulario'} }) }}
+
+			  			</div>
+			    		
+			  		</div>
+
+			  		<div id="tabs-6">
+
+			  			<div class="formulario">
+
+			  				{{ form_widget(OA_form.derechos, { 'attr': {'class': 'formulario'} }) }}
+
+			  			</div>
+			    		
+			  		</div>
+
+			  		<div id="tabs-7">
+
+			  			<div class="formulario">
+
+			  				<ul class="relaciones" data-prototype="{{ form_widget(OA_form.relaciones.vars.prototype)|e }}">
+ 
+						    </ul> 
+			    		
+			  			</div>
+			    		
+			  		</div>
+
+			  		<div id="tabs-8">
+
+			  			<div class="formulario">
+
+				    		<ul class="anotaciones" data-prototype="{{ form_widget(OA_form.anotaciones.vars.prototype)|e }}">
+	 
+							</ul> 
+
+						</div>
+
+			  		</div>
+
+			  		<div id="tabs-9">
+
+			  			<div class="formulario">
+
+				    		<ul class="clasificaciones" data-prototype="{{ form_widget(OA_form.clasificaciones.vars.prototype)|e }}">
+	 
+							</ul> 
+
+						</div>
+			    		
+			  		</div>
+
+			  		<div id="tabs-10">
+
+			  			<div class="formulario">
+			    		
+			    			{{ form_row(OA_form.titulo) }}
+
+			    			{{ form_row(OA_form.subcategoria) }}
+
+			    			<div>
+
+                                <label for="" class="label_form">Archivo</label>
+
+                                {{ form_errors(OA_form.file) }}
+                                {{ form_widget(OA_form.file) }}
+
+                            </div>
+
+			    			<div style="display:none"> {{ form_widget(OA_form.status) }} </div>
+
+			    		</div>
+
+			  		</div>
+
+				</div>
+			</div>
+			{{ form_row(OA_form._token) }}
+			<a class="btn_custom" name="login" id="boton_sesion" onClick="javascript:form_new.submit()">Aceptar</a>
+			<!--<input type="submit" name="aceptar" value="Aceptar" class="btn"/>-->
+		</form>
+
+	<div id="dialog-confirm" title="Eliminar" style="display:none">
+  		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro(a) que desea eliminar esta contribuci&oacute;n?</p>
+	</div>
+
+	<div id="dialog-confirm2" title="Eliminar" style="display:none">
+  		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro(a) que desea eliminar esta entidad?</p>
+	</div>
+
+	<div id="dialog-confirm3" title="Eliminar" style="display:none">
+  		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro(a) que desea eliminar esta anotaci&oacute;n?</p>
+	</div>
+
+	<div id="dialog-confirm4" title="Eliminar" style="display:none">
+  		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro(a) que desea eliminar esta clasificaci&oacute;n?</p>
+	</div>
+
+	<div id="dialog-confirm5" title="Eliminar" style="display:none">
+  		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro(a) que desea eliminar este requerimiento?</p>
+	</div>
+
+
+	<!-- ......................... Politicas de ROACAR .......................................... -->
+	<div id="dialog-message-politicas" title="Politicas" style="display:none">
+  		<h1>Pol&iacute;ticas de ROACAR</h1>
+  		<h3>Consideraciones Generales</h3>
+		<ul>
+			<li>
+				<p>ROACAR promueve la filosofía del acceso abierto a los contenidos. Esto conlleva una voluntad de difundir, compartir y reutilizar contenidos.</p>
+			</li>
+			<li>
+				<p>Los Objetos de Aprendizaje almacenados en ROACAR, deben ser producidos por miembros de la comunidad académica de la UCV y/o de otras instituciones en colaboración a través de convenios específicos. Los Objetos de Aprendizaje deben ser resultado de actividades de investigación, difusión, creación y enseñanza que pertenezcan a acervos de la institución ó editados por la UCV</p>
+			</li>
+			<li>
+				<p>Los Objetos de Aprendizaje almacenados deberán contar con los datos básicos para su identificación y clasificación, estar completos y en formato digital; no infringir los derechos de propiedad intelectual y/o que éstos afecten a terceros</p>
+			</li>
+			<li>
+				<p>ROACAR tiene la potestad de permitir o no la publicaci&oacute;n de los comentarios. Aquellos comentarios cuyo contenido sea ofensivo o viole alguna de las pol&iacute;ticas del Repositorio, ser&aacute; eliminado inmediatamente. </p>
+			</li>
+		</ul>
+
+		<h3>Almacenamiento</h3>
+		<ul>
+			<li>
+				<p>Podrá almacenar contenidos cualquier usuario que se registre en ROACAR.</p>
+			</li>
+			<li>
+				<p>El autor establecerá las limitaciones de acceso y términos de uso a sus contenidos, de acuerdo a los derechos de propiedad intelectual asociados a su trabajo.</p>
+			</li>
+			<li>
+				<p>El autor se hace responsable de la integridad y pertinencia del objeto almacenado, así como de la validación técnica de los datos que se incluyan.</p>
+			</li>
+		</ul>
+
+
+		<h3>Gestión y Organización</h3>
+		<ul>
+			<li>
+				<p>ROACAR contendrá el objeto mismo y sus metadatos.</p>
+			</li>
+			<li>
+				<p>Los depositantes deberán proporcionar los metadatos básicos para la identificación y clasificación de los objetos que depositan.</p>
+			</li>
+			<li>
+				<p>Si ROACAR detecta violaciones de derechos de autor en los Objetos de Aprendizaje almacenados, estos serán retirados inmediatamente</p>
+			</li>
+			<li>
+				<p>ROACAR solo permite formatos libres</p>
+			</li>
+		</ul>
+
+		<h3>Políticas de Uso y Derechos Legales</h3>
+		<ul>
+			<li>
+				<p>El autor(es) deberá poseer los derechos de propiedad intelectual de su trabajo y conceder a la UCV el derecho de preservar y dar acceso público a sus Objetos de Aprendizaje a través de los servicios de búsqueda y consulta del repositorio</p>
+			</li>
+			<li>
+				<p>El autor(es) deberá aceptar los términos de una licencia para el uso y distribución no exclusiva de los contenidos almacenados, y estar en capacidad de ceder voluntariamente a la UCV el derecho a preservar y distribuir su trabajo a través del repositorio.</p>
+			</li>
+			<li>
+				<p>El usuario puede descargar, almacenar o visualizar los Objetos de Aprendizaje, resultados de búsqueda u otra información, sólo para uso personal, de investigación y docencia.</p>
+			</li>
+		</ul>
+
+		<h3>Control de Calidad de los Objetos de Aprendizaje</h3>
+		<ul>
+			<li>
+				<p>Los Objetos de Aprendizaje pasan por un proceso de control de calidad antes de ser publicados en el Repositorio.</p>
+			</li>
+			<li>
+				<p>El control de calidad se rige por el Instrumento para la Evaluaci&oacute;n de Objetos de Aprendizaje denominado LORI, y es llevado a cabo por el Administrador de ROACAR.</p>
+			</li>
+			<li>
+				<p>El resultado de la evaluaci&oacute;n de los objetos se representa mediante una escala del 1 al 5.</p>
+			</li>
+		</ul>
+
+		<h3>Estado de los Objetos de Aprendizaje almacenados</h3>
+		<ul>
+			<li>
+				<p>Los Objetos de Aprendizaje almacenados dentro de ROACAR, pueden tener varios estados: En Revisi&oacute;n, Certificado y No Autorizado.</p>
+			</li>
+			<li>
+				<p>En Revisión: el Objeto de Aprendizaje esta siendo sometido a un proceso de revisi&oacute;n para verificar si cumple con los requisitos m&iacute;nimos de calidad de ROACAR. Mientras el Objeto est&aacute; en revisi&oacute;n, el usuario no podr&aacute; verlo en las publicaciones y tampoco podr&aacute; editarlo hasta tanto no sea Certificado</p>
+			</li>
+			<li>
+				<p>Certificado: el Objeto de Aprendizaje ha sido revisado y cumple con los requisitos m&iacute;nimos de calidad de ROACAR. Los Objetos Certificados est&aacute;n visible en las publicaciones</p>
+			</li>
+			<li>
+				<p>No Autorizado: el Objeto de Aprendizaje no cumple con los requisitos m&iacute;nimos de calidad de ROACAR o viola alguna de las pol&iacute;ticas del Repositorio. El usuario debe ponerse en contacto con el administrador para conocer los detalles.</p>
+			</li>
+		</ul>
+
+	</div>
+	<!-- ......................................................................................... -->
+
+	<!-- ........................Mensajes de Ayuda............................................... -->
+	<div id="dialog-message-OA_form_general_lenguaje_help" title="Ayuda" style="display:none">
+  		<h1>Lenguaje</h1>
+		<h3>Ficha: General</h3>
+		<p>Este campo corresponde con los idiomas utilizados en el material para comunicarse con los posibles consumidores del mismo.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_file_help" title="Ayuda" style="display:none">
+        <h1>Archivo</h1>
+        <h3>Ficha: OA</h3>
+        <p>Solo est&aacute; permitido cargar OA en formato abierto. Los formatos abiertos son:</p><br>
+	    <p>Imagen: JPG, PNG, SVG</p>
+	    <p>Audio: FLAC, OGG, OGA, OPUS</p>
+	    <p>Video: OGV, AVI, WEBM</p>
+	    <p>Archivos Comprimidos: ZIP</p>
+    </div>
+
+    <div id="dialog-message-OA_form_titulo_help" title="Ayuda" style="display:none">
+        <h1>T&iacute;tulo</h1>
+        <h3>Ficha: OA</h3>
+        <p>T&iacute;tulo del OA</p>
+    </div>
+
+    <div id="dialog-message-OA_form_subcategoria_help" title="Ayuda" style="display:none">
+        <h1>Categor&iacute;a</h1>
+        <h3>Ficha: OA</h3>
+        <p>Categor&iacute;a a la que pertenece el OA</p>
+    </div>
+
+	<div id="dialog-message-OA_form_general_descripcion_help" title="Ayuda" style="display:none">
+  		<h1>Descripci&oacute;n</h1>
+		<h3>Ficha: General</h3>
+		<p>Breve texto con la descripci&oacute;n del Objeto de Aprendizaje. Esta descripci&oacute;n aparecer&aacute; como un peque&ntilde;p resumen para que los usuarios sepan de que se trata el Objeto</p>
+	</div>
+
+	<div id="dialog-message-OA_form_metametadata_contribuciones_x_rol_help" title="Ayuda" style="display:none">
+  		<h1>Rol</h1>
+		<h3>Ficha: Metametadata / Contribuci&oacute;n</h3>
+		<p>Tipo de contribución por parte de los contribuyentes.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_metametadata_contribuciones_x_fecha_help" title="Ayuda" style="display:none">
+  		<h1>Fecha</h1>
+		<h3>Ficha: Metametadata / Contribuci&oacute;n</h3>
+		<p>Fecha de la contribuci&oacute;n</p>
+	</div>
+
+	<div id="dialog-message-OA_form_anotaciones_x_fecha_help" title="Ayuda" style="display:none">
+  		<h1>Fecha</h1>
+		<h3>Ficha: Anotaci&oacute;n</h3>
+		<p>Fecha en que la anotaci&oacute;n fue creada</p>
+	</div>
+
+	<div id="dialog-message-OA_form_anotaciones_x_descripcion_help" title="Ayuda" style="display:none">
+  		<h1>Descripcion</h1>
+		<h3>Ficha: Anotaci&oacute;n</h3>
+		<p>Contenido de la anotaci&oacute;n</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_requerimientos_x_tipo_help" title="Ayuda" style="display:none">
+  		<h1>Tipo</h1>
+		<h3>Ficha: T&eacute;cnico / Requerimientos</h3>
+		<p>Tipo de requerimiento</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_requerimientos_x_nombre_help" title="Ayuda" style="display:none">
+  		<h1>Nombre</h1>
+		<h3>Ficha: T&eacute;cnico / Requerimientos</h3>
+		<p>Nombre del requerimiento</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_requerimientos_x_version_minima_help" title="Ayuda" style="display:none">
+  		<h1>Versi&oacute;n M&iacute;nima</h1>
+		<h3>Ficha: T&eacute;cnico / Requerimientos</h3>
+		<p>La m&iacute;nima versi&oacute;n soportada por el OA</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_requerimientos_x_version_maxima_help" title="Ayuda" style="display:none">
+  		<h1>Versi&oacute;n M&aacute;xima</h1>
+		<h3>Ficha: T&eacute;cnico / Requerimientos</h3>
+		<p>La m&aacute;xima versi&oacute;n soportada por el OA</p>
+	</div>
+	
+	<div id="dialog-message-OA_form_ciclovida_contribuciones_x_rol_help" title="Ayuda" style="display:none">
+  		<h1>Rol</h1>
+		<h3>Ficha: Ciclo de Vida / Contribuciones</h3>
+		<p>Tipo de contribuci&oacute;n por parte de los contribuyentes</p>
+	</div>
+
+	<div id="dialog-message-OA_form_ciclovida_contribuciones_x_fecha_help" title="Ayuda" style="display:none">
+  		<h1>Fecha</h1>
+		<h3>Ficha: Ciclo de Vida / Contribuciones</h3>
+		<p>Fecha de la contribuci&oacute;n</p>
+	</div>
+
+	<div id="dialog-message-OA_form_clasificaciones_x_proposito_help" title="Ayuda" style="display:none">
+  		<h1>Prop&oacute;sito</h1>
+		<h3>Ficha: Clasificaci&oacute;n</h3>
+		<p> El propósito de clasificar el OA. LOM propone el siguiente vocabulario controlado de propósitos: Disciplina, Idea, Requisito previo, Objetivo educativo, Restricciones de acceso, Nivel educativo, Nivel de destreza y Nivel de seguridad</p>
+	</div>
+
+	<div id="dialog-message-OA_form_clasificaciones_x_descripcion_help" title="Ayuda" style="display:none">
+  		<h1>Descripci&oacute;n</h1>
+		<h3>Ficha: Clasificaci&oacute;n</h3>
+		<p>Una descripci&oacute;n textual del material relativa al prop&oacute;sito de clasificaci&oacute;n establecido.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_clasificaciones_x_clave_help" title="Ayuda" style="display:none">
+  		<h1>Clave</h1>
+		<h3>Ficha: Clasificaci&oacute;n</h3>
+		<p>Un conjunto de palabras clave relativas al prop&oacute;sito de clasificaci&oacute;n establecido.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_x_entidades_x" title="Ayuda" style="display:none">
+  		<h1>Entidad</h1>
+		<h3></h3>
+		<p>Identificaci&oacute;n e informaci&oacute;n sobre las entidades contribuyentes</p>
+	</div>
+
+	<div id="dialog-message-OA_form_general_clave_help" title="Ayuda" style="display:none">
+  		<h1>Clave</h1>
+		<h3>Ficha: General</h3>
+		<p>Palabra o frase que describe el tópico del OA.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_general_cobertura_help" title="Ayuda" style="display:none">
+  		<h1>Cobertura</h1>
+		<h3>Ficha: General</h3>
+		<p>El tiempo, la cultura, geograf&iacute;a o regi&oacute;n en donde el OA aplica.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_general_estructura_help" title="Ayuda" style="display:none">
+  		<h1>Estructura</h1>
+		<h3>Ficha: General</h3>
+		<p>La estructura interna del material. LOM define el siguiente vocabulario controlado para definir la estructura:Mixta, Lineal, Jra&aacute;rquica, En Red, Ramificada, Compartimentada, At&oacute;mica, Colecci&oacute;n</p>
+	</div>
+
+	<div id="dialog-message-OA_form_general_nivel_agregacion_help" title="Ayuda" style="display:none">
+  		<h1>Nivel de agregaci&oacute;n</h1>
+		<h3>Ficha: General</h3>
+		<p>Define la granularidad del material</p>
+	</div>
+
+	<div id="dialog-message-OA_form_ciclovida_version_help" title="Ayuda" style="display:none">
+  		<h1>Versi&oacute;n</h1>
+		<h3>Ficha: Ciclo de Vida</h3>
+		<p>La edici&oacute;n o versi&oacute;n del material</p>
+	</div>
+
+	<div id="dialog-message-OA_form_ciclovida_status_help" title="Ayuda" style="display:none">
+  		<h1>Status</h1>
+		<h3>Ficha: Ciclo de Vida</h3>
+		<p>El estado de producci&oacute;n del material. LOM propone el siguiente vocabulario: Borrador, Final, Revisado, No Disponible</p>
+	</div>
+
+	<div id="dialog-message-OA_form_metametadata_esquema_help" title="Ayuda" style="display:none">
+  		<h1>Esquema</h1>
+		<h3>Ficha: Metametadata</h3>
+		<p> El nombre y versi&oacute;n de la especificaci&oacute;n usada para crear los metadatos (por ejemplo, LOM v1.0).</p>
+	</div>
+
+	<div id="dialog-message-OA_form_metametadata_lenguaje_help" title="Ayuda" style="display:none">
+  		<h1>Lenguaje</h1>
+		<h3>Ficha: Metametadata</h3>
+		<p> El idioma utilizado para proporcionar los metadatos.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_formato_help" title="Ayuda" style="display:none">
+  		<h1>Formato</h1>
+		<h3>Ficha: T&eacute;cnico</h3>
+		<p>Formato del material. El material puede incluir m&uacute;ltiples formatos (por ejemplo HTML, JPG, MP4, entre otros). Una manera adecuada de describir los formatos es mediante su denominaci&oacute;n MIME.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_tamano_help" title="Ayuda" style="display:none">
+  		<h1>Tama&ntilde;o</h1>
+		<h3>Ficha: T&eacute;cnico</h3>
+		<p>EL tama&ntilde;o del OA en bytes.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_ubicacion_help" title="Ayuda" style="display:none">
+  		<h1>Ubicaci&oacute;n</h1>
+		<h3>Ficha: T&eacute;cnico</h3>
+		<p>Forma de ubicar el material, puede ser una URL o una descripci&oacute;n acerca de c&oacute;mo llevar a cabo la localizaci&oacute;n.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_tecnico_comentario_help" title="Ayuda" style="display:none">
+  		<h1>Comentario</h1>
+		<h3>Ficha: T&eacute;cnico</h3>
+		<p>Descripci&oacute;n de c&oacute;mo instalar el OA</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_tipo_interaccion_help" title="Ayuda" style="display:none">
+  		<h1>Tipo de Interacci&oacute;n</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Modo predominante de aprendizaje apoyado por el OA. LOM propone el siguiente vocabulario para caracterizar este tipo de interacci&oacute;n: Activa, Pasiva, Mixta, Indefinida</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_tipo_recurso_help" title="Ayuda" style="display:none">
+  		<h1>Tipo de Recurso</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Tipo espec&iacute;fico de OA. Un mismo material puede tener varios tipos asociados, en cuyo caso, el tipo dominante debe estar definido de primero. LOM propone el  siguiente vocabulario para caracterizar el tipo de material: Ejercicio, Simulaci&oacute;n, Cuestionario, Diagrama, Figura, G&aacute;fico, &Iacute;ndice, Diapositiva, Tabla, Texto narrativo, Examen, Experimento, Enunciado de problema y Autoevaluaci&oacute;.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_nivel_interaccion_help" title="Ayuda" style="display:none">
+  		<h1>Nivel de Interacci&oacute;n</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Especifica el grado de interacción del material. LOM propone el siguiente vocabulario: Muy bajo, Bajo, Medio, Alto, Muy alto</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_semantica_help" title="Ayuda" style="display:none">
+  		<h1>Sem&aacute;ntica</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Una medida subjetiva de la utilidad educativa del material en comparaci&oacute;n con su tama&ntilde;o y/o duraci&oacute;n. Para expresar la densidad sem&aacute;ntica LOM propone el mismo vocabulario propuesto en el nivel de interacci&oacute;n. </p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_rol_help" title="Ayuda" style="display:none">
+  		<h1>Rol</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Indica el rol que ejerce el usuario final del material. LOM propone el siguiente vocabulario: Maestro, Autor, Aprendiz, Gestor</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_contexto_help" title="Ayuda" style="display:none">
+  		<h1>Contexto</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>El entorno principal dentro del cual el aprendizaje y el uso del OA deber&iacute;an tener lugar. El vocabulario propuesto por LOM para especificar el contexto es el siguiente: Educaci&oacute;n primaria, Educaci&oacute;n secundaria,  Educaci&oacute;n superior, Primer ciclo universitario, Segundo ciclo universitario, Postgrado, Primer ciclo escuela t&eacute;cnica, segundo ciclo escuela t&eacute;cnica, Formaci&oacute;n profesional, Formaci&oacute;n continua, Formaci&oacute;n vocacional</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_edad_help" title="Ayuda" style="display:none">
+  		<h1>Edad</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Rango de edades t&iacute;pico de los usuarios previstos.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_dificultad_help" title="Ayuda" style="display:none">
+  		<h1>Dificultad</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Nivel de dificultad del material. LOM propone el siguiente vocabulario para caracterizar dicho nivel: Muy f&aacute;cil, F&aacute;cil, Medio, Dif&iacute;cil, Muy dif&iacute;cil</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_tiempo_help" title="Ayuda" style="display:none">
+  		<h1>Tiempo</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Tiempo aproximado que le toma a los usuarios previstos, trabajar con el OA para alcanzar el aprendizaje.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_descripcion_help" title="Ayuda" style="display:none">
+  		<h1>Descripci&oacute;n</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Comentarios sobre c&oacute;mo debe ser usado el OA desde el punto de vista pedag&oacute;gico.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_educacional_lenguaje_help" title="Ayuda" style="display:none">
+  		<h1>Lenguaje</h1>
+		<h3>Ficha: Educacional</h3>
+		<p>Idioma usado por el usuario final.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_derechos_costo_help" title="Ayuda" style="display:none">
+  		<h1>Costo</h1>
+		<h3>Ficha: Derechos</h3>
+		<p>Especifica si el recurso debe ser pagado.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_derechos_restricciones_help" title="Ayuda" style="display:none">
+  		<h1>Restricciones</h1>
+		<h3>Ficha: Derechos</h3>
+		<p>Establece si el recurso est&aacute; sujeto o no a derechos de copia y otras restricciones. </p>
+	</div>
+
+	<div id="dialog-message-OA_form_derechos_descripcion_help" title="Ayuda" style="display:none">
+  		<h1>Descripci&oacute;n</h1>
+		<h3>Ficha: Derechos</h3>
+		<p>Comentarios sobre las condiciones de uso del OA.</p>
+	</div>
+
+	<div id="dialog-message-OA_form_relaciones_x_tipo_help" title="Ayuda" style="display:none">
+  		<h1>Tipo</h1>
+		<h3>Ficha: Relaci&oacute;n</h3>
+		<p>Define la naturaleza de la relación entre el OA y el Objeto de Aprendizaje objetivo. LOM propone el siguiente vocabulario: isPartOf, hasPart, isVersionOf, hasVersion, isFormatOf, hasFormat, references, isReferencedBy, isBasedOn, isBasisFor, requires, isRequiredBy </p>
+	</div>
+
+	
+
+
+	<!-- ..........................................................................................-->
+
+
+
+	{% else %}
+
+	<h1>Debes iniciar sesi&oacute;n para poder insertar Objetos en el sistema</h1>
+	<div class="registrarse">
+		<p> En caso de no estar registrado <a href="{{ path('perfil_new') }}" class="link"> haz click aqui </a></p>
+	</div>
+	{% endif %}
+
+{% endblock content %}

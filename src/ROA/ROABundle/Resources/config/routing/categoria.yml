@@ -1,0 +1,30 @@
+categoria:
+    pattern:  /
+    defaults: { _controller: "ROABundle:Categoria:index" }
+
+categoria_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ROABundle:Categoria:show" }
+
+categoria_new:
+    pattern:  /new
+    defaults: { _controller: "ROABundle:Categoria:new" }
+
+categoria_create:
+    pattern:  /create
+    defaults: { _controller: "ROABundle:Categoria:create" }
+    requirements: { _method: post }
+
+categoria_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ROABundle:Categoria:edit" }
+
+categoria_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ROABundle:Categoria:update" }
+    requirements: { _method: post }
+
+categoria_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ROABundle:Categoria:delete" }
+    requirements: { _method: post }

@@ -1,0 +1,47 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_create-update.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!--<script language="javascript" src="{{ asset('bundles/ROA/js/livevalidation.js') }}" type="text/javascript"></script>-->
+
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#inicio').attr('class');
+            $('a#inicio').attr('class', a_class+' active');
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+	<h1>Mi Perfil</h1>
+
+	<div class="alert alert-info mensaje">
+		¡Tu perfil ha sido actualizado!
+	</div>
+	
+		<table class="table table-bordered">
+            <tr>
+                <td><p class="bold">Nombre</p></td>
+                <td><p>{{ usuario_edit.nombre }}</p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Apellido</p></td>
+                <td><p>{{ usuario_edit.apellido }}</p></td>
+            </tr>
+            <tr>
+                <td><p class="bold">Email</p></td>
+                <td><p>{{ usuario_edit.email }}<p></td>
+            </tr>
+        </table>
+
+		<div class="instrucciones"><p>Para actualizar nuevamente tu perfil<a href="{{path('perfil_edit', {'id': usuario.getId})}}" class="link"> haz click aqui </a></p></div>
+
+        </table>
+
+
+{% endblock content %}

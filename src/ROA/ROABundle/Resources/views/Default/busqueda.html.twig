@@ -1,0 +1,66 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+			for (i = new Date().getFullYear(); i > 1999; i--){
+				$('#ano').append($('<option />').val(i).html(i));
+			}
+			a_class = $('a#buscar_OACA').attr('class');
+			$('a#buscar_OACA').attr('class', a_class+' active');
+
+			a_class = $('a#busqueda').attr('class');
+			$('a#busqueda').attr('class', a_class+' active');
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+
+<h1>B&uacute;squeda Avanzada</h1>	
+
+<p>Ingrese la subcategor&iacute;a, autor, a&ntilde;o, t&iacute;tulo o sus combinaciones</p><br>
+
+<div class="formulario">
+	<form name="form_busqueda" id="form_busqueda" method="POST" action="{{path('busqueda')}}">
+		<div>
+			<label class="label_form">Categor&iacute;a</label>
+
+			<select name="subcategoria" id="subcategoria" class="select_form">
+			<option value=">0">Todas</option>
+			{% for categoria in categorias %}
+	
+				{% for subcategoria in categoria.subcategorias %}
+					<option value="{{subcategoria.id}}">{{ subcategoria.nombre}}</option>
+				{% endfor %}
+
+			{% endfor %}
+
+			</select>
+
+		</div>
+		<div>
+			<label class="label_form">Autor</label>
+			<input type="text" name="autor" id="autor" class="input_form"/>
+		</div>
+		<div>
+			<label class="label_form">A&ntilde;o</label>
+			<select name="ano" id="ano" class="select_form">
+				<option value="%">Todos</option>
+			</select>
+		</div>
+		<div>
+			<label class="label_form">T&iacute;tulo</label>
+			<input type="text" name="titulo" id="titulo" class="input_form"/>
+		</div>
+
+		<a class="btn_custom" name="login" id="boton_sesion" onclick="javascript:form_busqueda.submit()">Buscar</a>
+	</form>
+</div>
+{% endblock content %}

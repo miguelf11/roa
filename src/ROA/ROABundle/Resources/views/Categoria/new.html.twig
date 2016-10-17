@@ -1,0 +1,64 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    <script> 
+  $(document).ready(function(){
+
+    a_class = $('a#contenidos').attr('class');
+    $('a#contenidos').attr('class', a_class+' active');
+    a_class = $('a#categorias').attr('class');
+    $('a#categorias').attr('class', a_class+' active');
+
+    agregar_subcategorias();
+  });
+  </script> 
+{% endblock %}
+
+{% block content %}
+
+
+<h1>Nueva Categor&iacute;a</h1>
+<p>Completa el siguiente formulario para crear la categor&iacute;a</p><br><br>
+
+<form action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }} name="form_new" id="form_new">
+    <div class="formulario">
+    {{ form_row(form.nombre) }}
+
+    {{ form_row(form._token) }}
+
+    <ul class="subcategorias" data-prototype="{{ form_widget(form.subcategorias.vars.prototype)|e }}">
+   
+  </ul>
+
+
+    
+  </div>
+</form>
+
+<ul class="">
+    <li class="volver">
+        <a href="{{ path('categoria') }}" class="link" id="">
+            Volver a la lista
+        </a>
+    </li>
+</ul>
+
+<p>
+  <!--<button type="submit">Create</button>-->
+  <a class="btn_custom" name="" id="crear_categoria" onClick="javascript:form_new.submit()">Crear</a>
+</p>
+
+
+<div id="dialog-confirm-subcategoria" title="Eliminar" style="display:none">
+      <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&iquest;Seguro(a) que desea eliminar esta subcategoria?</p>
+</div>
+
+
+{% endblock %}
+

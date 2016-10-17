@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('bundles/ROA/css/email.css') }}" />
+		{% endblock %}
+	</head>
+	<body>
+		<header>
+			<div id="#logo_ucv" class="left">
+				<img src="{{ asset('bundles/ROA/images/logoUCVNuevo.png') }}"/>
+			</div>
+
+			<div id="#logo_ROACAR" class="right">
+				<img src="{{ asset('bundles/ROA/images/logoNuevo2.png') }}"/>
+			</div>
+		</header>
+
+
+		<div id="contenido_wrapper">
+			<div id="cabecera_contenido">
+				Aqui pongo el contenido del email
+			</div>
+			<div id="contenido">
+				{% block content %}
+				{% endblock %}
+			</div>
+		</div>
+
+		
+
+		
+	</body>
+
+</html>

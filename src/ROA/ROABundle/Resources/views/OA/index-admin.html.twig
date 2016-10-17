@@ -1,0 +1,104 @@
+{% extends "ROABundle::layoutAdmin.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/admin.css') }}"/> 
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#solicitudes').attr('class');
+            $('a#solicitudes').attr('class', a_class+' active');
+            a_class = $('a#OA').attr('class');
+            $('a#OA').attr('class', a_class+' active');
+        });
+    </script> 
+{% endblock %}
+
+{% block content %}
+
+<h1>OACA</h1>
+
+    {% if mensaje %}
+        <div class="alert alert-info mensaje">{{ mensaje }}</div>
+    {% endif %}
+
+	<table class="table-general">
+    	<thead>
+        	<tr>
+            	<th>Titulo</th>
+            	<th>Autor</th>
+                <th>Fecha de Publicaci&oacute;n</th>
+                <th>Status</th>
+           		<th colspan="2">Acciones</th>
+        	</tr>
+    	</thead>
+    	<tbody>
+    		{% for objeto in objetos_en_revision %}
+	        	<tr>
+	            	<td>{{ objeto.titulo }}</td>
+	            	<td>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</td>
+                    <td>{{ objeto.fecha_publicacion | date('d-m-Y h:i a') }}</td>
+                    <td>
+                        <span class="amarillo">{{ objeto.status.descripcion }}</span>
+                    </td>
+	            	<td>
+	                	<a class="link" href="{{path('OA_visualizacion', {'id':objeto.id})}}" target="_blank">Ver</a>
+	            	</td>    
+		            <td>
+		               <a class="link" href="{{path('OA_descarga', {'id':objeto.id})}}">Descargar</a>
+		            </td>
+		            <td>
+		                <a href="{{ path('OA_edit_admin', { 'id': objeto.id }) }}" class="link">Editar</a>
+		            </td>
+	        	</tr>
+
+    		{% endfor %}
+            {% for objeto in objetos_no_autorizados %}
+                <tr>
+                    <td>{{ objeto.titulo }}</td>
+                    <td>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</td>
+                     <td>{{ objeto.fecha_publicacion | date('d-m-Y h:i a') }}</td>
+                    <td>
+                        <span class="rojo">{{ objeto.status.descripcion }}</span>
+                    </td>
+                    <td>
+                        <a class="link" href="{{path('OA_visualizacion', {'id':objeto.id})}}" target="_blank">Ver</a>
+                    </td>    
+                    <td>
+                       <a class="link" href="{{path('OA_descarga', {'id':objeto.id})}}">Descargar</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('OA_edit_admin', { 'id': objeto.id }) }}" class="link">Editar</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            {% for objeto in objetos_certificados %}
+                <tr>
+                    <td>{{ objeto.titulo }}</td>
+                    <td>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</td>
+                     <td>{{ objeto.fecha_publicacion | date('d-m-Y h:i a') }}</td>
+                    <td>
+                        <span class="azul">{{ objeto.status.descripcion }}</span>
+                    </td>
+                    <td>
+                        <a class="link" href="{{path('OA_visualizacion', {'id':objeto.id})}}" target="_blank">Ver</a>
+                    </td>    
+                    <td>
+                       <a class="link" href="{{path('OA_descarga', {'id':objeto.id})}}">Descargar</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('OA_edit_admin', { 'id': objeto.id }) }}" class="link">Editar</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+    	</tbody>
+    </table>
+
+
+{% endblock content %}

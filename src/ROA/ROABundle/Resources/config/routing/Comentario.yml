@@ -1,0 +1,6 @@
+comentario_new:
+    pattern:  /new.{_format}
+    defaults: { _controller: ROABundle:Comentario:new, _format:html }
+    requirements:
+        _method: GET|POST
+        _format: html|xml|rss|json

@@ -1,0 +1,98 @@
+ {% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+	{{ parent() }} 
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+			a_class = $('a#creditos').attr('class');
+			$('a#creditos').attr('class', a_class+' active');
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+
+		<div id="creditos">
+			<h1>Cr&eacute;ditos</h1>
+
+			<!--<div class="row row_creditos">
+				<div class="left foto_creditos">
+					<img class="logo_creditos" style="" src="{{ asset('bundles/ROA/images/ucv_logo.jpg') }}"/>
+
+				</div>
+
+				<div class="left foto_creditos">
+					<img class="logo_creditos" style="" src="{{ asset('bundles/ROA/images/ciencias_logo.jpg') }}"/>
+				</div>
+
+				<div class="left foto_creditos">
+					<img class="logo_creditos" style="" src="{{ asset('bundles/ROA/images/computacion_logo.jpg') }}"/>	
+				</div>
+			</div>-->
+
+			<div class="row row_creditos">
+				<div class="left foto_creditos">
+					<img class="logo_creditos" style="" src="{{ asset('bundles/ROA/images/ucv_logo.jpg') }}"/>
+				</div>
+
+				<div class="left">
+					<p>Universidad Central de Venezuela</p>
+					<p><a href="http://www.ucv.ve" target="_blank" class="link">www.ucv.ve</a></p>
+				</div>
+			</div>
+
+
+			<div class="row row_creditos">
+				<div class="left foto_creditos">
+					<img class="logo_creditos" style="" src="{{ asset('bundles/ROA/images/ciencias_logo.jpg') }}"/>
+				</div>
+
+				<div class="left">
+					<p>Facultad de Ciencias</p>
+					<p><a href="http://www.ciens.ucv.ve" target="_blank" class="link">www.ciens.ucv.ve</a></p>
+				</div>
+			</div>
+
+			<div class="row row_creditos">
+				<div class="left foto_creditos">
+					<img class="logo_creditos" style="" src="{{ asset('bundles/ROA/images/computacion_logo.jpg') }}"/>
+				</div>
+
+				<div class="left">
+					<p>Escuela de Computaci&oacute;n</p>
+					<p><a href="http://www.ciens.ucv.ve/escueladecomputacion" target="_blank" class="link">www.ciens.ucv.ve/escueladecomputacion</a></p>
+				</div>
+			</div>
+
+
+			<div class="row row_creditos">
+				<div class="left foto_creditos">
+					<img class="logo_creditos" style="" src="{{ asset('bundles/ROA/images/user.png') }}"/>
+
+				</div>
+
+				<div class="left">
+					<p>Desarrollador: Juan Carlos Morantes Taccetti</p>
+					<p>Email: <a href="mailto:juansneak@hotmail.com" target="_blank" class="link">juansneak@gmail.com</a></p>
+				</div>
+			</div>
+
+			<div class="row row_creditos">
+				<div class="left foto_creditos">
+					<img class="" style="" src="{{ asset('bundles/ROA/images/user.png') }}"/>
+
+				</div>
+
+				<div class="left">
+					<p>Tutora: Prof. Yosly Hern&aacute;ndez</p>
+					<p>Email: <a href="mailto:yoslyhernandez@gmail.com" target="_blank" class="link">yoslyhernandez@gmail.com</p>
+				</div>
+			</div>
+	</div>
+
+{% endblock %}
+
