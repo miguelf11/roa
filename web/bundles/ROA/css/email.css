@@ -1,0 +1,47 @@
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+header{
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	overflow: auto;
+}
+body{
+	background-repeat:no-repeat;
+	background-image: url(../images/fondoNuevo9.jpg);
+	background-position: center top;
+}
+#contenido_wrapper, #cabecera_contenido{
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius:12px;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border: 1px solid #CCC;
+	box-shadow: 1px 1px 2px #CFCFCF;
+}
+
+#cabecera_contenido{
+	background-color: #1B6C95;
+	margin-top:0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 20px;
+}
+#contenido_wrapper{
+	margin-top:0px;
+	background-color: white;
+} 
+#contenido{
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+}

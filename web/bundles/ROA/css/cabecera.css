@@ -1,0 +1,183 @@
+ #logo{
+
+	/*border: 1px solid black;*/
+	padding-top:40px;
+	padding-bottom: 5px;
+	float: left;
+
+}
+
+#busqueda_avanzada a:hover{
+
+	text-decoration:underline;
+
+}
+
+#info_perfil{
+
+	/*border: 1px solid black;*/
+	border: 1px solid #049EFF;
+	overflow:visible;
+	width:220px;
+	margin-top:5px;
+	background-color: white; 
+	position:absolute;
+	left:719px;
+	top:4px;
+	display:none;
+	z-index:5000;
+	padding-top:15px;
+	text-align: left;
+
+	moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.2),inset 0 0 0 #000;
+	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.2),inset 0 0 0 #000;
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.2),inset 0 0 0 #000;
+
+
+}
+
+#div_sesion{
+	/*border: 1px solid black;*/
+	overflow:visible;
+	clear: left;/*right*/
+	float: right;
+	padding-right: 25px;
+	/*width:220px;
+	/*height:25px;*/
+	/*margin-top:25px;*/
+	position:relative;
+	/*width: 400px;
+	text-align: right;*/
+
+}
+
+#div_sesion_admin{
+	/*border: 1px solid black;*/
+	overflow:visible;
+	clear: right;
+	float: right;
+	/*width:220px;
+	/*height:25px;*/
+	/*margin-top:25px;*/
+	position:relative;
+	width: 400px;
+	text-align: right;
+	margin-top:73px;
+
+}
+
+
+.chat-bubble-arrow {
+	border-color: transparent transparent white transparent;
+	border-style: solid;
+	border-width: 9px;
+	height: 0;
+	width: 0;
+	position: absolute;
+	top: -17px;
+	right: 150px;/*200px*/
+}
+
+
+.chat-bubble-arrow-border{
+	border-color: transparent transparent #049EFF transparent;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: #049EFF;
+	border-left-color: transparent;
+
+
+	border-style: solid;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+
+
+	border-width: 9px;
+	height: 0;
+	width: 0;
+	position: absolute;
+	top: -19px;
+	right: 150px;/*200px*/
+
+}
+
+input#busqueda{
+	
+}
+
+input#boton_busqueda{
+
+	width: 20px;
+	height: 20px;
+	background: url(../images/lupa.png);
+	border: none;
+	cursor: pointer;
+	position:relative;
+	top: -22px;
+	left:192px;
+	float: left;
+
+}
+
+#redes_sociales{
+
+	/*border: 1px solid black;*/
+	padding-top:35px;
+	float: right;
+	/*margin-top:25px;*/
+
+}
+
+#buscador input#busqueda{
+
+	height:15px;
+	width:82%;
+	height:15px;
+	padding-left:3px;
+   	outline:none;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    border-radius:20px;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
+    border:1px solid rgba(0,0,0, 0.2);
+    color:gray;
+   	padding: 4px;
+	padding-right: 25px;
+	-moz-box-shadow: 0 0 1px gray;
+	-webkit-box-shadow: 0 0 1px gray;
+	box-shadow: 0 0 1px gray;
+	padding-left: 10px;
+
+}
+
+#buscador  input#busqueda:focus{
+
+    box-shadow: 0 0 8px #00AA72;
+    -webkit-box-shadow: 0 0 8px #00AA72; 
+    -moz-box-shadow: 0 0 8px #00AA72;
+    border:1px solid #00AA72; 
+    background-color:white;
+
+}
+
+#busqueda_avanzada p{
+
+	/*border: 1px solid black;*/
+	text-align:right;
+	padding-right: 10px;
+	padding-top: 5px;
+	margin-bottom: 15px;
+	font-size:11px;
+	
+}
+
+#busqueda_avanzada a{
+
+	cursor:pointer;
+	color: #00AA72;
+
+}

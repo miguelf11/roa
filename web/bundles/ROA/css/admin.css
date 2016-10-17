@@ -1,0 +1,126 @@
+.table-general thead tr{
+	/*background-color: #086FA1;
+	color: white;
+	width: 50px*/
+	font-family: 'Arial-custom';
+	font-size: 15px;
+	text-align:justify;
+	color: #424242;
+	font-weight: normal;
+}
+
+.table-general{
+	width: 100%;
+margin-bottom: 20px;
+
+
+max-width: 100%;
+background-color: transparent;
+border-collapse: collapse;
+
+border-spacing: 0;
+-webkit-border-horizontal-spacing: 0px;
+-webkit-border-vertical-spacing: 0px;
+
+
+
+border-color: gray;
+border-top-color: gray;
+
+font-family: 'Arial-custom';
+}
+
+.table-general thead{
+	display: table-header-group;
+vertical-align: middle;
+border-color: inherit;
+}
+
+.table-general tbody{
+	display: table-row-group;
+vertical-align: middle;
+border-color: inherit;
+}
+
+.table-general tr{
+	display: table-row;
+vertical-align: inherit;
+border-color: inherit;
+}
+
+.table-general th, .table-general td {
+	padding: 8px;
+	padding-top: 8px;
+	line-height: 20px;
+	text-align: left;
+	vertical-align: top;
+
+	border-top: 1px solid #DDD;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #DDD;
+
+
+	font-family: 'Arial-custom';
+	font-size: 14px;
+	text-align:justify;
+	color: #424242;
+	font-weight: normal;
+}
+
+
+.table-general thead tr{
+	border-top: 0;
+}
+
+.table-general thead th{
+	border-top: 0;
+	font-weight: bold;
+}
+
+.table-general .link{
+	font-size: 14px;
+}
+p.titulo_modulo{
+	margin-bottom:10px;
+}
+ul{
+	list-style: none;
+}
+
+.table_admin{
+	margin-top:25px;
+}
+div.mensaje{
+	margin-top: 30px;
+}
+#status_comentario{
+	margin-bottom: 25px;
+}
+ul.record_actions li{
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+#OA_form_status{
+	/*margin-bottom: 20px;*/
+}
+
+.li_add_subcategoria{
+	margin-left: 165px;
+	margin-bottom: 15px;
+}
+.volver{
+	margin-bottom:15px;
+	margin-left: 165px;
+	margin-top: 15px;
+}
+#crear_categoria{
+	margin-left: 165px;
+}
+.ficha_descriptiva{
+	margin-bottom: 15px;
+}
+
+#main {
+	min-height: 200px !important;
+}

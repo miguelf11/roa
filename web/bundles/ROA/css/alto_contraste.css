@@ -1,0 +1,41 @@
+p, a, a.link, h1, h2, h3, label{
+	color:white;
+}
+.pestanas .ui-widget-content a{
+	/*color: white;*/
+}
+
+#main, #outer, .pestanas, form a, .modulo, #tabs, form ul, form li, span, form div{
+	background-color: black;
+}
+
+.ui-tabs-panel, .ui-widget-content ,.ui-corner-bottom{
+	background:transparent;
+}
+body{
+	background-color: black;
+}
+#info_perfil{
+	background-color: black;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited{
+	color: white;
+}
+.pestanas .ui-widget-content a {
+	color: white;
+}
+.subform legend{
+	color: white;
+}
+.ui-resizable{
+	background-color: black;
+}
+div.ui-widget-header{
+	background-color:black 
+}
+div.ui-tooltip-content{
+	/*font-size: 12px;
+	//font-family: Arial, Helvetica, sans-serif;*/
+	color: white;
+}

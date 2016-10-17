@@ -1,0 +1,35 @@
+@font-face {
+  	font-family: 'Myriad pro2';
+  	src: url('../fonts/MyriadPro.eot');
+ 	src: url('../fonts/MyriadPro.woff') format('woff'),
+ 	url('../fonts/MyriadPro.ttf') format('truetype');
+  	font-weight: normal;
+  	font-style: normal;
+}
+
+@font-face {
+  	font-family: 'Arial-custom';
+  	src: url('../fonts/arial.eot');
+ 	src: url('../fonts/arial.woff') format('woff'),
+ 	url('../fonts/arial.ttf') format('truetype');
+  	font-weight: normal;
+  	font-style: normal;
+}
+
+@font-face {
+	 font-family: 'duepuntozero_bold';
+	 src: url('../fonts/duepuntozero_bold.eot');
+	 src: local('duepuntozero_bold'), url('../fonts/duepuntozero_bold.woff') format('woff'), url('../fonts/duepuntozero_bold.ttf') format('truetype'), url('../fonts/duepuntozero_bold.svg') format('svg');
+	 font-weight: normal;
+	 font-style: normal;
+}
+
+body {
+	/*font-family: 'Myriad pro';*/
+}
+
+.puntozero {
+ 	font-family:'duepuntozero_bold';
+	font-size:12pt;
+  color: #034769;
+}

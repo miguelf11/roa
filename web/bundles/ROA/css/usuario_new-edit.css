@@ -1,0 +1,38 @@
+#registro_usuario{
+
+	width: 630px;
+
+}
+.formulario label{
+	float: left;
+    width: 157px;
+    text-align: right;
+    /*margin-right: 10px;*/
+    /*font-weight: bold;*/
+ 
+}
+#form_new a.btn_custom{
+	margin-left: 165px;
+}
+#volver_lista{
+	
+}
+ul.record_actions li{
+	margin-bottom: 10px;
+	margin-left: 165px;
+	margin-top: 20px;
+}
+div.foto_usuario{
+	width: 216px;
+	text-align: right;
+}
+
+/*Mensajes de ERROR*/
+label.label_form + ul, label + ul {
+	max-width: 177px;
+	position: absolute;
+	z-index: 20;
+	top: -7px;
+	left: 427px;
+}
+

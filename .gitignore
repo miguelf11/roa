@@ -8,7 +8,6 @@
 /bin/
 /composer.phar
 /vendor/
-/web/bundles/
 /app/config
 web/downloads
 web/uploads

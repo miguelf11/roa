@@ -1,0 +1,25 @@
+#columnas_der{
+
+	/*border: 1px solid black;*/
+	float: right;
+	width: 655px;
+	/*margin-top:20px;*/
+
+}
+
+#columnas_der_admin{
+
+	/*border: 1px solid black;*/
+	/*float: right;*/
+	/*width: 655px;*/
+	margin-top:20px;
+
+}
+
+.imagen_inicio {
+
+	padding: 10px;
+	border: 1px #CCC solid;
+	margin: 10px;
+
+}

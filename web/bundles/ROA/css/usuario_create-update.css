@@ -1,0 +1,32 @@
+#info_cuenta{
+	/*width: 630px;*/
+	/*height: 10px;*/
+}
+.etiqueta_cuenta{
+	font-weight: bold;
+	width: 100px;
+	/*float: left;*/
+	margin-top: 10px;
+}
+.dato_cuenta{
+	/*float: right;*/
+	/*width: 510px;*/
+	margin-top: 10px;
+}
+div#info_cuenta a.btn{
+	margin-top:10px;
+}
+ul.record_actions{
+	list-style: none;
+	margin-top:30px;
+}
+ul.record_actions li{
+	margin-top: 20px;
+}
+#info_usuario{
+	margin-top: 20px;
+}
+div.mensaje{
+	margin-top: 30px;
+}
+

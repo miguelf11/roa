@@ -1,0 +1,146 @@
+#menu_principal{
+
+	/*border: 1px solid black;*/
+	clear:both;
+	overflow: hidden;
+	margin-bottom:15px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	box-shadow: 1px 1px 2px #CFCFCF;
+	/*width:897px;*/
+	background:#1b6c95;
+	overflow: auto;
+
+}
+
+*{
+
+	/*list-style: none;*/
+	text-decoration:none;
+	padding:0;
+
+}
+
+.menu{
+
+	list-style: none;
+	text-decoration:none;
+	padding:0;
+	cursor:pointer;
+
+}
+
+.menu  > li{
+
+	float:left;
+	/*background:#1b6c95;*/
+	border-right:1px solid #C6BDBE;
+	
+}
+
+.menu li a{
+
+	font-family: 'Arial-custom';
+	font-size: 11px; /*13px*/
+	text-decoration:none;
+	color:white;
+	display:block;
+	padding-top: 15px; 
+	padding-bottom:17px;/*15px*/
+	width: 191px;
+	text-align:center;
+	/*font-weight: bold;*/
+
+}
+
+.menu li#ultimo{
+
+	border: none;
+
+}
+
+.menu li a:hover{
+
+	background:#2ec6b7;
+
+	
+}
+
+.menu li ul{
+
+	display:none;
+	position:absolute;
+	background:#034769;
+	opacity: 0.9;
+	list-style: none;
+
+}
+
+.menu li:hover > ul{
+
+	display:block;
+
+}
+
+.menu li ul li{
+
+	position:relative;
+	
+}
+
+.menu li ul li ul{
+
+	right: -226px;
+	top: 0px;
+
+}
+
+.menu li:hover {
+
+	background:#2ec6b7;
+
+}
+
+.menu li:hover a{
+
+	/*color:#034769;*/
+
+}
+
+.menu li ul li a{
+
+	border-bottom: 1px solid #C6BDBE;
+	font-size: 11px; /*13px*/
+	
+}
+li.active a{
+	/*background:#2ec6b7;
+	color:#034769;*/
+
+}
+li a.active{
+	background:#2ec6b7;
+	color:#034769;
+
+}
+#redes_s{
+
+	background:#034769;
+	float: right;
+	width: 191px;
+	height: 45px;
+	text-align: center;
+	overflow: auto;
+
+}
+.red_social{
+	padding-left:7px;
+	padding-right:7px;
+	margin-top:7px;
+	overflow: auto;
+}
+.red_social img{
+	padding-top:3px;
+}
+
+
