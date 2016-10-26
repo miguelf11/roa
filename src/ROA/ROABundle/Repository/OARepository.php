@@ -29,7 +29,6 @@ class OARepository extends EntityRepository
 		$query = $em->createQuery($dql);
 		$OAs = $query->getResult();
 		return $OAs;
-
 	}
 
 	public function findNoAutorizados(){

@@ -34,9 +34,9 @@
 						<p><b>Autor: </b>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</p>
 						<p><b>Categoria: </b>{{ objeto.subcategoria.categoria.nombre }}</p>
 						<p><b>Subcategoria: </b>{{ objeto.subcategoria.nombre }}</p>
-						<p><b>Fecha de Publicaci&oacute;n: </b>{{ objeto.fecha_publicacion |date('d-m-Y') }}</p>
+						<p><b>Fecha de Publicación: </b>{{ objeto.fecha_publicacion |date('d-m-Y') }}</p>
 
-						<p id="puntuacion"><b>Puntuaci&oacute;n: </b></p>
+						<p id="puntuacion"><b>Puntuación: </b></p>
 						{% if objeto.puntuacion == 1 %} 
 							<span class="valoracion val-10"></span> 
 						{% endif %}

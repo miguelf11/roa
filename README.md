@@ -3,7 +3,12 @@ Cambios hechos hasta ahora:
 1- Colocar correo de gmail para poder enviar el acceso a la página a traveś de correo , en UsuarioController
 2- Cambio en servicios donde se enrutaba  a una ip de la universidad en vez de una ruta genérica generada mediante la app
 3- Modificación en vendor/doctrine para poder usar php 5.5
-4- 
+4- Impedir que en la opciones de accesibilidad se pueda aumentar o disminuir las letras todo lo que se quiera
+
+
+Vista donde se muestran los OA -- controlador: OA@indexAction
+
+OA.index
 
 
 

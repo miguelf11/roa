@@ -242,9 +242,6 @@ class UsuarioController extends Controller
      */
     public function deleteAction($role, Request $request, $id)
     {
-        
-        
-
         $usuario = $this->get('security.context')->getToken()->getUser();
         $format = $this->getRequest()->getRequestFormat();
 
