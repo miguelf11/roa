@@ -133,4 +133,27 @@ class Comentario
         return $this->status;
     }
 
+
+    /**
+     * Set fecha_publicacion
+     *
+     * @param \DateTime $fechaPublicacion
+     * @return Comentario
+     */
+    public function setFechaPublicacion($fechaPublicacion)
+    {
+        $this->fecha_publicacion = $fechaPublicacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha_publicacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaPublicacion()
+    {
+        return $this->fecha_publicacion;
+    }
 }

@@ -145,4 +145,27 @@ class Anotacion
     {
         return $this->oa;
     }
+
+    /**
+     * Add entidades
+     *
+     * @param \ROA\ROABundle\Entity\Entidad $entidades
+     * @return Anotacion
+     */
+    public function addEntidade(\ROA\ROABundle\Entity\Entidad $entidades)
+    {
+        $this->entidades[] = $entidades;
+    
+        return $this;
+    }
+
+    /**
+     * Remove entidades
+     *
+     * @param \ROA\ROABundle\Entity\Entidad $entidades
+     */
+    public function removeEntidade(\ROA\ROABundle\Entity\Entidad $entidades)
+    {
+        $this->entidades->removeElement($entidades);
+    }
 }

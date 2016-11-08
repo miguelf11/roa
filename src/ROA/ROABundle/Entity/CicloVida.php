@@ -124,4 +124,27 @@ class CicloVida
         //return $this->contribucion->toArray();
         return $this->contribucion;
     }*/
+
+    /**
+     * Add contribuciones
+     *
+     * @param \ROA\ROABundle\Entity\Contribucion $contribuciones
+     * @return CicloVida
+     */
+    public function addContribucione(\ROA\ROABundle\Entity\Contribucion $contribuciones)
+    {
+        $this->contribuciones[] = $contribuciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove contribuciones
+     *
+     * @param \ROA\ROABundle\Entity\Contribucion $contribuciones
+     */
+    public function removeContribucione(\ROA\ROABundle\Entity\Contribucion $contribuciones)
+    {
+        $this->contribuciones->removeElement($contribuciones);
+    }
 }

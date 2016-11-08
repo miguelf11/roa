@@ -81,4 +81,14 @@ class Ip
     {
         return $this->direccion;
     }
+
+    /**
+     * Remove oas
+     *
+     * @param \ROA\ROABundle\Entity\OA $oas
+     */
+    public function removeOa(\ROA\ROABundle\Entity\OA $oas)
+    {
+        $this->oas->removeElement($oas);
+    }
 }

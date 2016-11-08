@@ -5,26 +5,26 @@ namespace ROA\ROABundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Vocabulario
+ * Area
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ROA\ROABundle\Entity\AreaRepository")
  */
-class Vocabulario
+class Area
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=30)
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
 
@@ -43,7 +43,7 @@ class Vocabulario
      * Set nombre
      *
      * @param string $nombre
-     * @return Vocabulario
+     * @return Area
      */
     public function setNombre($nombre)
     {
@@ -60,9 +60,5 @@ class Vocabulario
     public function getNombre()
     {
         return $this->nombre;
-    }
-    public function __toString()
-    {
-        return $this->getNombre();
     }
 }

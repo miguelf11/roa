@@ -550,4 +550,50 @@ class Usuario implements UserInterface, \Serializable{
             $this->comentarios = $comentarios;
     }
   
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Usuario
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Remove oas
+     *
+     * @param \ROA\ROABundle\Entity\OA $oas
+     */
+    public function removeOa(\ROA\ROABundle\Entity\OA $oas)
+    {
+        $this->oas->removeElement($oas);
+    }
+
+    /**
+     * Add comentarios
+     *
+     * @param \ROA\ROABundle\Entity\Comentario $comentarios
+     * @return Usuario
+     */
+    public function addComentario(\ROA\ROABundle\Entity\Comentario $comentarios)
+    {
+        $this->comentarios[] = $comentarios;
+    
+        return $this;
+    }
+
+    /**
+     * Remove comentarios
+     *
+     * @param \ROA\ROABundle\Entity\Comentario $comentarios
+     */
+    public function removeComentario(\ROA\ROABundle\Entity\Comentario $comentarios)
+    {
+        $this->comentarios->removeElement($comentarios);
+    }
 }

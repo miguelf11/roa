@@ -428,11 +428,9 @@ class OAController extends Controller
 
 	public function indexAction($filtro , $id){
 
-        
         if(($filtro != 'subcategoria') && !($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) ){
             return $this->redirect($this->generateUrl('inicio', array()));
         }
-
 
         $mensaje = $this->getRequest()->getSession()->getFlash('mensaje');
         $politicas = $this->getRequest()->getSession()->getFlash('politicas');

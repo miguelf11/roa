@@ -69,4 +69,27 @@ class Vocablo
     {
         return $this->descripcion;
     }
+
+    /**
+     * Set vocabulario
+     *
+     * @param \ROA\ROABundle\Entity\Vocabulario $vocabulario
+     * @return Vocablo
+     */
+    public function setVocabulario(\ROA\ROABundle\Entity\Vocabulario $vocabulario = null)
+    {
+        $this->vocabulario = $vocabulario;
+    
+        return $this;
+    }
+
+    /**
+     * Get vocabulario
+     *
+     * @return \ROA\ROABundle\Entity\Vocabulario 
+     */
+    public function getVocabulario()
+    {
+        return $this->vocabulario;
+    }
 }

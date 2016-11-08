@@ -184,4 +184,50 @@ class Entidad
     {
         return $this->anotacion;
     }*/
+
+    /**
+     * Add contribuciones
+     *
+     * @param \ROA\ROABundle\Entity\Contribucion $contribuciones
+     * @return Entidad
+     */
+    public function addContribucione(\ROA\ROABundle\Entity\Contribucion $contribuciones)
+    {
+        $this->contribuciones[] = $contribuciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove contribuciones
+     *
+     * @param \ROA\ROABundle\Entity\Contribucion $contribuciones
+     */
+    public function removeContribucione(\ROA\ROABundle\Entity\Contribucion $contribuciones)
+    {
+        $this->contribuciones->removeElement($contribuciones);
+    }
+
+    /**
+     * Add anotaciones
+     *
+     * @param \ROA\ROABundle\Entity\Anotacion $anotaciones
+     * @return Entidad
+     */
+    public function addAnotacione(\ROA\ROABundle\Entity\Anotacion $anotaciones)
+    {
+        $this->anotaciones[] = $anotaciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove anotaciones
+     *
+     * @param \ROA\ROABundle\Entity\Anotacion $anotaciones
+     */
+    public function removeAnotacione(\ROA\ROABundle\Entity\Anotacion $anotaciones)
+    {
+        $this->anotaciones->removeElement($anotaciones);
+    }
 }

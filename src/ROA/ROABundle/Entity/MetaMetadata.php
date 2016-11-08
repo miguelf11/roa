@@ -123,4 +123,27 @@ class MetaMetadata
         }
             $this->contribuciones = $contribuciones;
     }
+
+    /**
+     * Add contribuciones
+     *
+     * @param \ROA\ROABundle\Entity\Contribucion $contribuciones
+     * @return MetaMetadata
+     */
+    public function addContribucione(\ROA\ROABundle\Entity\Contribucion $contribuciones)
+    {
+        $this->contribuciones[] = $contribuciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove contribuciones
+     *
+     * @param \ROA\ROABundle\Entity\Contribucion $contribuciones
+     */
+    public function removeContribucione(\ROA\ROABundle\Entity\Contribucion $contribuciones)
+    {
+        $this->contribuciones->removeElement($contribuciones);
+    }
 }

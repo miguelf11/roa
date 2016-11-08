@@ -84,4 +84,27 @@ class Recurso
         }
             $this->identificadores = $identificadores;
     }
+
+    /**
+     * Add identificadores
+     *
+     * @param \ROA\ROABundle\Entity\Identificador $identificadores
+     * @return Recurso
+     */
+    public function addIdentificadore(\ROA\ROABundle\Entity\Identificador $identificadores)
+    {
+        $this->identificadores[] = $identificadores;
+    
+        return $this;
+    }
+
+    /**
+     * Remove identificadores
+     *
+     * @param \ROA\ROABundle\Entity\Identificador $identificadores
+     */
+    public function removeIdentificadore(\ROA\ROABundle\Entity\Identificador $identificadores)
+    {
+        $this->identificadores->removeElement($identificadores);
+    }
 }

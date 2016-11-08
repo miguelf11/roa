@@ -247,4 +247,27 @@ class Tecnico
         //return $this->requerimiento->toArray();
         return $this->requerimiento;
     }*/
+
+    /**
+     * Add requerimientos
+     *
+     * @param \ROA\ROABundle\Entity\Requerimiento $requerimientos
+     * @return Tecnico
+     */
+    public function addRequerimiento(\ROA\ROABundle\Entity\Requerimiento $requerimientos)
+    {
+        $this->requerimientos[] = $requerimientos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove requerimientos
+     *
+     * @param \ROA\ROABundle\Entity\Requerimiento $requerimientos
+     */
+    public function removeRequerimiento(\ROA\ROABundle\Entity\Requerimiento $requerimientos)
+    {
+        $this->requerimientos->removeElement($requerimientos);
+    }
 }

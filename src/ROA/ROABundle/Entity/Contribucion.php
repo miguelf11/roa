@@ -161,4 +161,27 @@ class Contribucion
     {
         return $this->metametadata;
     }
+
+    /**
+     * Add entidades
+     *
+     * @param \ROA\ROABundle\Entity\Entidad $entidades
+     * @return Contribucion
+     */
+    public function addEntidade(\ROA\ROABundle\Entity\Entidad $entidades)
+    {
+        $this->entidades[] = $entidades;
+    
+        return $this;
+    }
+
+    /**
+     * Remove entidades
+     *
+     * @param \ROA\ROABundle\Entity\Entidad $entidades
+     */
+    public function removeEntidade(\ROA\ROABundle\Entity\Entidad $entidades)
+    {
+        $this->entidades->removeElement($entidades);
+    }
 }

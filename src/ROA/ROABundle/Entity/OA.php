@@ -625,4 +625,155 @@ class OA
         $this->relacion[] = $relacion;
     }*/
 
+
+    /**
+     * Set fecha_publicacion
+     *
+     * @param \DateTime $fechaPublicacion
+     * @return OA
+     */
+    public function setFechaPublicacion($fechaPublicacion)
+    {
+        $this->fecha_publicacion = $fechaPublicacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha_publicacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaPublicacion()
+    {
+        return $this->fecha_publicacion;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return OA
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Set original_name
+     *
+     * @param string $originalName
+     * @return OA
+     */
+    public function setOriginalName($originalName)
+    {
+        $this->original_name = $originalName;
+    
+        return $this;
+    }
+
+    /**
+     * Get original_name
+     *
+     * @return string 
+     */
+    public function getOriginalName()
+    {
+        return $this->original_name;
+    }
+
+    /**
+     * Add anotaciones
+     *
+     * @param \ROA\ROABundle\Entity\Anotacion $anotaciones
+     * @return OA
+     */
+    public function addAnotacione(\ROA\ROABundle\Entity\Anotacion $anotaciones)
+    {
+        $this->anotaciones[] = $anotaciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove anotaciones
+     *
+     * @param \ROA\ROABundle\Entity\Anotacion $anotaciones
+     */
+    public function removeAnotacione(\ROA\ROABundle\Entity\Anotacion $anotaciones)
+    {
+        $this->anotaciones->removeElement($anotaciones);
+    }
+
+    /**
+     * Add relaciones
+     *
+     * @param \ROA\ROABundle\Entity\Relacion $relaciones
+     * @return OA
+     */
+    public function addRelacione(\ROA\ROABundle\Entity\Relacion $relaciones)
+    {
+        $this->relaciones[] = $relaciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove relaciones
+     *
+     * @param \ROA\ROABundle\Entity\Relacion $relaciones
+     */
+    public function removeRelacione(\ROA\ROABundle\Entity\Relacion $relaciones)
+    {
+        $this->relaciones->removeElement($relaciones);
+    }
+
+    /**
+     * Add clasificaciones
+     *
+     * @param \ROA\ROABundle\Entity\Clasificacion $clasificaciones
+     * @return OA
+     */
+    public function addClasificacione(\ROA\ROABundle\Entity\Clasificacion $clasificaciones)
+    {
+        $this->clasificaciones[] = $clasificaciones;
+    
+        return $this;
+    }
+
+    /**
+     * Remove clasificaciones
+     *
+     * @param \ROA\ROABundle\Entity\Clasificacion $clasificaciones
+     */
+    public function removeClasificacione(\ROA\ROABundle\Entity\Clasificacion $clasificaciones)
+    {
+        $this->clasificaciones->removeElement($clasificaciones);
+    }
+
+    /**
+     * Add comentarios
+     *
+     * @param \ROA\ROABundle\Entity\Comentario $comentarios
+     * @return OA
+     */
+    public function addComentario(\ROA\ROABundle\Entity\Comentario $comentarios)
+    {
+        $this->comentarios[] = $comentarios;
+    
+        return $this;
+    }
+
+    /**
+     * Remove comentarios
+     *
+     * @param \ROA\ROABundle\Entity\Comentario $comentarios
+     */
+    public function removeComentario(\ROA\ROABundle\Entity\Comentario $comentarios)
+    {
+        $this->comentarios->removeElement($comentarios);
+    }
 }
