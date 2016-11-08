@@ -1,37 +1,57 @@
-<h1>Subcategoria list</h1>
+{% extends "ROABundle::layoutAdmin.html.twig" %}
 
-<table class="records_list">
+{% block javascripts %} 
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#contenidos').attr('class');
+            $('a#contenidos').attr('class', a_class+' active');
+            a_class = $('a#categorias').attr('class');
+            $('a#categorias').attr('class', a_class+' active');
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/admin.css') }}" 
+{% endblock %}
+
+{% block content %}
+    
+
+<h1>Subcategorías</h1>
+
+{% if mensaje %}
+    <div class="alert alert-info mensaje">{{ mensaje }}</div>
+{% endif %}
+
+<table class="table-general table_admin">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
-            <th>Actions</th>
+            <th colspan="2">Acciones</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('subcategoria_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.nombre }}</td>
             <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('subcategoria_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('subcategoria_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <a href="{{ path('subcategoria_show', { 'id': entity.id }) }}" class="link">Ver</a>
+            </td>
+            <td>
+                <a href="{{ path('subcategoria_edit', { 'id': entity.id }) }}" class="link">Editar</a>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('subcategoria_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+
+{% endblock content %}
+
+
+
+
+

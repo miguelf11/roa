@@ -30,6 +30,39 @@ class Area
 
 
     /**
+     * @ORM\OneToMany(targetEntity="OA", mappedBy="area", cascade={"persist", "remove"})
+     */
+    private $oas;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Subcategoria", inversedBy="areas")
+     * @ORM\JoinColumn(name="subcategoria", referencedColumnName="id")
+     * @return integer
+     */
+    private $subcategoria;
+
+    public function __construct(){
+
+        $this->oas = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }
+
+    public function getOas()
+    {
+        //return $this->oas->toArray();
+        return $this->oas;
+    }
+
+    public function setOas($oas)
+    {
+        foreach ($oas as $oa) {
+            $oa->setSubategoria($this);
+        }
+        $this->oas = $oas;
+    }
+
+
+    /**
      * Get id
      *
      * @return integer 
@@ -60,5 +93,38 @@ class Area
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+     public function setArea(\ROA\ROABundle\Entity\Area $area)
+    {
+        $this->area = $area;
+    }
+
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
+     * Add oas
+     *
+     * @param \ROA\ROABundle\Entity\OA $oas
+     * @return Area
+     */
+    public function addOa(\ROA\ROABundle\Entity\OA $oas)
+    {
+        $this->oas[] = $oas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove oas
+     *
+     * @param \ROA\ROABundle\Entity\OA $oas
+     */
+    public function removeOa(\ROA\ROABundle\Entity\OA $oas)
+    {
+        $this->oas->removeElement($oas);
     }
 }

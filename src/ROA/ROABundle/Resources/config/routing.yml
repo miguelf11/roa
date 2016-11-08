@@ -24,7 +24,7 @@ ROABundle_categoria:
 
 ROABundle_subcategoria:
         resource: "@ROABundle/Resources/config/routing/subcategoria.yml"
-        prefix:   /subcategoria
+        prefix:   admin/subcategoria
 
 roa_homepage:
     pattern:  /hello/{name}

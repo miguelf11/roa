@@ -154,6 +154,18 @@ class OA
      */
     private $subcategoria;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Area", inversedBy="oas")
+     * @ORM\JoinColumn(name="area_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="Campo requerido", groups={"create", "update"})
+     * @return integer
+     */
+    private $area;
+
+
+
+
     /**
      * @ORM\Column(name="puntuacion", type="integer", nullable=true)
      */

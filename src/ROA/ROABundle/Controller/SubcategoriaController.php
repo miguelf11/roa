@@ -20,12 +20,16 @@ class SubcategoriaController extends Controller
      */
     public function indexAction()
     {
+
+        $mensaje = $this->getRequest()->getSession()->getFlash('mensaje');
+        $usuario = $this->get('security.context')->getToken()->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('ROABundle:Subcategoria')->findAll();
 
         return $this->render('ROABundle:Subcategoria:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $entities,'usuario'=>$usuario, 'mensaje'=>$mensaje,
         ));
     }
 
