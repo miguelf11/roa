@@ -45,14 +45,11 @@
                         
                 <fieldset class="subform3 subcategoria"><legend>Subcategoría</legend>
                     {{ form_row(subcategoria) }}
-                    <a href="{{ path('categoria_show', { 'id': entity.id }) }}" class="link">Editar</a>
-
                 </fieldset>
         
             {% endfor %}
          
         </ul>
-
     </div>
 
     <p>
@@ -66,7 +63,7 @@
         <form action="{{ path('categoria_delete', { 'id': entity.id }) }}" method="post" id="form_delete_categoria">
             {{ form_widget(delete_form) }}
             <!--<button type="submit">Delete</button>-->
-            <a type="submit" class="btn_custom" id="" onClick="eliminar('form_delete_categoria')">Eliminar Categor&iacute;a</a>
+            <a type="submit" class="btn_custom" id="" onClick="eliminar('form_delete_categoria')">Eliminar Categoría</a>
         </form>
     </li>
     <li>

@@ -110,11 +110,10 @@ class CategoriaController extends Controller
      */
     public function editAction($id)
     {
-        
         $mensaje = $this->getRequest()->getSession()->getFlash('mensaje');
         $usuario = $this->get('security.context')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('ROABundle:Categoria')->find($id);
 
         if (!$entity) {
@@ -143,14 +142,13 @@ class CategoriaController extends Controller
         $usuario = $this->get('security.context')->getToken()->getUser();
 
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('ROABundle:Categoria')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Categoria entity.');
         }
 
-        /*Subcategorias orginales*/
+        /*Subcategorias originales*/
         $originalSubcategorias = array();
         foreach ($entity->getSubcategorias() as $subcategoria) {
             $originalSubcategorias[] = $subcategoria;

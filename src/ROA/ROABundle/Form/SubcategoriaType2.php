@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SubcategoriaType extends AbstractType
+class SubcategoriaType2 extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,15 +17,7 @@ class SubcategoriaType extends AbstractType
                             'label'=>'Nombre Subcategoría');
 
         $builder
-            ->add('nombre', 'text', $opciones)
-            ->add('areas', 'collection', array('type' => new AreaType(),
-                                                'allow_add' => true,
-                                                'allow_delete' => true,
-                                                'by_reference' => false,
-                                                'attr'=>array('class'=>'input_form'),
-                                                'label_attr'=>array('class'=>'label_form')
-                                                ));
-        ;
+            ->add('nombre', 'text', $opciones);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

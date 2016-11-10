@@ -58,7 +58,6 @@ class Categoria
 
     
 
-
     /**
      * Get id
      *
@@ -90,28 +89,5 @@ class Categoria
     public function getNombre()
     {
         return $this->nombre;
-    }
-
-    /**
-     * Add subcategorias
-     *
-     * @param \ROA\ROABundle\Entity\Subcategoria $subcategorias
-     * @return Categoria
-     */
-    public function addSubcategoria(\ROA\ROABundle\Entity\Subcategoria $subcategorias)
-    {
-        $this->subcategorias[] = $subcategorias;
-    
-        return $this;
-    }
-
-    /**
-     * Remove subcategorias
-     *
-     * @param \ROA\ROABundle\Entity\Subcategoria $subcategorias
-     */
-    public function removeSubcategoria(\ROA\ROABundle\Entity\Subcategoria $subcategorias)
-    {
-        $this->subcategorias->removeElement($subcategorias);
     }
 }

@@ -1,22 +1,85 @@
-<h1>Subcategoria edit</h1>
+{% extends "ROABundle::layoutAdmin.html.twig" %}
 
-<form action="{{ path('subcategoria_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
+{% block stylesheets %} 
+    {{ parent() }} 
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/formulario.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/ROA/css/usuario_new-edit.css') }}" />
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }} 
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#contenidos').attr('class');
+            $('a#contenidos').attr('class', a_class+' active');
+            a_class = $('a#subcategorias').attr('class');
+            $('a#categorias').attr('class', a_class+' active');
+
+            agregar_areas();
+
+            /*Para eliminar los numeritos en las subcategorias*/
+            $('label.required').remove();
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+{% if mensaje %}
+    <div class="alert alert-info mensaje">{{ mensaje }}</div>
+{% endif %}
+
+<h1>Editar Subcategoría: {{entity.nombre }}</h1>
+<p>Utiliza el siguiente formulario para editar la información de la Subcategoría</p><br><br>
+
+<form name="form_new" id="form_new" action="{{ path('subcategoria_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    
+    <div class="formulario">
+
+        {{ form_row(edit_form.nombre) }}
+        {{ form_row(edit_form._token) }}
+
+        <ul class="areas" data-prototype="{{ form_widget(edit_form.areas.vars.prototype)|e }}">
+
+            {% for area in edit_form.areas %}
+                        
+                <fieldset class="subform3 area"><legend>Area</legend>
+                    {{ form_row(area) }}
+                </fieldset>
+        
+            {% endfor %}
+         
+        </ul>
+
+    </div>
+
     <p>
-        <button type="submit">Edit</button>
+        <!--<button type="submit">Edit</button>-->
+        <a class="btn_custom" name="" id="" onClick="javascript:form_new.submit()">Editar</a>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('subcategoria') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('subcategoria_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('subcategoria_delete', { 'id': entity.id }) }}" method="post" id="form_delete_subcategoria">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <!--<button type="submit">Delete</button>-->
+            <a type="submit" class="btn_custom" id="" onClick="eliminar('form_delete_subcategoria')">Eliminar Subcategoría</a>
         </form>
     </li>
+    <li>
+        <a href="{{ path('subcategoria') }}" class="link">
+            Volver a la lista
+        </a>
+    </li>
 </ul>
+
+<div id="dialog-confirm-subcategoria" title="Eliminar" style="display:none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Seguro que desea eliminar esta area?</p>
+</div>
+
+<div id="dialog-confirm" title="Eliminar" style="display:none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Seguro que desea eliminar esta subcategoría?</p>
+</div>
+
+{% endblock %}

@@ -18,7 +18,7 @@ class CategoriaType extends AbstractType
 
         $builder
             ->add('nombre', 'text', $opciones)
-            ->add('subcategorias', 'collection', array('type' => new SubcategoriaType(),
+            ->add('subcategorias', 'collection', array('type' => new SubcategoriaType2(),
                                                 'allow_add' => true,
                                                 'allow_delete' => true,
                                                 'by_reference' => false,

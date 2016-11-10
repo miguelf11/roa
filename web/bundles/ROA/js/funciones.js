@@ -729,42 +729,19 @@ function addSubcategoriaForm(collectionHolder, $newLinkLi) {
     var $newFormLi = $('<fieldset class=subform><legend>Subcategoria</legend></fieldset>').append(newForm);
     $newLinkLi.before($newFormLi);
 
-   //$(".fecha").datepicker({ dayNamesMin: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ], monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ], changeYear: true, nextText: "Siguiente", prevText: "Anterior", dateFormat: "dd-mm-yy" });
 
     addSubcategoriaFormDeleteLink($newFormLi);
 
-    //var entidad = $('div#OA_form_anotaciones_'+newIndex+'_entidades');
-
-   //agregar_entidades(entidad);
 }
 
 function addSubcategoriaFormDeleteLink($subcategoriaFormLi) {
     var $removeFormA = $('<a href="#" class="btn">Eliminar</a>');
     $subcategoriaFormLi.append($removeFormA);
-
-    /*$removeFormA.on('click', function(e) {
-        e.preventDefault();
-        $( "#dialog-confirm3" ).dialog({
-          resizable: false,
-          height:160,
-          modal: true,
-          buttons: {
-            "Si": function() {
-               $anotacionFormLi.remove(); 
-               $( this ).dialog( "close" );
-            },
-            "No": function() {
-              $( this ).dialog( "close" );
-            }
-          }
-        });*/
         if(confirm("\u00bfSeguro que desea eliminar esta subcategoria?")){
             $SubcategoriaFormLi.remove();
         }
-    //});
     return false;
 }
-
 
 
 
@@ -1097,17 +1074,68 @@ function addIdentificadorFormDeleteLink2($identificadorFormLi) {
 
 
 
-function agregar_subcategorias(){
+function agregar_areas(){
+  var collectionHolder = $('ul.areas');
+  var $addAreaLink = $('<a href="#" class="add_subcategoria_link">Agregar Area</a>');
+  var $newLinkLi = $('<li class="li_add_area"></li>').append($addAreaLink);
+  collectionHolder.append($newLinkLi);
+  $addAreaLink.on('click', function(e) {
+          e.preventDefault();
+          addAreaForm(collectionHolder, $newLinkLi);
+      });
 
+  collectionHolder.find('.area').each(function() {
+       addAreaFormDeleteLink($(this));
+  });
+}
+
+function addAreaForm(collectionHolder, $newLinkLi) {
+
+    var prototype = collectionHolder.attr('data-prototype');
+    var newIndex = collectionHolder.find(':input').length;
+    var newForm = prototype.replace(/__name__/g, newIndex);
+    var $newFormLi = $('<fieldset class=subform3><legend>Area</legend></fieldset>').append(newForm);
+    $newLinkLi.before($newFormLi);
+
+    addAreaFormDeleteLink($newFormLi);
+
+}
+
+function addAreaFormDeleteLink($areaFormLi) {
+    var $removeFormA = $('<a href="#" class="btn">Eliminar</a>');
+    $areaFormLi.append($removeFormA);
+
+    $removeFormA.on('click', function(e) {
+        e.preventDefault();
+        $( "#dialog-confirm-area" ).dialog({
+          resizable: false,
+          height:160,
+          modal: true,
+          buttons: {
+            "Si": function() {
+               $areaFormLi.remove(); 
+               $( this ).dialog( "close" );
+            },
+            "No": function() {
+              $( this ).dialog( "close" );
+            }
+          }
+        });
+    });
+    return false;
+}
+
+function agregar_subcategorias(){
 
   var collectionHolder = $('ul.subcategorias');
   var $addSubcategoriaLink = $('<a href="#" class="add_subcategoria_link">Agregar Subcategoria</a>');
   var $newLinkLi = $('<li class="li_add_subcategoria"></li>').append($addSubcategoriaLink);
   collectionHolder.append($newLinkLi);
+
   $addSubcategoriaLink.on('click', function(e) {
-          e.preventDefault();
-          addSubcategoriaForm(collectionHolder, $newLinkLi);
-      });
+    e.preventDefault();
+    addSubcategoriaForm(collectionHolder, $newLinkLi);
+  });
 
   collectionHolder.find('.subcategoria').each(function() {
        addSubcategoriaFormDeleteLink($(this));
@@ -1122,13 +1150,7 @@ function addSubcategoriaForm(collectionHolder, $newLinkLi) {
     var $newFormLi = $('<fieldset class=subform3><legend>Subcategoria</legend></fieldset>').append(newForm);
     $newLinkLi.before($newFormLi);
 
-   //$(".fecha").datepicker({ dayNamesMin: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ], monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ], changeYear: true, nextText: "Siguiente", prevText: "Anterior", dateFormat: "dd-mm-yy" });
-
     addSubcategoriaFormDeleteLink($newFormLi);
-
-    //var entidad = $('div#OA_form_anotaciones_'+newIndex+'_entidades');
-
-   //agregar_entidades(entidad);
 }
 
 function addSubcategoriaFormDeleteLink($subcategoriaFormLi) {
@@ -1150,10 +1172,7 @@ function addSubcategoriaFormDeleteLink($subcategoriaFormLi) {
               $( this ).dialog( "close" );
             }
           }
-        });
-        /*if(confirm("\u00bfSeguro que desea eliminar esta subcategoria?")){
-            $subcategoriaFormLi.remove();
-        }*/
+        })
     });
     return false;
 }

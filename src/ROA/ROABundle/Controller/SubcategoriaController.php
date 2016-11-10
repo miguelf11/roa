@@ -99,6 +99,8 @@ class SubcategoriaController extends Controller
      */
     public function editAction($id)
     {
+        $mensaje = $this->getRequest()->getSession()->getFlash('mensaje');
+        $usuario = $this->get('security.context')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ROABundle:Subcategoria')->find($id);
@@ -114,6 +116,8 @@ class SubcategoriaController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'usuario' => $usuario,
+            'mensaje'=>$mensaje,
         ));
     }
 
@@ -123,21 +127,45 @@ class SubcategoriaController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
 
+        $mensaje = $this->getRequest()->getSession()->getFlash('mensaje');
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('ROABundle:Subcategoria')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Subcategoria entity.');
         }
 
+
+        /*Areas originales*/
+        $originalAreas = array();
+        foreach ($entity->getAreas() as $area) {
+            $originalAreas[] = $area;
+        }
+
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new SubcategoriaType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            /*Eliminar Areas*/
+            foreach ($entity->getAreas() as $area) {
+                foreach ($originalAreas as $key => $toDel) {
+                    if ($toDel->getId() === $area->getId()) {
+                        unset($originalAreas[$key]);
+                    }
+                }
+            }
+            foreach ($originalAreas as $area) {
+                $em->remove($area);
+            }
+
             $em->persist($entity);
             $em->flush();
+
+            $this->getRequest()->getSession()->setFlash('mensaje', 'Subcategoria editada exitosamente!');
 
             return $this->redirect($this->generateUrl('subcategoria_edit', array('id' => $id)));
         }
@@ -146,6 +174,8 @@ class SubcategoriaController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'usuario' => $usuario,
+            'mensaje'=>$mensaje,
         ));
     }
 

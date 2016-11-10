@@ -41,6 +41,7 @@ class Area
      */
     private $subcategoria;
 
+
     public function __construct(){
 
         $this->oas = new \Doctrine\Common\Collections\ArrayCollection();
@@ -52,7 +53,6 @@ class Area
         //return $this->oas->toArray();
         return $this->oas;
     }
-
     public function setOas($oas)
     {
         foreach ($oas as $oa) {
@@ -95,36 +95,14 @@ class Area
         return $this->nombre;
     }
 
-     public function setArea(\ROA\ROABundle\Entity\Area $area)
+    public function setSubcategoria(\ROA\ROABundle\Entity\Subcategoria $subcategoria)
     {
-        $this->area = $area;
+        $this->subcategoria = $subcategoria;
     }
 
-    public function getArea()
+    public function getSubcategoria()
     {
-        return $this->area;
+        return $this->subcategoria;
     }
 
-    /**
-     * Add oas
-     *
-     * @param \ROA\ROABundle\Entity\OA $oas
-     * @return Area
-     */
-    public function addOa(\ROA\ROABundle\Entity\OA $oas)
-    {
-        $this->oas[] = $oas;
-    
-        return $this;
-    }
-
-    /**
-     * Remove oas
-     *
-     * @param \ROA\ROABundle\Entity\OA $oas
-     */
-    public function removeOa(\ROA\ROABundle\Entity\OA $oas)
-    {
-        $this->oas->removeElement($oas);
-    }
 }
