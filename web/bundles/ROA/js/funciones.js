@@ -708,43 +708,6 @@ function addContribucion2FormDeleteLink($contribucion2FormLi) {
 }
 
 
-//Subcategorias
-function agregar_subcategorias(){
-
-  var collectionHolder = $('ul.subcategorias');
-  var $addSubcategoriaLink = $('<a href="#" class="add_subcategoria_link">Agregar Subcategoria</a>');
-  var $newLinkLi = $('<li class="li_add_subcategoria"></li>').append($addSubcategoriaLink);
-  collectionHolder.append($newLinkLi);
-  $addSubcategoriaLink.on('click', function(e) {
-          e.preventDefault();
-          addSubcategoriaForm(collectionHolder, $newLinkLi);
-      });
-}
-
-function addSubcategoriaForm(collectionHolder, $newLinkLi) {
-
-    var prototype = collectionHolder.attr('data-prototype');
-    var newIndex = collectionHolder.find(':input').length;
-    var newForm = prototype.replace(/__name__/g, newIndex);
-    var $newFormLi = $('<fieldset class=subform><legend>Subcategoria</legend></fieldset>').append(newForm);
-    $newLinkLi.before($newFormLi);
-
-
-    addSubcategoriaFormDeleteLink($newFormLi);
-
-}
-
-function addSubcategoriaFormDeleteLink($subcategoriaFormLi) {
-    var $removeFormA = $('<a href="#" class="btn">Eliminar</a>');
-    $subcategoriaFormLi.append($removeFormA);
-        if(confirm("\u00bfSeguro que desea eliminar esta subcategoria?")){
-            $SubcategoriaFormLi.remove();
-        }
-    return false;
-}
-
-
-
 //Identificadores
 function agregar_identificadores(){
 
@@ -1107,7 +1070,7 @@ function addAreaFormDeleteLink($areaFormLi) {
 
     $removeFormA.on('click', function(e) {
         e.preventDefault();
-        $( "#dialog-confirm-area" ).dialog({
+        $( "#dialog-confirm-subcategoria" ).dialog({
           resizable: false,
           height:160,
           modal: true,
@@ -1120,11 +1083,13 @@ function addAreaFormDeleteLink($areaFormLi) {
               $( this ).dialog( "close" );
             }
           }
-        });
+        })
     });
     return false;
 }
 
+
+//subcategorias
 function agregar_subcategorias(){
 
   var collectionHolder = $('ul.subcategorias');
@@ -1181,14 +1146,7 @@ function addSubcategoriaFormDeleteLink($subcategoriaFormLi) {
 
 
 
-
-
-
-
-
-
-
-
+//tags
 function agregar_tags(){
 
 	/*PARA AGREGAR TAGS NUEVOS*/
