@@ -276,7 +276,9 @@ $(document).ready(function(){
 							<ul>
 							{% for subcategoria in categoria.subcategorias %}
 								<li class="submenu_accordion">
-									<div><a href="{{path('OA_index', {'filtro':'subcategoria', 'id': subcategoria.id})}}">{{ subcategoria.nombre }}</a>
+									<!--<div><a href="{{path('OA_index', {'filtro':'subcategoria', 'id': subcategoria.id})}}">{{ subcategoria.nombre }}</a> -->
+
+									<div><a href="{{path('OA_prueba', {'id': subcategoria.id})}}">{{ subcategoria.nombre }}</a>
 									</div>
 								</li>
 							{% endfor %}

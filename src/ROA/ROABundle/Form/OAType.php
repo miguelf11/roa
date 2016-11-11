@@ -28,7 +28,22 @@ class OAType extends AbstractType
                             'label'=>'Categoria'
                         );
 
-        $opcionesSubcategoria['attr']['tipo'] = 'requerido';
+        //$opcionesSubcategoria['attr']['tipo'] = 'requerido';
+
+        $opcionesArea = array(
+                            'class'=>'ROA\ROABundle\Entity\Area',
+                            'property'=>'nombre',
+                            'query_builder' => function (\Doctrine\ORM\EntityRepository $repository){
+                                return $repository->createQueryBuilder('c');
+                            },
+                            'empty_value' => 'Seleccione una opción',
+                            'required' => false, 
+                            'attr'=>array('class'=>'select_form'),
+                            'label_attr'=>array('class'=>'label_form'),
+                            'label'=>'Area'
+                        );
+
+        $opcionesArea['attr']['tipo'] = 'requerido';
 
         $opcionesTitulo = $opciones;
         $opcionesTitulo['attr']['tipo'] = 'requerido';
@@ -71,6 +86,7 @@ class OAType extends AbstractType
         $builder->add('titulo', 'text', $opcionesTitulo)
                 ->add('file', 'file', $opcionesFile)
                 ->add('subcategoria', 'entity', $opcionesSubcategoria)
+                ->add('area','entity',$opcionesArea)
                 ->add('status', 'entity', $opcionesStatus)
                 ->add('puntuacion', 'choice', $opcionesPuntuacion)
                 ->add('general', new GeneralType(), $opciones)

@@ -149,10 +149,10 @@ class OA
     /**
      * @ORM\ManyToOne(targetEntity="Subcategoria", inversedBy="oas")
      * @ORM\JoinColumn(name="subcategoria_id", referencedColumnName="id")
-     * @Assert\NotBlank(message="Campo requerido", groups={"create", "update"})
      * @return integer
      */
     private $subcategoria;
+
 
 
     /**
@@ -162,7 +162,6 @@ class OA
      * @return integer
      */
     private $area;
-
 
 
 
@@ -359,6 +358,17 @@ class OA
     public function getSubcategoria()
     {
         return $this->subcategoria;
+    }
+
+    //\ROA\ROABundle\Entity\Area $area
+    public function setArea($area)
+    {
+        $this->area = $area;
+    }
+
+    public function getArea()
+    {
+        return $this->area;
     }
 
     public function __construct()

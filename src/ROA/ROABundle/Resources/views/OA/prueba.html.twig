@@ -1,0 +1,35 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    <script>
+		$(document).ready(function(){
+			a_class = $('a#inicio').attr('class');
+			$('a#inicio').attr('class', a_class+' active');
+		});
+	</script> 
+{% endblock %}
+
+{% block content %}
+
+
+	<h1>{{ subcategoria.categoria.nombre }} - {{ subcategoria.nombre }}</h1>
+
+
+<div>
+		<p> La fisica importante para el mundo y nuestro alrededores por lo tanto debemos aprender física si queremos hacer del mundo ,un mundo mejor bla bla bla bla bla bla bla bla bla bla bla bla bl</p>
+        <div class="content-left">
+            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
+            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
+            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
+            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
+            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
+            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/subcategorias/Fisica.png') }}" class="imagen_area" /></a>
+        </div>
+</div>
+
+{% endblock content %}

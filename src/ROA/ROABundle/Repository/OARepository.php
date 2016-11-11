@@ -31,6 +31,15 @@ class OARepository extends EntityRepository
 		return $OAs;
 	}
 
+	public function findByAreaAndStatus($area, $status){
+
+		$em = $this->getEntityManager();
+		$dql = "select o from ROABundle:OA o JOIN o.status s JOIN o.area sub WITH s.descripcion LIKE '".$status."' AND sub.id =".$area." ORDER BY o.fecha_publicacion DESC";
+		$query = $em->createQuery($dql);
+		$OAs = $query->getResult();
+		return $OAs;
+	}
+
 	public function findNoAutorizados(){
 
 		$em = $this->getEntityManager();

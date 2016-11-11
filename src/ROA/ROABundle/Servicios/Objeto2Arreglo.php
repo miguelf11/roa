@@ -19,6 +19,7 @@ class Objeto2Arreglo
 		$arreglo['id'] = $oa->getId();
 		$arreglo['titulo'] = $oa->getTitulo();
 		$arreglo['subcategoria'] = $oa->getSubcategoria()->getNombre();
+		$arreglo['area'] = $oa->getArea()->getNombre();
 		$arreglo['fecha_publicacion'] = $oa->getFecha_publicacion();
 		//General
 		$arreglo['general']['lenguaje'] = $oa->getGeneral()->getLenguaje();

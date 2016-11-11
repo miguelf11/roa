@@ -40,7 +40,6 @@ use ROA\ROABundle\Entity\PclZip;
 class OAController extends Controller
 {
 
-
     public function edit_adminAction($id)
     {
         
@@ -394,6 +393,7 @@ class OAController extends Controller
 	}
 
 
+
     public function delete_adminAction($id){
         
         $error = $this->getRequest()->getSession()->getFlash('error');
@@ -425,6 +425,17 @@ class OAController extends Controller
 
         return $this->redirect($this->generateUrl('OA_index_admin'));
     }
+
+    public function pruebaAction($id){
+        $error = $this->getRequest()->getSession()->getFlash('error');
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $subcategoria = $em->getRepository('ROABundle:Subcategoria')->find($id);
+        $variables = array('error'=> $error,'usuario'=> $usuario,'subcategoria'=>$subcategoria,'categorias' => $this->getDoctrine()->getManager()->getRepository('ROABundle:Categoria')->findAll());
+        return $this->render('ROABundle:OA:prueba.html.twig', $variables);
+    }
+
 
 	public function indexAction($filtro , $id){
 
@@ -484,6 +495,28 @@ class OAController extends Controller
                 }
                 break;
 
+            case 'area':
+                $area = $em->getRepository('ROABundle:Area')->find($id);
+                $objetos = $em->getRepository('ROABundle:OA')->findByAreaAndStatus($id, 'Certificado');
+
+                switch ($format) {
+                    case 'json':
+                        foreach ($objetos as $key => $oa) {
+                            $arreglo[] = $this->get('objeto_2_arreglo')->OA_to_arreglo($oa);
+                        }
+                        return new JsonResponse($arreglo);
+                        break;
+                    
+                    default:
+                        $variables = array('error'=> $error,'usuario'=> $usuario, 'objetos'=>$objetos, 'categorias' => $this->getDoctrine()->getManager()->getRepository('ROABundle:Categoria')->findAll(), 'filtro' => $filtro, 'area'=>$area);
+                            $content = $this->renderView('ROABundle:OA:index-area.html.twig', $variables);
+                        break;
+                }
+
+
+
+                break;
+
         }
         return new Response($content);
            
@@ -537,6 +570,9 @@ class OAController extends Controller
         $OA_form= $this->createForm(new OAType(), $OA, array('validation_groups'=>array('create')));
         $OA_form->bind($request);
 
+        echo "paso el bind";
+        exit();
+
         //echo $OA_form->getErrorsAsString(); exit();
 
         if( $OA_form->isValid()){
@@ -563,7 +599,7 @@ class OAController extends Controller
             //Envio de email
             $email = \Swift_Message::newInstance()
                     ->setSubject('ROACAR')
-                    ->setFrom('juansneak@gmail.com')
+                    ->setFrom('miguel.figueira16@gmail.com')
                     ->setTo($usuario->getEmail())
                     ->setBody(
                             $this->renderView(
@@ -622,7 +658,10 @@ class OAController extends Controller
                     'error'=> $error,
                     'usuario'=> $usuario,
                     'OA_form' => $OA_form->createView(),
-                    'categorias' => $this->getDoctrine()->getManager()->getRepository('ROABundle:Categoria')->findAll());
+                    'categorias' => $this->getDoctrine()->getManager()->getRepository('ROABundle:Categoria')->findAll(),
+                    'areas'=> $this->getDoctrine()->getManager()->getRepository('ROABundle:Area')->findAll()
+                );
+
 
                 $content = $this->renderView('ROABundle:OA:new.html.twig', $variables);
             

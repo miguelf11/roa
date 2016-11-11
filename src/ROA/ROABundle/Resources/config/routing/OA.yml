@@ -58,3 +58,10 @@ OA_dispatcher:
         id: \d+
         _method: POST|GET
         _format: html|xml|rss
+
+
+OA_prueba:
+    pattern: /prueba/{id}
+    defaults: { _controller: ROABundle:OA:prueba, _format: html}
+    requirements:
+        _method: POST|GET
