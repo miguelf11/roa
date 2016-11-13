@@ -11,13 +11,21 @@ class SubcategoriaType2 extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         
-        $opciones =  array('required' => false,
+        $opcionesNombre =  array('required' => false,
                             'attr'=>array('class'=>'input_form'),
                             'label_attr'=>array('class'=>'label_form'),
                             'label'=>'Nombre Subcategoría');
 
+        $opcionesDescripcion =  array('required' => false,
+                            'attr'=>array('class'=>'input_form','rows' => '5','cols'=>'100'),
+                            'label_attr'=>array('class'=>'label_form',
+                            'label'=>'Descripción'));
+
+
+
         $builder
-            ->add('nombre', 'text', $opciones);
+            ->add('nombre', 'text', $opcionesNombre)
+            ->add('descripcion', 'textarea', $opcionesDescripcion);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

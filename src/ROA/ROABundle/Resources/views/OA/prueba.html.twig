@@ -7,29 +7,29 @@
 {% block javascripts %} 
     {{ parent() }}
     <script>
-		$(document).ready(function(){
-			a_class = $('a#inicio').attr('class');
-			$('a#inicio').attr('class', a_class+' active');
-		});
-	</script> 
+        $(document).ready(function(){
+            a_class = $('a#inicio').attr('class');
+            $('a#inicio').attr('class', a_class+' active');
+        });
+    </script> 
 {% endblock %}
 
 {% block content %}
 
 
-	<h1>{{ subcategoria.categoria.nombre }} - {{ subcategoria.nombre }}</h1>
-
-
+<h1>{{ subcategoria.categoria.nombre }} - {{ subcategoria.nombre }}</h1>
 <div>
-		<p> La fisica importante para el mundo y nuestro alrededores por lo tanto debemos aprender física si queremos hacer del mundo ,un mundo mejor bla bla bla bla bla bla bla bla bla bla bla bla bl</p>
-        <div class="content-left">
-            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
-            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
-            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
-            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
-            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/areas/Física_Espacial.png') }}" class="imagen_area" /></a>
-            <a href="{{path('OA_index', {'filtro':'area', 'id': 1})}}"> <img src="{{ asset('bundles/ROA/images/subcategorias/Fisica.png') }}" class="imagen_area" /></a>
-        </div>
+    <p>{{ subcategoria.descripcion }}</p>
+    <div class="content-left pagination-area">
+        {% for area in subcategoria.areas %}
+            {% if usuario.getWebPath() %}
+                    <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}"> <img src="{{ asset(area.getWebPath()) }}" class="imagen_area" /></a>
+            {% else %}
+                    <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}"> <img src="{{ asset('bundles/ROA/images/user.png') }}" class="imagen_area"/></a>
+                    <img src="{{ asset('bundles/ROA/images/user.png') }}" class="imagen_area"/>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock content %}

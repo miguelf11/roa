@@ -189,8 +189,6 @@ class Usuario implements UserInterface, \Serializable{
 
 
 
-
-
     /**
      * Get id
      *
@@ -410,9 +408,19 @@ class Usuario implements UserInterface, \Serializable{
         return $this->path;
     }
 
-    /*public function setPath($path){
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Usuario
+     */
+    public function setPath($path)
+    {
         $this->path = $path;
-    }*/
+    
+        return $this;
+    }
 
 
     public function getAbsolutePath()
@@ -446,7 +454,7 @@ class Usuario implements UserInterface, \Serializable{
 
 
 
-    //RETROLLAMADAS
+    //RETROLLAMADAS(CALLBACKS)
 
     /**
      * Sets file.
@@ -551,18 +559,7 @@ class Usuario implements UserInterface, \Serializable{
     }
   
 
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Usuario
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-    
-        return $this;
-    }
+
 
     /**
      * Remove oas

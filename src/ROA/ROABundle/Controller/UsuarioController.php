@@ -109,12 +109,6 @@ class UsuarioController extends Controller
             $entity->setActivacion(null);
 
             $em = $this->getDoctrine()->getManager();
-            //if ($role == 'prof'){
-                //$role_user = $em->getRepository('ROABundle:Role')->findOneByDescripcion($role);
-            //}else{
-               // $role_user = $em->getRepository('ROABundle:Role')->findOneByNombre('ROLE_ESTUDIANTE');
-            //}
-            //$entity->addRole($role_user); 
             $role_user = $em->getRepository('ROABundle:Role')->findOneByNombre('ROLE_NO_CONTRIBUYENTE');
             $entity->addRole($role_user); 
             $em->persist($entity);

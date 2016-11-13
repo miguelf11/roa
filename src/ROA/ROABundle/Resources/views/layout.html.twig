@@ -42,6 +42,19 @@ $(document).ready(function(){
      
 	});
 
+	$('.pagination-area').flexipage({
+    //element:'a',
+    perpage:1,
+    //navigation: true,
+    //pager: false,
+    //showcounter: false,
+    next_txt: 'Siguiente',
+    prev_txt: 'Anterior'
+     
+	});
+
+
+
 
 	$("#accordion > li > div").click(function(){
  		if(false == $(this).next().is(':visible')) {

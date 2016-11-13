@@ -8,12 +8,19 @@ class AreaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         
-        $opciones =  array('required' => false,
+        $opcionesNombre =  array('required' => false,
                             'attr'=>array('class'=>'input_form'),
                             'label_attr'=>array('class'=>'label_form',
                             'label'=>'Nombre Area'));
+
+        $opcionesImagen = $opcionesNombre;
+        $opcionesImagen['label'] = 'Imagen';
+
+
+
         $builder
-            ->add('nombre', 'text', $opciones);
+            ->add('nombre', 'text', $opcionesNombre)
+            ->add('file','file',$opcionesImagen);
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
