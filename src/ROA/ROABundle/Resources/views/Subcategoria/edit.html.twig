@@ -37,6 +37,7 @@
     <div class="formulario">
 
         {{ form_row(edit_form.nombre) }}
+        {{ form_row(edit_form.file)}}
         {{ form_row(edit_form._token) }}
 
         <ul class="areas" data-prototype="{{ form_widget(edit_form.areas.vars.prototype)|e }}">

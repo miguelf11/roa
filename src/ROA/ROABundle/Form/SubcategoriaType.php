@@ -16,8 +16,12 @@ class SubcategoriaType extends AbstractType
                             'label_attr'=>array('class'=>'label_form'),
                             'label'=>'Nombre Subcategoría');
 
+        $opcionesImagen = $opciones;
+        $opcionesImagen['label'] = 'Imagen';
+
         $builder
             ->add('nombre', 'text', $opciones)
+            ->add('file','file',$opcionesImagen)
             ->add('areas', 'collection', array('type' => new AreaType(),
                                                 'allow_add' => true,
                                                 'allow_delete' => true,

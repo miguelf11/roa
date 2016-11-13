@@ -19,13 +19,14 @@
 
 <h1>{{ subcategoria.categoria.nombre }} - {{ subcategoria.nombre }}</h1>
 <div>
+    <img src="{{ asset(subcategoria.getWebPath())}}" id="imagen_subcategoria"/>
     <p>{{ subcategoria.descripcion }}</p>
     <div class="content-left pagination-area">
         {% for area in subcategoria.areas %}
             {% if usuario.getWebPath() %}
-                    <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}"> <img src="{{ asset(area.getWebPath()) }}" class="imagen_area" /></a>
+                    <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}"> <img src="{{ asset(area.getWebPath()) }}" class="imagen_area" alt={{area.nombre}} /></a>
             {% else %}
-                    <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}"> <img src="{{ asset('bundles/ROA/images/user.png') }}" class="imagen_area"/></a>
+                    <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}"> <img src="{{ asset('bundles/ROA/images/user.png') }}" class="imagen_area" alt={{area.nombre}}/></a>
                     <img src="{{ asset('bundles/ROA/images/user.png') }}" class="imagen_area"/>
             {% endif %}
         {% endfor %}
