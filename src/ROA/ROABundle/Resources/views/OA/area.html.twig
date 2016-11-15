@@ -1,0 +1,51 @@
+{% extends "ROABundle::layout.html.twig" %}
+
+{% block stylesheets %} 
+    {{ parent() }} 
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            a_class = $('a#inicio').attr('class');
+            $('a#inicio').attr('class', a_class+' active');
+        });
+    </script> 
+{% endblock %}
+
+{% block content %}
+
+
+<h1>{{ subcategoria.categoria.nombre }} - {{ subcategoria.nombre }}</h1>
+<div>
+    {% if subcategoria.getWebPath() %}
+        <img src="{{ asset(subcategoria.getWebPath())}}" id="imagen_subcategoria"/>
+    {% endif %}
+
+    <p>{{ subcategoria.descripcion }}</p>
+    <br>
+    <br>
+    <div>
+        {% for area in subcategoria.areas %}
+            {% if area.getWebPath() %}
+                <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}">
+                     <div class="left-div imgWrap">
+                        <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}"> <img src="{{ asset(area.getWebPath()) }}" class="imagen_area" alt="{{area.nombre}}" />
+                        <h1 class="imgDescription">{{area.nombre}}</h1>
+                    </div>
+                </a>
+            {% else %}
+                <div class="left-div">
+                    <a href="{{path('OA_index', {'filtro':'area', 'id': area.id})}}">
+                        <div id="myCanvas">
+                            <h1 id="area_nombre">{{area.nombre}}</h1>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

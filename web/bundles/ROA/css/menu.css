@@ -73,6 +73,7 @@
 	background:#034769;
 	opacity: 0.9;
 	list-style: none;
+	z-index: 1000;
 
 }
 

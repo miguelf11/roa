@@ -56,6 +56,8 @@ $(document).ready(function(){
 
 
 
+
+
 	$("#accordion > li > div").click(function(){
  		if(false == $(this).next().is(':visible')) {
  			$('#accordion ul').slideUp(300);
@@ -105,6 +107,16 @@ $(document).ready(function(){
 		$(this).prev().parent().children('img').eq(0).attr('src', aux);
 		
 	});
+
+
+
+	
+	
+	
+	$('#easyPaginate').easyPaginate({
+		paginateElement: 'div',
+        elementsPerPage: 2,
+    });
 
 
 	/*Botones Accesibilidad*/
@@ -291,7 +303,7 @@ $(document).ready(function(){
 								<li class="submenu_accordion">
 									<!--<div><a href="{{path('OA_index', {'filtro':'subcategoria', 'id': subcategoria.id})}}">{{ subcategoria.nombre }}</a> -->
 
-									<div><a href="{{path('OA_prueba', {'id': subcategoria.id})}}">{{ subcategoria.nombre }}</a>
+									<div><a href="{{path('OA_area', {'id': subcategoria.id})}}">{{ subcategoria.nombre }}</a>
 									</div>
 								</li>
 							{% endfor %}

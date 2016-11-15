@@ -1040,7 +1040,7 @@ function addIdentificadorFormDeleteLink2($identificadorFormLi) {
 function agregar_areas(){
   var collectionHolder = $('ul.areas');
   var $addAreaLink = $('<a href="#" class="add_subcategoria_link">Agregar Area</a>');
-  var $newLinkLi = $('<li class="li_add_area"></li>').append($addAreaLink);
+  var $newLinkLi = $('<li class="li_add_subcategoria"></li>').append($addAreaLink);
   collectionHolder.append($newLinkLi);
   $addAreaLink.on('click', function(e) {
           e.preventDefault();

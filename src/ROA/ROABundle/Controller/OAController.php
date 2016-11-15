@@ -264,7 +264,7 @@ class OAController extends Controller
             //Envio de email
             $email = \Swift_Message::newInstance()
                     ->setSubject('ROACAR')
-                    ->setFrom('juansneak@gmail.com')
+                    ->setFrom('miguel.figueira16@gmail.com')
                     ->setTo($usuario->getEmail())
                     ->setBody(
                             $this->renderView(
@@ -426,14 +426,14 @@ class OAController extends Controller
         return $this->redirect($this->generateUrl('OA_index_admin'));
     }
 
-    public function pruebaAction($id){
+    public function areaAction($id){
         $error = $this->getRequest()->getSession()->getFlash('error');
         $usuario = $this->get('security.context')->getToken()->getUser();
         $em = $this->getDoctrine()->getEntityManager();
 
         $subcategoria = $em->getRepository('ROABundle:Subcategoria')->find($id);
         $variables = array('error'=> $error,'usuario'=> $usuario,'subcategoria'=>$subcategoria,'categorias' => $this->getDoctrine()->getManager()->getRepository('ROABundle:Categoria')->findAll());
-        return $this->render('ROABundle:OA:prueba.html.twig', $variables);
+        return $this->render('ROABundle:OA:area.html.twig', $variables);
     }
 
 
@@ -570,8 +570,6 @@ class OAController extends Controller
         $OA_form= $this->createForm(new OAType(), $OA, array('validation_groups'=>array('create')));
         $OA_form->bind($request);
 
-        echo "paso el bind";
-        exit();
 
         //echo $OA_form->getErrorsAsString(); exit();
 
@@ -591,10 +589,6 @@ class OAController extends Controller
             $em->persist($OA);
             $em->flush();
 
-            $variables = array('error'=> $error,'usuario'=> $usuario, 'categorias' => $this->getDoctrine()->getManager()->getRepository('ROABundle:Categoria')->findAll());
-        
-            //return $this->render('ROABundle:OA:create.html.twig', $variables);
-
 
             //Envio de email
             $email = \Swift_Message::newInstance()
@@ -610,7 +604,7 @@ class OAController extends Controller
 
             $this->getRequest()->getSession()->setFlash('mensaje', '¡Objeto almacenado exitosamente!');
             $this->getRequest()->getSession()->setFlash('politicas', true);
-            return $this->redirect($this->generateUrl('OA_index', array('filtro' => 'usuario', 'id'=>$usuario->getId())));
+            return $this->redirect($this->generateUrl('OA_index', array('filtro' => 'usuario', 'id'=>$usuario->getId(),'categorias' => $this->getDoctrine()->getManager()->getRepository('ROABundle:Categoria')->findAll())));
 
 
         }else{

@@ -3,8 +3,9 @@
 <h3>Informaci&oacute;n de tu objeto:</h3>
 
 <p><b>Titulo:</b> {{ objeto.titulo }}</p>
-<p><b>Categor&iacute;a:</b> {{ objeto.subcategoria.categoria.nombre }}</p>
-<p><b>Subcategor&iacute;a:</b>{{ objeto.subcategoria.nombre }}</p>
+<p><b>Categor&iacute;a:</b> {{ objeto.area.subcategoria.categoria.nombre }}</p>
+<p><b>Subcategor&iacute;a:</b>{{ objeto.area.subcategoria.nombre }}</p>
+<p><b>Área:</b>{{ objeto.area.nombre }}</p>
 
 <p>El Estado actual de tu OACA es "{{ objeto.status.descripcion }}". Debes esperar que tu OACA sea autorizado para que puedas verlo en las publicaciones</p>
 

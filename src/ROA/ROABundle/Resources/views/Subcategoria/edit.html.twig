@@ -43,11 +43,9 @@
         <ul class="areas" data-prototype="{{ form_widget(edit_form.areas.vars.prototype)|e }}">
 
             {% for area in edit_form.areas %}
-                        
                 <fieldset class="subform3 area"><legend>Area</legend>
                     {{ form_row(area) }}
                 </fieldset>
-        
             {% endfor %}
          
         </ul>
