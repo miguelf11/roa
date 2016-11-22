@@ -49,6 +49,7 @@ class Usuario implements UserInterface, \Serializable{
      * @Assert\NotBlank(message="Campo requerido", groups={"create", "update"})
 	 */
 	protected $email;
+
 	/**
 	 * @ORM\Column(type="string", length=25)
      * @Assert\Email()
@@ -61,6 +62,7 @@ class Usuario implements UserInterface, \Serializable{
      * )
      */
 	protected $nombre;
+
 	/**
 	 * @ORM\Column(type="string", length=25)
      * @Assert\NotBlank(message="Campo requerido", groups={"create", "update"})
@@ -72,7 +74,6 @@ class Usuario implements UserInterface, \Serializable{
      * )
 	 */
 	protected $apellido;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="Vocablo")

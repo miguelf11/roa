@@ -3,6 +3,9 @@
 namespace ROA\ROABundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use ROA\ROABundle\Form\EventListener\AddSubcategoriaFieldSubscriber;
+use ROA\ROABundle\Form\EventListener\AddCategoriaFieldSubscriber;
 
 
 class OAType extends AbstractType

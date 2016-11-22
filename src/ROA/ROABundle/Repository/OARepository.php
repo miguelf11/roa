@@ -78,10 +78,10 @@ class OARepository extends EntityRepository
 		return $OAs;
 	}
 
-	public function findAvanzada($subcategoria, $autor, $ano, $titulo){
+	public function findAvanzada($area, $autor, $ano, $titulo){
 
-		if ($subcategoria != ">0"){
-			$subcategoria = "=".$subcategoria;
+		if ($area != ">0"){
+			$area = "=".$area;
 		}
 
 		if ($titulo == ""){
@@ -89,9 +89,9 @@ class OARepository extends EntityRepository
 		}
 
 		if ($autor == "''"){
-			$dql = "select o from ROABundle:OA o JOIN o.subcategoria s JOIN o.status st WHERE o.ano LIKE '".$ano."' AND s.id".$subcategoria." AND o.titulo LIKE '%".$titulo."%' AND st.descripcion LIKE 'Certificado' ORDER BY o.fecha_publicacion DESC";
+			$dql = "select o from ROABundle:OA o JOIN o.area s JOIN o.status st WHERE o.ano LIKE '".$ano."' AND s.id".$area." AND o.titulo LIKE '%".$titulo."%' AND st.descripcion LIKE 'Certificado' ORDER BY o.fecha_publicacion DESC";
 		}else{
-			$dql = "select o from ROABundle:OA o JOIN o.subcategoria s JOIN o.status st JOIN o.usuario u WHERE o.ano LIKE '".$ano."' AND s.id".$subcategoria." AND o.titulo LIKE '%".$titulo."%' AND st.descripcion LIKE 'Certificado' AND (u.nombre IN (".$autor.") OR u.apellido IN (".$autor.")) ORDER BY o.fecha_publicacion DESC";
+			$dql = "select o from ROABundle:OA o JOIN o.area s JOIN o.status st JOIN o.usuario u WHERE o.ano LIKE '".$ano."' AND s.id".$area." AND o.titulo LIKE '%".$titulo."%' AND st.descripcion LIKE 'Certificado' AND (u.nombre IN (".$autor.") OR u.apellido IN (".$autor.")) ORDER BY o.fecha_publicacion DESC";
 		}
 
 		$em = $this->getEntityManager();

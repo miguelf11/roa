@@ -28,7 +28,7 @@ body {
 	font-family: 'Arial-custom';
 	/*font-family: Arial, Helvetica, sans-serif;*/
 	background-repeat:no-repeat;
-	background-image: url(../images/fondoNuevo9.jpg);
+	background-image: url(../images/banner_principal.png);
 	background-position: center top;
 }
 
@@ -593,6 +593,8 @@ header{
 	margin-left:-130px;*/
 
 }
+
+
 #inicio_sesion{
 	/*width: 273px;*/
 	/*width:350px;680*/

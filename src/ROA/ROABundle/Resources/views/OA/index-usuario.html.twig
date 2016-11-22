@@ -45,9 +45,10 @@
 
 						<p><b>Titulo: </b>{{ objeto.titulo }}</p>
 						<p><b>Autor: </b>{{ objeto.usuario.nombre }} {{ objeto.usuario.apellido }}</p>
-						<p><b>Categoria: </b>{{ objeto.subcategoria.categoria.nombre }}</p>
-						<p><b>Subcategoria: </b>{{ objeto.subcategoria.nombre }}</p>
-						<p><b>Fecha de Publicaci&oacute;n: </b>{{ objeto.fecha_publicacion |date('d-m-Y') }}</p>
+						<p><b>Categoria: </b>{{ objeto.area.subcategoria.categoria.nombre }}</p>
+						<p><b>Subcategoria: </b>{{ objeto.area.subcategoria.nombre }}</p>
+						<p><b>Area: </b>{{ objeto.area.nombre }}</p>
+						<p><b>Fecha de Publicación: </b>{{ objeto.fecha_publicacion |date('d-m-Y') }}</p>
 						
 						<p id="puntuacion"><b>Valoraci&oacute;n: </b></p>
 						{% if objeto.puntuacion == 1 %} 

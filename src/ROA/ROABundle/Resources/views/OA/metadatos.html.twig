@@ -47,8 +47,8 @@ $(document).ready(function(){
 
         <tr>
             <td><p class="bold">Categor&iacute;a</p></td>
-            {% if objeto.subcategoria.nombre %}
-            	<td><p>{{ objeto.subcategoria.nombre }}</p></td>
+            {% if objeto.area.subcategoria.nombre %}
+            	<td><p>{{ objeto.area.subcategoria.nombre }}</p></td>
             {% else %}
             	<td><p>{{ vacio }}</p></td>
             {% endif %}
@@ -927,8 +927,8 @@ $(document).ready(function(){
 			<div class="row">
 				<label class="label_form">Subcategor&iacute;a</label>
 				<p class="descripcion_metadato left">
-					{% if objeto.subcategoria %}
-						{{objeto.subcategoria.nombre}}
+					{% if objeto.area.subcategoria %}
+						{{objeto.area.subcategoria.nombre}}
 					{% else %}
 						{{ vacio }}
 					{% endif %}

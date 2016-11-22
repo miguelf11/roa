@@ -23,6 +23,16 @@ CAMBIO DE CORREO A LA HORA DE MONTAR EN PRODUCCIÓN
 
 - OAController:CreateAction
 - OAController:UpdateAction
+- Views/create.html.twig línea 13
+
+
+CAMBIO AGREGADO PARA QUE ACEPTE PHP 5.6
+
+vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/ClassMetadataInfo.php
+Linea 827 , public function newInstance
+
+Para saber la versión a agregar es <?php echo PHP_VERSION_ID; ?>
+
 
 
 

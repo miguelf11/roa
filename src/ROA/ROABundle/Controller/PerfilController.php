@@ -82,8 +82,10 @@ class PerfilController extends Controller
                             $em->flush();
                             $variables['activacion_exitosa'] = '1';
                             $variables['usuario_new'] = $usuario_activar;
+                            $variables['message'] = "Usuario activado correctamente, Bienvenido";
+                            return $this->render('ROABundle:Perfil:create.html.twig', $variables);
                         }
-                        $content = $this->renderView('ROABundle:Perfil:create.html.twig', $variables);
+                        return $this->render('ROABundle:Perfil:create.html.twig', $variables);
                     }else{
                        $content = $this->renderView('ROABundle:Perfil:new.html.twig', $variables); 
                     }  
@@ -229,7 +231,7 @@ class PerfilController extends Controller
             //Envio de email
             $mensaje = \Swift_Message::newInstance()
                     ->setSubject('ROACAR - Restauracion de Contrasena')
-                    ->setFrom('miguel.figueira16@gmail.com')
+                    ->setFrom('uead.cienciasucv@gmail.com')
                     ->setTo($usuario_aux->getEmail())
                     ->setBody(
                             $this->renderView(
@@ -266,7 +268,7 @@ class PerfilController extends Controller
         //Envio de email
         $mensaje = \Swift_Message::newInstance()
                 ->setSubject('Activacion de tu cuenta de ROACAR')
-                ->setFrom('miguel.figueira16@gmail.com')
+                ->setFrom('uead.cienciasucv@gmail.com')
                 ->setTo($usuario->getEmail())
                 ->setBody(
                         $this->renderView(

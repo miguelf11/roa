@@ -170,7 +170,7 @@ class DefaultController extends Controller
         if($this->getRequest()->getMethod() == 'POST'){
 
             $request = $this->getRequest(); 
-            $subcategoria = $request->request->get('subcategoria');
+            $area = $request->request->get('area');
             $ano = $request->request->get('ano');
             $autor = $request->request->get('autor');
             $titulo = $request->request->get('titulo');
@@ -184,7 +184,7 @@ class DefaultController extends Controller
                 }
             } 
             
-            $objetos = $em->getRepository('ROABundle:OA')->findAvanzada($subcategoria, $autor, $ano, $titulo);
+            $objetos = $em->getRepository('ROABundle:OA')->findAvanzada($area, $autor, $ano, $titulo);
             $variables['objetos'] = $objetos;
             return $this->render('ROABundle:Default:resultados.html.twig', $variables);
 

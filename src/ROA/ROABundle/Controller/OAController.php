@@ -264,7 +264,7 @@ class OAController extends Controller
             //Envio de email
             $email = \Swift_Message::newInstance()
                     ->setSubject('ROACAR')
-                    ->setFrom('miguel.figueira16@gmail.com')
+                    ->setFrom('uead.cienciasucv@gmail.com')
                     ->setTo($usuario->getEmail())
                     ->setBody(
                             $this->renderView(
@@ -340,7 +340,7 @@ class OAController extends Controller
             //Envio de email
             $email = \Swift_Message::newInstance()
                         ->setSubject('ROACAR')
-                        ->setFrom('juansneak@gmail.com')
+                        ->setFrom('uead.cienciasucv@gmail.com')
                         ->setTo($autor->getEmail())
                         ->setBody(
                                 $this->renderView(
@@ -411,7 +411,7 @@ class OAController extends Controller
         //Envio de email
         $mensaje = \Swift_Message::newInstance()
                     ->setSubject('ROACAR')
-                    ->setFrom('juansneak@gmail.com')
+                    ->setFrom('uead.cienciasucv@gmail.com')
                     ->setTo($autor->getEmail())
                     ->setBody(
                             $this->renderView(
@@ -439,9 +439,11 @@ class OAController extends Controller
 
 	public function indexAction($filtro , $id){
 
+        /*
         if(($filtro != 'subcategoria') && !($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) ){
             return $this->redirect($this->generateUrl('inicio', array()));
         }
+        */
 
         $mensaje = $this->getRequest()->getSession()->getFlash('mensaje');
         $politicas = $this->getRequest()->getSession()->getFlash('politicas');
@@ -593,7 +595,7 @@ class OAController extends Controller
             //Envio de email
             $email = \Swift_Message::newInstance()
                     ->setSubject('ROACAR')
-                    ->setFrom('miguel.figueira16@gmail.com')
+                    ->setFrom('uead.cienciasucv@gmail.com')
                     ->setTo($usuario->getEmail())
                     ->setBody(
                             $this->renderView(

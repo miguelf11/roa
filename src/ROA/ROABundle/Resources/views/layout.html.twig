@@ -110,13 +110,7 @@ $(document).ready(function(){
 
 
 
-	
-	
-	
-	$('#easyPaginate').easyPaginate({
-		paginateElement: 'div',
-        elementsPerPage: 2,
-    });
+
 
 
 	/*Botones Accesibilidad*/
@@ -184,6 +178,7 @@ $(document).ready(function(){
 {% block body %}
 
 <header>
+	
 	<img id= "logo_ucv" src="{{ asset('bundles/ROA/images/logoUCVNuevo.png') }}"/>
 	<div id="inicio_sesion">
 		<img class="logo" src="{{ asset('bundles/ROA/images/logoRoacar.png') }}"/>
@@ -191,7 +186,6 @@ $(document).ready(function(){
 			<p class="puntozero">Repositorio de Objetos de Aprendizaje</p>
 			<p class="puntozero verde2">de Contenidos Abiertos Reutilizables</p>
 		</div>
-	
 		<div id="div_sesion">
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<a class="link_top2" id="link_sesion">{{ usuario.getNombre | upper }} {{ usuario.getApellido | upper}}</a>
@@ -228,10 +222,11 @@ $(document).ready(function(){
 			<div id="sesion">
 				{% if error %}
 					<div><p class='error'>{{ error }}</p></div>
-				{% endif %}	
+				{% endif %}
+
 				
 				<form action="{{ path('login_check') }}" method="POST" name="form_entrar" id="form_entrar" >
-					<input type="text" name="_username" placeholder="Usuario" value=""/>
+					<input type="text" name="_username" placeholder="Correo" value=""/>
 					<input type="password" name="_password" id="password" placeholder="Contrasena"/>
 					
 					<a class="btn_custom" name="login" id="boton_sesion" onClick="javascript:form_entrar.submit()">Aceptar</a>

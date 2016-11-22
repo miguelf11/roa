@@ -32,12 +32,13 @@
 		<div>
 			<label class="label_form">Categor&iacute;a</label>
 
-			<select name="subcategoria" id="subcategoria" class="select_form">
+			<select name="area" id="area" class="select_form">
 			<option value=">0">Todas</option>
 			{% for categoria in categorias %}
-	
 				{% for subcategoria in categoria.subcategorias %}
-					<option value="{{subcategoria.id}}">{{ subcategoria.nombre}}</option>
+					{% for area in subcategoria.areas %}
+						<option value="{{area.id}}">{{ area.nombre}}</option>
+					{% endfor %}
 				{% endfor %}
 
 			{% endfor %}

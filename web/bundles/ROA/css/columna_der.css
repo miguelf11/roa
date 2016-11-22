@@ -19,7 +19,6 @@
 .imagen_inicio {
 
 	padding: 10px;
-	border: 1px #CCC solid;
 	margin: 10px;
 }
 
@@ -54,6 +53,7 @@
 .left-div{
 	float:left;
 	margin-right: 10px;
+  margin-top: 10px;
 }
 
 #myCanvas{
@@ -80,7 +80,8 @@
   position: relative;
   height: 150px;
   width: 300px;
-  margin-top: 10px
+  margin-bottom: 20px;
+  margin-right: 22px;
 }
 
 .imgDescription {
