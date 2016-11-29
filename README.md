@@ -1,29 +1,8 @@
-Cambios hechos hasta ahora:
+MODIFICAR TAMAÑO MÁXIMO DE LOS OBJETOS DE APRENDIZAJE
 
-1- Colocar correo de gmail para poder enviar el acceso a la página a traveś de correo , en UsuarioController
-2- Cambio en servicios donde se enrutaba  a una ip de la universidad en vez de una ruta genérica generada mediante la app
-3- Modificación en vendor/doctrine para poder usar php 5.5
-4- Impedir que en la opciones de accesibilidad se pueda aumentar o disminuir las letras todo lo que se quiera
+roa/src/ROA/Entity/OA.php 
 
-
-Vista donde se muestran los OA -- controlador: OA@indexAction
-
-OA.index
-
-
-
-Cambios que faltan :
-
-1- Añadir tabla de subsubcategorías o 'temas' que responda a una subcategoria por ejemplo física.
-2- Dichos temas deben poder linkearse a través de imágenes en específico.
-
-
-
-CAMBIO DE CORREO A LA HORA DE MONTAR EN PRODUCCIÓN
-
-- OAController:CreateAction
-- OAController:UpdateAction
-- Views/create.html.twig línea 13
+buscar el atributo public $file y modificar la anotación maxSize.
 
 
 CAMBIO AGREGADO PARA QUE ACEPTE PHP 5.6
@@ -32,6 +11,24 @@ vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/ClassMetadataInfo.php
 Linea 827 , public function newInstance
 
 Para saber la versión a agregar es <?php echo PHP_VERSION_ID; ?>
+
+
+//Limpiar la cache , necesario para algunos cambios
+php app/console cache:clear
+
+// Limpiar cache en producción
+php app/console cache:clear --env=prod --no-debug
+
+
+
+
+You need to set both of these in the php.ini:
+
+post_max_size = 50M
+upload_max_filesize = 50M
+
+
+
 
 
 
